@@ -1,0 +1,5 @@
+<svg  xmlns="http://www.w3.org/2000/svg">
+    <path
+        d="M5 3c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm0 14c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm0-7c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2z"
+        stroke="currentColor" stroke-width="1.5" stroke-dasharray="0 0" fill="none" fill-rule="evenodd" />
+</svg>

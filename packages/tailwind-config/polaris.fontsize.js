@@ -1,0 +1,15 @@
+module.exports = {
+    'polaris-size-275': 'var(--p-font-size-275)',
+    'polaris-size-300': 'var(--p-font-size-300)',
+    'polaris-size-325': 'var(--p-font-size-325)',
+    'polaris-size-350': 'var(--p-font-size-350)',
+    'polaris-size-400': 'var(--p-font-size-400)',
+    'polaris-size-450': 'var(--p-font-size-450)',
+    'polaris-size-500': 'var(--p-font-size-500)',
+    'polaris-size-550': 'var(--p-font-size-550)',
+    'polaris-size-600': 'var(--p-font-size-600)',
+    'polaris-size-750': 'var(--p-font-size-750)',
+    'polaris-size-800': 'var(--p-font-size-800)',
+    'polaris-size-900': 'var(--p-font-size-900)',
+    'polaris-size-1000': 'var(--p-font-size-1000)',
+};

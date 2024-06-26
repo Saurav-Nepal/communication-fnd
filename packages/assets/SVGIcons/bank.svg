@@ -1,0 +1,8 @@
+<svg viewBox="0 0 24 22">
+    <g stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0 0"
+        fill="none" fill-rule="evenodd">
+        <path
+            d="M21.37 4.75c.35.14.63.56.63.93V9c0 .55-.45 1-1 1H3c-.55 0-1-.45-1-1V5.68c0-.37.28-.79.63-.93l9-3.6c.2-.08.54-.08.74 0l9 3.6zM2 21v-3c0-.55.45-1 1-1h18c.55 0 1 .45 1 1v3H2zM4 17v-7M8 17v-7M12 17v-7M16 17v-7M20 17v-7M1 21h22" />
+        <path d="M12 7.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" />
+    </g>
+</svg>

@@ -1,0 +1,270 @@
+version: 2.1 # 2.1 config required to use orbs
+
+orbs:
+    aws-cli: circleci/aws-cli@4.1.3
+    aws-ecr: circleci/aws-ecr@9.1.0
+    aws-ecs: circleci/aws-ecs@4.0.0
+
+executors:
+    custom:
+        machine:
+            image: ubuntu-2004:2024.04.4
+        resource_class: xlarge
+
+jobs:
+    verify-deployment:
+        executor: aws-cli/default
+        steps:
+            - aws-cli/install
+            - aws-cli/setup:
+                  aws_access_key_id: AWS_ACCESS_KEY_ID
+                  region: AWS_DEFAULT_REGION
+                  aws_secret_access_key: AWS_SECRET_ACCESS_KEY
+            - run:
+                  name: Get last task definition
+                  command: >
+                      TASK_DEFINITION_ARN=$(aws ecs describe-task-definition \
+                          --task-definition ${MY_APP_PREFIX}-service \
+                          --output text \
+                          --query 'taskDefinition.taskDefinitionArn')
+                      echo "export TASK_DEFINITION_ARN='${TASK_DEFINITION_ARN}'" >>
+                      "$BASH_ENV"
+            - aws-ecs/verify_revision_is_deployed:
+                  family: '${MY_APP_PREFIX}-service'
+                  cluster: '${MY_APP_PREFIX}-cluster'
+                  task_definition_arn: '${TASK_DEFINITION_ARN}'
+
+workflows:
+    build-and-deploy:
+        jobs:
+            ##################### dev deployment ###################################
+            - aws-ecr/build_and_push_image: # orb built-in job
+                  name: dev-pwa-build
+                  executor: custom
+                  dockerfile: Dockerfile.pwa
+                  region: '${AWS_REGION}'
+                  account_id: ${AWS_ACCOUNT_ID}
+                  repo: '${MY_APP_PREFIX}'
+                  tag: '${CIRCLE_SHA1}'
+                  no_output_timeout: 30m
+                  auth:
+                      - aws-cli/setup:
+                            aws_access_key_id: AWS_ACCESS_KEY_ID
+                            region: AWS_DEFAULT_REGION
+                            aws_secret_access_key: AWS_SECRET_ACCESS_KEY
+                  context:
+                      - DEV-FN-SERVER
+                      - DEV-FN-PWA
+                  filters:
+                      branches:
+                          only:
+                              - dev
+            - aws-ecr/build_and_push_image: # orb built-in job
+                  name: dev-web-build
+                  executor: custom
+                  dockerfile: Dockerfile.web
+                  region: '${AWS_REGION}'
+                  account_id: ${AWS_ACCOUNT_ID}
+                  repo: '${MY_APP_PREFIX}'
+                  tag: '${CIRCLE_SHA1}'
+                  no_output_timeout: 30m
+                  auth:
+                      - aws-cli/setup:
+                            aws_access_key_id: AWS_ACCESS_KEY_ID
+                            region: AWS_DEFAULT_REGION
+                            aws_secret_access_key: AWS_SECRET_ACCESS_KEY
+                  context:
+                      - DEV-FN-SERVER
+                      - DEV-FN-WEB
+                  filters:
+                      branches:
+                          only:
+                              - dev
+            - aws-ecs/deploy_service_update: # orb built-in job
+                  name: dev-pwa-deployment
+                  auth:
+                      - aws-cli/setup:
+                            aws_access_key_id: AWS_ACCESS_KEY_ID
+                            region: AWS_DEFAULT_REGION
+                            aws_secret_access_key: AWS_SECRET_ACCESS_KEY
+                  context:
+                      - DEV-FN-SERVER
+                      - DEV-FN-PWA
+                  requires:
+                      - dev-pwa-build
+                  family: '${MY_APP_PREFIX}-service'
+                  cluster: '${MY_APP_PREFIX}-cluster'
+                  container_image_name_updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
+            - aws-ecs/deploy_service_update: # orb built-in job
+                  name: dev-web-deployment
+                  auth:
+                      - aws-cli/setup:
+                            aws_access_key_id: AWS_ACCESS_KEY_ID
+                            region: AWS_DEFAULT_REGION
+                            aws_secret_access_key: AWS_SECRET_ACCESS_KEY
+                  context:
+                      - DEV-FN-SERVER
+                      - DEV-FN-WEB
+                  requires:
+                      - dev-web-build
+                  family: '${MY_APP_PREFIX}-service'
+                  cluster: '${MY_APP_PREFIX}-cluster'
+                  container_image_name_updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
+            ##################### demo deployment ###################################
+            - aws-ecr/build_and_push_image: # orb built-in job
+                  name: demo-pwa-build
+                  executor: custom
+                  dockerfile: Dockerfile.pwa
+                  region: '${AWS_REGION}'
+                  account_id: ${AWS_ACCOUNT_ID}
+                  repo: '${MY_APP_PREFIX}'
+                  tag: '${CIRCLE_SHA1}'
+                  no_output_timeout: 30m
+                  auth:
+                      - aws-cli/setup:
+                            aws_access_key_id: AWS_ACCESS_KEY_ID
+                            region: AWS_DEFAULT_REGION
+                            aws_secret_access_key: AWS_SECRET_ACCESS_KEY
+                  context:
+                      - DEV-FN-SERVER
+                      - DEMO-FN-PWA
+                  filters:
+                      branches:
+                          only:
+                              - demo
+            - aws-ecr/build_and_push_image: # orb built-in job
+                  name: demo-web-build
+                  executor: custom
+                  dockerfile: Dockerfile.web
+                  region: '${AWS_REGION}'
+                  account_id: ${AWS_ACCOUNT_ID}
+                  repo: '${MY_APP_PREFIX}'
+                  tag: '${CIRCLE_SHA1}'
+                  no_output_timeout: 30m
+                  auth:
+                      - aws-cli/setup:
+                            aws_access_key_id: AWS_ACCESS_KEY_ID
+                            region: AWS_DEFAULT_REGION
+                            aws_secret_access_key: AWS_SECRET_ACCESS_KEY
+                  context:
+                      - DEV-FN-SERVER
+                      - DEMO-FN-WEB
+                  filters:
+                      branches:
+                          only:
+                              - demo
+            - aws-ecs/deploy_service_update: # orb built-in job
+                  name: demo-pwa-deployment
+                  auth:
+                      - aws-cli/setup:
+                            aws_access_key_id: AWS_ACCESS_KEY_ID
+                            region: AWS_DEFAULT_REGION
+                            aws_secret_access_key: AWS_SECRET_ACCESS_KEY
+                  context:
+                      - DEV-FN-SERVER
+                      - DEMO-FN-PWA
+                  requires:
+                      - demo-pwa-build
+                  family: '${MY_APP_PREFIX}-service'
+                  cluster: '${MY_APP_PREFIX}-cluster'
+                  container_image_name_updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
+            - aws-ecs/deploy_service_update: # orb built-in job
+                  name: demo-web-deployment
+                  auth:
+                      - aws-cli/setup:
+                            aws_access_key_id: AWS_ACCESS_KEY_ID
+                            region: AWS_DEFAULT_REGION
+                            aws_secret_access_key: AWS_SECRET_ACCESS_KEY
+                  context:
+                      - DEV-FN-SERVER
+                      - DEMO-FN-WEB
+                  requires:
+                      - demo-web-build
+                  family: '${MY_APP_PREFIX}-service'
+                  cluster: '${MY_APP_PREFIX}-cluster'
+                  container_image_name_updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
+            - verify-deployment:
+                  requires:
+                      - demo-web-deployment
+                  context:
+                      - DEV-FN-SERVER
+                      - DEMO-FN-WEB
+            ##################### prod deployment ###################################
+            - aws-ecr/build_and_push_image: # orb built-in job
+                  name: pwa-build
+                  executor: custom
+                  dockerfile: Dockerfile.pwa
+                  region: '${AWS_REGION}'
+                  account_id: ${AWS_ACCOUNT_ID}
+                  repo: '${MY_APP_PREFIX}'
+                  tag: '${CIRCLE_SHA1}'
+                  no_output_timeout: 30m
+                  auth:
+                      - aws-cli/setup:
+                            aws_access_key_id: AWS_ACCESS_KEY_ID
+                            region: AWS_DEFAULT_REGION
+                            aws_secret_access_key: AWS_SECRET_ACCESS_KEY
+                  context:
+                      - PROD-FN-CLIENT
+                      - PROD-FN-PWA
+                  filters:
+                      branches:
+                          only:
+                              - production
+            - aws-ecr/build_and_push_image: # orb built-in job
+                  name: web-build
+                  executor: custom
+                  dockerfile: Dockerfile.web
+                  region: '${AWS_REGION}'
+                  account_id: ${AWS_ACCOUNT_ID}
+                  repo: '${MY_APP_PREFIX}'
+                  tag: '${CIRCLE_SHA1}'
+                  no_output_timeout: 30m
+                  auth:
+                      - aws-cli/setup:
+                            aws_access_key_id: AWS_ACCESS_KEY_ID
+                            region: AWS_DEFAULT_REGION
+                            aws_secret_access_key: AWS_SECRET_ACCESS_KEY
+                  context:
+                      - PROD-FN-CLIENT
+                      - PROD-FN-WEB
+                  filters:
+                      branches:
+                          only:
+                              - production
+            - aws-ecs/deploy_service_update: # orb built-in job
+                  name: pwa-deployment
+                  auth:
+                      - aws-cli/setup:
+                            aws_access_key_id: AWS_ACCESS_KEY_ID
+                            region: AWS_DEFAULT_REGION
+                            aws_secret_access_key: AWS_SECRET_ACCESS_KEY
+                  context:
+                      - PROD-FN-CLIENT
+                      - PROD-FN-PWA
+                  requires:
+                      - pwa-build
+                  family: '${MY_APP_PREFIX}-service'
+                  cluster: '${MY_APP_PREFIX}-cluster'
+                  container_image_name_updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
+            - aws-ecs/deploy_service_update: # orb built-in job
+                  name: web-deployment
+                  auth:
+                      - aws-cli/setup:
+                            aws_access_key_id: AWS_ACCESS_KEY_ID
+                            region: AWS_DEFAULT_REGION
+                            aws_secret_access_key: AWS_SECRET_ACCESS_KEY
+                  context:
+                      - PROD-FN-CLIENT
+                      - PROD-FN-WEB
+                  requires:
+                      - web-build
+                  family: '${MY_APP_PREFIX}-service'
+                  cluster: '${MY_APP_PREFIX}-cluster'
+                  container_image_name_updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
+            - verify-deployment:
+                  requires:
+                      - web-deployment
+                  context:
+                      - PROD-FN-CLIENT
+                      - PROD-FN-WEB

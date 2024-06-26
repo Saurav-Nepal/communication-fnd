@@ -1,0 +1,10 @@
+{
+    "extends": "tsconfig/react-library.json",
+    "include": [
+        ".",
+        "../../apps/web/src/Components/GenericExpenseDetail",
+        "../../apps/web/src/Components/CommonDocumentList",
+        "../../apps/pwa/src/Components/MobileUploader/mobileMultipleFile.upload.component.tsx"
+, "src/Composites/Filter/src/components/list-filter-form/list-filter-form/components/filterListFormElement/.tsx"    ],
+    "exclude": ["dist", "build", "node_modules"]
+}

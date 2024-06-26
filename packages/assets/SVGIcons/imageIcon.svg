@@ -1,0 +1,11 @@
+<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="image">
+        <rect id="Rectangle 2" x="14" y="2" width="12" height="12" transform="rotate(90 14 2)" stroke="currentColor"
+            stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Path 39" d="M2 9.33366L4.66667 6.66699L12 14.0003" stroke="currentColor" stroke-linecap="round" />
+        <path id="Oval" fill-rule="evenodd" clip-rule="evenodd"
+            d="M9.0026 6.66634C9.92308 6.66634 10.6693 5.92015 10.6693 4.99967C10.6693 4.0792 9.92308 3.33301 9.0026 3.33301C8.08213 3.33301 7.33594 4.0792 7.33594 4.99967C7.33594 5.92015 8.08213 6.66634 9.0026 6.66634Z"
+            stroke="currentColor" />
+        <path id="Path 40" d="M9 11L14 6" stroke="currentColor" />
+    </g>
+</svg>

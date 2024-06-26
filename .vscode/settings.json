@@ -1,0 +1,47 @@
+{
+    "cSpell.words": [
+        "analysable",
+        "analyse",
+        "Analysed",
+        "Anaysing",
+        "CGST",
+        "Configurator",
+        "Customizer",
+        "Dtos",
+        "finnoto",
+        "finops",
+        "fullfilled",
+        "gstin",
+        "gstr",
+        "Hoverable",
+        "ICIC",
+        "ifsc",
+        "IGST",
+        "Msme",
+        "onhold",
+        "Popover",
+        "prepopulate",
+        "querybuilder",
+        "recko",
+        "reco",
+        "SGST",
+        "showpassword",
+        "SOURCEHASH",
+        "tanstack",
+        "toastify"
+    ],
+    "sonarlint.connectedMode.project": {
+        "connectionId": "https-sq-servicelabs-co",
+        "projectKey": "finnoto_fn-new-web_AYi37sDCPZS-4L-d7YXo"
+    },
+    "githubPullRequests.ignoredPullRequestBranches": ["main"],
+    "cSpell.language": "en-GB",
+    "tailwindCSS.experimental.classRegex": [
+        ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+        ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
+        ["\\S*[Cc]lass[nN]ame\\:\\s*'([^']*)'"]
+    ],
+    "files.exclude": {
+        "**/.git": false
+    }
+}

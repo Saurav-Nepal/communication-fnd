@@ -1,0 +1,10 @@
+export { default as grid_view } from './dashboard.svg';
+export { default as DocumentFileSidebarSvgIcon } from './expenses.svg';
+export { default as EmployeeAdvanceSvgIcon } from './advances.svg';
+export { default as DashboardPaymentSvgIcon } from './payments.svg';
+export { default as SidebarVendorSvgIcon } from './parties.svg';
+export { default as SidebarHrSvgIcon } from './hr.svg';
+export { default as ReportMenuSvgIcon } from './reports.svg';
+export { default as SidebarBankStatementIconSvg } from './bank-accounts.svg';
+export { default as WorkFlowSvgIcon } from './workflows.svg';
+export { default as VendorOutlineSvgIcon } from './sidebar-vendor.svg';

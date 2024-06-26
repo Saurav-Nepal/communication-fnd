@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+    web:
+        container_name: web
+        build:
+            context: .
+            dockerfile: Dockerfile.web
+        restart: always
+        ports:
+            - 3000:3000
+    pwa:
+        container_name: pwa
+        build:
+            context: .
+            dockerfile: Dockerfile.pwa
+        restart: always
+        environment:
+            PORT: 3001
+        ports:
+            - 3001:3001

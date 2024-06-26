@@ -1,0 +1,324 @@
+// @tailwind base;
+// @tailwind components;
+@tailwind utilities;
+
+:root {
+    --sidebar-width: 68px;
+    --sidebar-expand-width: 280px;
+    --header-height: 57px;
+    --main-header-height: 64px;
+    --min-view-width: 1024px;
+    --bottom-nav-height: 65px;
+    --global-activity-log-height: 25px;
+    --animate-delay: 0.8s;
+
+    --rounded-btn: 4px;
+    --animation-btn: 0;
+    --btn-text-case: 'capitalize';
+    font-feature-settings: 'zero';
+    --webkit-font-smoothing: 'antialiased';
+
+    --tooltip-color: #3d3e3f;
+    --tooltip-text-color: #ffffff;
+
+    --dashboard-bg-color: #f0f2f4;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-internal-autofill-selected {
+    transition: background-color 600000s 0s, color 600000s 0s;
+}
+input[data-autocompleted] {
+    background-color: transparent !important;
+}
+
+*,
+::before,
+::after {
+    // @apply dark:border-gray-800;
+    @apply border-base-300 dark:border-base-content/20;
+}
+
+::-webkit-scrollbar-corner {
+    @apply bg-base-100;
+}
+::-webkit-scrollbar {
+    @apply w-2 h-2 bg-base-300;
+}
+::-webkit-scrollbar-thumb {
+    @apply bg-neutral/20 rounded-full;
+}
+::-webkit-scrollbar {
+    @apply w-0;
+}
+
+.root {
+    @apply text-sm w-screen h-screen sm:w-[420px] sm:shadow-lg;
+    @apply mx-auto overflow-auto text-sm;
+}
+.employee-text-color {
+    color: #06a77d;
+}
+
+.shadow-2xl {
+    --tw-shadow: 0 25px 50px 15px rgb(0 0 0 / 0.25);
+    --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+        var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+@layer utilities {
+    .container {
+        @apply mx-auto px-4;
+    }
+
+    .row-flex {
+        @apply flex flex-row;
+    }
+
+    .col-flex {
+        @apply flex flex-col;
+    }
+
+    .btn-dashed {
+        @apply border-dashed;
+    }
+}
+
+.home-clip {
+    clip-path: circle(99.9% at 49% -118%);
+}
+.dashboard {
+    @apply flex flex-col min-h-screen print:min-h-full;
+
+    .min-h-content-screen {
+        min-height: calc(100vh - var(--main-header-height));
+    }
+
+    .with-bottom-nav {
+        @apply pb-[var(--bottom-nav-height)];
+
+        .page-loader {
+            &.h-screen {
+                height: calc(100vh - var(--bottom-nav-height));
+            }
+        }
+    }
+    .dashboard-content {
+        @apply relative col-flex flex-grow w-full;
+        background-color: var(--dashboard-bg-color);
+        @apply dark:bg-base-200;
+    }
+}
+
+.header-search {
+    @apply border-none;
+    &:hover ~ span {
+        @apply border-none;
+    }
+
+    & ~ span {
+        @apply bg-neutral-focus border-none pl-4;
+    }
+}
+
+//  In put component
+.form-control {
+    @apply relative my-1;
+
+    &.container-input-md {
+        .input-md,
+        .selectbox-control {
+            @apply h-11;
+        }
+    }
+
+    .top-label {
+        @apply transition-all absolute z-[1] font-normal bg-base-100 top-1.5 px-2 w-3/4 py-2  left-2 scale-105;
+        &:not([class*='text-'], [class*='input-']) {
+            @apply text-base-secondary;
+        }
+    }
+    &.countEnable {
+        &:not([class*='valid-']):not(:focus-within) .top-label {
+            @apply w-11/12 left-3;
+        }
+    }
+    &.container-input-sm {
+        .top-label {
+            @apply top-1 px-0.5 py-0.5 left-2 scale-100;
+        }
+    }
+    &.input-container-disabled {
+        .top-label {
+            @apply bg-base-200;
+        }
+    }
+
+    &:focus-within,
+    &.valid-input,
+    .top-label:focus {
+        .top-label {
+            background-clip: text;
+            @apply -top-3 px-1 py-1 w-fit left-2 scale-100;
+            &::before {
+                content: '';
+                left: 0;
+                right: 0;
+                bottom: 0;
+                top: 60%;
+                transform: translateY(-50%);
+                position: absolute;
+                background-color: inherit;
+                z-index: -1;
+            }
+        }
+        &.container-input-sm {
+            .top-label {
+                @apply -top-3 px-0.5 py-0.5 left-1 scale-75;
+            }
+        }
+    }
+
+    &:focus-within {
+        .top-label {
+            &:not([class*='text-'], [class*='input-']) {
+                @apply text-info;
+            }
+        }
+        .input-default:not(:disabled):focus,
+        .textarea-default:not(:disabled):focus,
+        .input-addon-group .input-default:not(:disabled):focus ~ * {
+            @apply border-info;
+        }
+    }
+}
+// }
+.filter_button_group {
+    .slick-list {
+        .slick-track {
+            @apply gap-2;
+        }
+    }
+}
+
+.menu-items {
+    @apply grid grid-cols-2 gap-4;
+
+    .menu-item {
+        @apply col-flex bg-base-100 items-center font-medium p-5 text-sm gap-5 active:bg-base-200 rounded text-center;
+    }
+}
+.v-timeline {
+    .v-timeline-item {
+        @apply pl-4;
+        .v-timeline-item-wrapper {
+            .v-timeline-item-title {
+            }
+        }
+    }
+    .approve-card {
+        @apply bg-base-200/50;
+    }
+}
+.hover-color-remove-data-row {
+    &:hover {
+        background-color: transparent !important;
+    }
+}
+
+.animated__tab {
+    &--inactive {
+        @apply text-base-primary;
+    }
+}
+.slick-slider .slick-track {
+    @apply gap-4;
+    & > div {
+        @apply my-auto h-full;
+    }
+}
+.webcam {
+    width: 100%;
+    height: 80vh;
+    @apply absolute top-0 left-0 right-0 bottom-0;
+    object-fit: contain;
+}
+
+.m-bg-base-200 {
+    @apply bg-base-200;
+}
+.m-basic-filter {
+    @apply bg-base-200 text-base-tertiary border-base-300;
+}
+.m-static {
+    position: static !important;
+}
+.m-form-create-another {
+    padding: 14px 0px !important;
+    @apply fixed right-2 left-2 bottom-10 bg-base-100;
+}
+.m-p-0 {
+    padding: 0px !important;
+}
+.m-form-builder {
+    padding-bottom: 100px;
+}
+.m-custom-boolean {
+    @apply text-base-secondary;
+}
+
+.m-submit-btn {
+    @apply fixed bottom-2 right-2 left-2 z-30;
+}
+
+.table-link {
+    &:not(.normal-link) {
+        @apply underline decoration-dashed decoration-slate-400 underline-offset-4;
+    }
+}
+
+.rdrMonth {
+    @apply w-auto;
+}
+
+.small-dot {
+    @apply w-1 h-1 bg-black inline-block rounded-full;
+}
+.sticky-form-footer {
+    @apply bg-base-100 z-50;
+}
+.filter-applied {
+    @apply absolute -top-0.5 -right-0.5 z-10 w-2 h-2 border rounded-full bg-success border-base-100;
+}
+.msme-dashboard {
+    @apply flex-1 w-full;
+    .rdrDefinedRangesWrapper {
+        display: none !important;
+    }
+    .rdrCalendarWrapper {
+        @apply w-full dark:bg-base-100;
+    }
+    .rdrMonthAndYearWrapper {
+        @apply h-fit py-1 rounded-t bg-base-200;
+    }
+    .rdrMonthsVertical {
+        @apply flex flex-col gap-4;
+    }
+    .rdrDayInPreview {
+        @apply border-none;
+    }
+    .rdrMonth {
+        @apply flex-1 border  rounded rounded-t-none w-full mb-3 pb-5;
+    }
+    .rdrMonthAndYearPickers {
+        @apply gap-6;
+    }
+}
+.modal-background {
+    @apply bg-[#F7F8FA] dark:bg-base-200;
+}
+.break-long-word {
+    word-break: break-word;
+}

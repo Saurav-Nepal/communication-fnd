@@ -1,0 +1,6 @@
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="24" height="24" rx="4" fill="currentColor" fill-opacity="0.1" />
+    <path
+        d="M16 20V18M18 16H20M7.05093 11.293L5.63672 12.7072C4.07462 14.2693 4.07432 16.8019 5.63642 18.364C7.19851 19.9261 9.73148 19.9261 11.2936 18.364L12.7072 16.9498M6 8L4 8M8 4V6M11.293 7.0502L12.7072 5.63599C14.2693 4.07389 16.8018 4.07395 18.3639 5.63605C19.926 7.19815 19.9264 9.73074 18.3643 11.2928L16.9502 12.7071"
+        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

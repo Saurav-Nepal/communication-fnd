@@ -1,0 +1,25 @@
+{
+    "extends": "tsconfig/nextjs.json",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "plugins": [
+            {
+                "name": "next"
+            }
+        ],
+        "paths": {
+            "@Constants/*": ["src/Constants/*"],
+            "@Components/*": ["src/Components/*"],
+            "@Composites/*": ["src/Composites/*"],
+            "@Utils/*": ["src/Utils/*"],
+            "@Modules/*": ["src/Modules/*"],
+            "@Hooks/*": ["src/Hooks/*"],
+            "@Themes/*": ["src/Themes/*"],
+            "@Types/*": ["src/Types/*"],
+            "@ExpenseModules/*": ["src/ExpenseModules/*"]
+        },
+        "isolatedModules": true
+    },
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "../../packages/core/src/Utils/genericDefinition.utils.ts"],
+    "exclude": ["node_modules"]
+}

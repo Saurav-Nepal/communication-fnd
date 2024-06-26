@@ -1,0 +1,9 @@
+export enum SCRIPT_TYPE {
+    ON_LOAD = 53,
+    ON_CHANGE = 54,
+    ON_SUBMIT = 55,
+    POST_SUBMISSION = 56,
+    ON_SCHEMA_LOAD = 2062,
+    ON_FORM_SCHEMA_LOAD = 66,
+    // PRE_ONLOAD = 1003,
+}
