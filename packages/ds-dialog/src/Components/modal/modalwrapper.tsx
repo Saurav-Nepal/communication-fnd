@@ -9,7 +9,6 @@ import { ModalProps } from './modal.types';
  *
  * @extends {BaseWrapper<ModalProps>}
  *
- * @author Rumesh Udash
  */
 export class ModalWrapper extends BaseWrapper<ModalProps> {
     /**

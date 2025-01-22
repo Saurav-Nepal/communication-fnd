@@ -12,15 +12,7 @@ import './globals.scss';
 
 import { ColorSchemeScript } from '@slabs/ds-core';
 
-import { GLOBAL } from '@/constants/global.constants';
-
 const inter = Inter({ subsets: ['latin'] });
-
-// export const metadata: Metadata = {
-//     title: GLOBAL.ORGANIZATION.name,
-//     description: GLOBAL.ORGANIZATION.name,
-// };
-
 export default function RootLayout({
     children,
 }: Readonly<{

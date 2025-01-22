@@ -22,7 +22,6 @@ import { ModalProps } from './modal.types';
  *
  * @return {JSX.Element} A modal component with the specified content and size
  *
- * @author Rumesh Udash
  */
 export const ModalComponent = ({
     component: RenderInner,

@@ -16,7 +16,7 @@ import {
 } from '@slabs/ds-core';
 import { cn, isEmptyArray } from '@slabs/ds-utils';
 
-import { AdminWrapperProps, USER_TYPE } from '@/types';
+import { communicationWrapperProps, USER_TYPE } from '@/types';
 import { Navigation } from '@/utils/navigation.utils';
 import { Logout } from '@/utils/user.utils';
 
@@ -26,7 +26,7 @@ const Sidebar = ({
     setIsSidebarExpanded,
     user,
 }: {
-    menus: AdminWrapperProps['menus'];
+    menus: communicationWrapperProps['menus'];
     isSidebarExpanded: boolean;
     setIsSidebarExpanded: (val: boolean) => void;
     user: USER_TYPE | undefined;

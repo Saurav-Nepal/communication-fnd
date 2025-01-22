@@ -359,3 +359,13 @@ div.table {
         @apply bg-card border-border;
     }
 }
+
+.bg-login-background {
+    @apply relative flex items-center justify-center h-screen;
+
+    &::before {
+        content: '';
+        z-index: -1;
+        @apply absolute inset-0 right-2/4 top-0 bottom-0 bg-primary;
+    }
+}

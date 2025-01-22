@@ -6,12 +6,13 @@ import { usePathname } from 'next/navigation';
 import { RouteProps, Router } from '@slabs/ds-next-router';
 import { isEmptyArray } from '@slabs/ds-utils';
 
-import MenuTemplate from '@/components/adminWrapper/components/menuTemplate.component';
 import PageNotFound from '@/components/errors/pageNotFound.component';
 import { RECENT_STATE } from '@/constants/storage.constants';
 import { MenuService } from '@/services';
 import { GetItem, SetItem } from '@/utils/localStorage.utils';
 import { GetScene } from '@/utils/scene.utils';
+
+import MenuTemplate from '../components/adminWrapper/components/menuTemplate.component';
 
 const IndexRouter = () => {
     const { modules = [] } = MenuService.menuList || {};

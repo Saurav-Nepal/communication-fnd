@@ -6,7 +6,6 @@ import { DialogOpenParams } from './dialogs.types';
  * A utility class for working with dialog base components.
  *
  * @class
- * @author Rumesh Udash
  */
 export class DialogBaseUtil {
     _currentGlobalLoader = null;

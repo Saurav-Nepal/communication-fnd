@@ -1,7 +1,7 @@
 import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-use';
 
-import { isEmptyArray, isEmptyObject } from '@slabs/ds-utils';
+import { isEmptyObject } from '@slabs/ds-utils';
 
 import { GLOBAL } from '@/constants/global.constants';
 import { ORGANIZATION_NAME } from '@/constants/storage.constants';
@@ -9,8 +9,6 @@ import useUser from '@/hooks/useUser.hook';
 import { MenuService } from '@/services';
 import { GetItem } from '@/utils/localStorage.utils';
 import { IsProduction } from '@/utils/system.utils';
-import { Toast } from '@/utils/toast.utils';
-import { GetSettings, GetUserPreferences } from '@/utils/userPreference.utils';
 import { useQuery } from '@tanstack/react-query';
 
 import { AdminWrapper } from '../adminWrapper/adminWrapper.component';
@@ -31,39 +29,10 @@ const AdminProvider = ({ children }: { children: ReactNode }) => {
         queryFn: () => MenuService.initMenus(!IsProduction()),
     });
 
-    const { data: preferences, status: prefStatus } = useQuery({
-        queryKey: ['user_preferences'],
-        retry: 2,
-        enabled: !!user?.id,
-        queryFn: () => GetUserPreferences(),
-    });
-
     useEffect(() => {
         if (isEmptyObject(menus)) return;
-
         setMenuUrlMap(getUrlMenuMapping(menus.modules));
     }, [menus]);
-
-    useEffect(() => {
-        if (isEmptyArray(preferences)) return;
-
-        const shortCut = GetSettings(['spotLight', 'searchMenu']);
-
-        if (shortCut && shortCut.length) {
-            // TO-DO: setup shortcuts
-            // shortCut.forEach((key) => {
-            //     this.updateKey(key);
-            // });
-        } else {
-            setTimeout(() => {
-                Toast.warn({
-                    title: 'Note',
-                    description:
-                        'To bring more control to having shortcut keys in Admin Panel, We had to reset all your previously set short cut keys. Please try setting your shortcut keys again.',
-                });
-            }, 3000);
-        }
-    }, [preferences]);
 
     /**
      * Create url map object
@@ -125,14 +94,13 @@ const AdminProvider = ({ children }: { children: ReactNode }) => {
             title = ` | ${menuUrlMap[index].name}`;
         }
 
-        return `${orgName || 'Admin'} ${title}`;
+        return `${orgName || 'communication'} ${title}`;
     }, [menus, location, menuUrlMap]);
 
     return (
         <AdminWrapper
             isLoadingMenu={status === 'pending'}
-            isLoadingPreferences={prefStatus === 'pending'}
-            {...{ menus, preferences, pageTitle }}
+            {...{ menus, pageTitle }}
         >
             {children}
         </AdminWrapper>

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useEffectOnce } from 'react-use';
 
-import { Modal } from '@slabs/ds-dialog';
 import { isValidString } from '@slabs/ds-utils';
 
 import { GLOBAL, setRouteUrl } from '@/constants/global.constants';
@@ -13,7 +12,6 @@ import { isPublicPage } from '@/utils/isPublicPage.utils';
 import { GetItem } from '@/utils/localStorage.utils';
 import { Navigation } from '@/utils/navigation.utils';
 
-import AskBackendURL from '../askBackendURL/askBackendURL.component';
 import { PageLoader } from '../loader';
 import AdminProvider from './admin.provider';
 
@@ -29,21 +27,12 @@ const AuthProvider = ({ children }: any) => {
         const org_name = GetItem(ORGANIZATION_NAME, true);
 
         if (!isValidString(GLOBAL.ROUTE_URL) && !backend_url) {
-            openAskBackend();
             return;
         }
 
         if (!backend_url) return;
         setRouteUrl(backend_url, org_name);
     });
-
-    const openAskBackend = () => {
-        if (!GLOBAL.ALLOW_SET_BACKEND) return;
-
-        Modal.open({
-            component: AskBackendURL,
-        });
-    };
 
     useEffect(() => {
         if (loadingUser) return;

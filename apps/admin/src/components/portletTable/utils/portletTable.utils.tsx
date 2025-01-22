@@ -1,7 +1,6 @@
 import { isUndefinedOrNull } from '@slabs/ds-utils';
 
 import { ParseComponent } from '@/components/genericColumnFilters/parseComponent.component';
-import { ScriptInput } from '@/components/inputs/scriptInput.component';
 import { COLUMN_TYPE } from '@/constants/columnType.constants';
 import { Navigation } from '@/utils/navigation.utils';
 import { GetTime } from '@/utils/time.utils';
@@ -78,20 +77,7 @@ export function RowTemplate({
             </span>
         );
     }
-    if (selectedColumn.type_id == COLUMN_TYPE.SCRIPT) {
-        return (
-            <span className='printable'>
-                {listingRow[selectedColumn.path] ? (
-                    <ScriptInput
-                        value={listingRow[selectedColumn.path]}
-                        payload={{ method: 'edit', source: 'listing' }}
-                        column={selectedColumn}
-                        onSave={() => {}}
-                    />
-                ) : null}
-            </span>
-        );
-    }
+
     if (selectedColumn.route && selectedColumn.menu_url) {
         const idPath = selectedColumn.parent + '.id';
         const path = `${selectedColumn.menu_url.indexOf('/') !== 0 ? '/' : ''}${

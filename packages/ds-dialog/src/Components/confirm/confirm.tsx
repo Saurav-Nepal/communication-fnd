@@ -17,7 +17,6 @@ import { ModalBody, ModalContainer } from '../modal/modal.container';
  * @param {'primary' | 'success' | 'error' | 'warning'} [iconAppearance='primary'] - The appearance of the icon.
  * @returns {JSX.Element} - The modal dialog box.
  *
- * @author Rumesh Udash
  */
 export const ConfirmModal = ({
     title = 'Confirm',
@@ -45,12 +44,12 @@ export const ConfirmModal = ({
 
     return (
         <ModalContainer>
-            <ModalBody className={cn('mx-auto bg-secondary/25 w-full px-4')}>
+            <ModalBody className={cn('px-4 mx-auto w-full bg-secondary/25')}>
                 {!!icon && (
-                    <div className='flex items-center justify-center mb-4'>
+                    <div className='flex justify-center items-center mb-4'>
                         <div
                             className={cn(
-                                'h-12 w-12 rounded-full flex items-center justify-center',
+                                'flex justify-center items-center w-12 h-12 rounded-full',
                                 iconAppearances[iconAppearance]
                             )}
                         >

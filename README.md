@@ -1,11 +1,11 @@
-# Slab Design System
+# Slab Communication
 
 ### Build
 
 To build all apps and packages, run the following command:
 
 ```
-cd slab-admin
+cd communication-fnd
 yarn build
 ```
 
@@ -14,7 +14,7 @@ yarn build
 To develop all apps and packages, run the following command:
 
 ```
-cd slab-admin
+cd slab-communication
 yarn dev
 ```
 

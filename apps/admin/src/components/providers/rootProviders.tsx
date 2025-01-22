@@ -36,9 +36,6 @@ const RootProvider = ({
     InitializeStorageUtility(StorageUtility);
     InitializeStateManager(StateManagerUtility);
 
-    RegisterScene('generic-list', GenericListingScene);
-    RegisterScene('generic-detail', GenericDetailScene);
-
     return (
         <QueryClientProvider client={queryClient}>
             <SlabProvider themes={themesConstants}>

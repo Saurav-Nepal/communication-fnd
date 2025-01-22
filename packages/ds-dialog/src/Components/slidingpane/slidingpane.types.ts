@@ -1,7 +1,6 @@
 /**
  * Interface representing props for the SlidingPane component.
  *
- * @author Rumesh Udash
  */
 export interface SlidingPaneProps {
     /**

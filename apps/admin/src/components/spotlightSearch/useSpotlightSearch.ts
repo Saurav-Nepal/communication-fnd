@@ -5,7 +5,7 @@ import Fuse from 'fuse.js';
 import { useBoolean, useOs } from '@slabs/ds-hooks';
 import { isEmptyObject } from '@slabs/ds-utils';
 
-import { AdminWrapperProps, MenuProps, ObjectDto } from '@/types';
+import { communicationWrapperProps, MenuProps, ObjectDto } from '@/types';
 import { GetItem, SetItem } from '@/utils/localStorage.utils';
 import { Navigation } from '@/utils/navigation.utils';
 
@@ -20,7 +20,7 @@ type HistoryItem = {
 const useSpotlightSearch = ({
     menus,
 }: {
-    menus: AdminWrapperProps['menus'];
+    menus: communicationWrapperProps['menus'];
 }) => {
     const [isOpen, setIsOpen] = useBoolean(false);
     const [search, setSearch] = useState('');

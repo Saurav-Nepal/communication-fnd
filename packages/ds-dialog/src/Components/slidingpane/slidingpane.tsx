@@ -18,8 +18,6 @@ import { SlidingPaneProps } from './slidingpane.types';
  * - position: The position of the sheet. Either 'left' or 'right'.
  * - onClose: The function to call when the sheet is closed.
  * @return {JSX.Element} The sliding pane sheet component.
- *
- * @author Rumesh Udash
  */
 export const SlidingPaneSheet = ({
     component: RenderInner,

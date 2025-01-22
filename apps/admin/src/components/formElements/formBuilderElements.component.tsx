@@ -21,7 +21,6 @@ import { formElements } from './formElements.component';
  * @param {object} props - any other property that may be required to render the form control element
  * @return {JSX.Element} a dynamic form control element based on the type property provided
  *
- * @author Rumesh Udash
  */
 export const formBuilderElements = ({
     key,

@@ -20,7 +20,6 @@ import { ConfirmUtilProps } from './confirm.types';
  *   @param {ReactNode} [icon] - The icon to display in the modal header.
  *   @param {string} [iconAppearance='primary'] - The appearance of the icon.
  *
- * @author Rumesh Udash
  */
 export function ConfirmUtil({
     title = 'Confirm',

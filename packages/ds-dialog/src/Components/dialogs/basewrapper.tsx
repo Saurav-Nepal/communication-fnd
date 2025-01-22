@@ -6,7 +6,6 @@ import { DialogOpenParams } from './dialogs.types';
  * A base class for rendering a modal container with various functionality.
  *
  * @template T The type of the modal container.
- * @author Rumesh Udash
  */
 export class BaseWrapper<T> extends Component<
     any,

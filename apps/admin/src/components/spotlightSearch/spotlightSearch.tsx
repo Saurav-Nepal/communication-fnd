@@ -15,11 +15,15 @@ import {
 } from '@slabs/ds-core';
 import { isEmptyArray } from '@slabs/ds-utils';
 
-import { AdminWrapperProps } from '@/types';
+import { communicationWrapperProps } from '@/types';
 
 import useSpotlightSearch from './useSpotlightSearch';
 
-const SpotlightSearch = ({ menus }: { menus: AdminWrapperProps['menus'] }) => {
+const SpotlightSearch = ({
+    menus,
+}: {
+    menus: communicationWrapperProps['menus'];
+}) => {
     const {
         isOpen,
         search,

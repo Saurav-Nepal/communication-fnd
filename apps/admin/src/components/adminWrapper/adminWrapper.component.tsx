@@ -12,7 +12,7 @@ import { capitalize, cn, isEmptyObject } from '@slabs/ds-utils';
 import { RIGHT_CLICK_DATA } from '@/constants/state.constants';
 import themesConstants from '@/constants/themes.constants';
 import useUser from '@/hooks/useUser.hook';
-import { AdminWrapperProps } from '@/types';
+import { communicationWrapperProps } from '@/types';
 import { Navigation } from '@/utils/navigation.utils';
 import { SubscribeToEvent, UnsubscribeEvent } from '@/utils/stateManager.utils';
 import { GetUserDetail, Logout } from '@/utils/user.utils';
@@ -25,10 +25,8 @@ const AdminWrapper = ({
     children,
     menus,
     isLoadingMenu,
-    isLoadingPreferences,
-    preferences,
     pageTitle,
-}: AdminWrapperProps) => {
+}: communicationWrapperProps) => {
     const { setTheme } = useSlabTheme();
     const { user: currentUser } = useUser();
     const user = useMemo(() => {
@@ -79,37 +77,15 @@ const AdminWrapper = ({
         },
     ];
 
-    /**
-     * @param  {object} spotlight
-     * @param  {} =>update the short keys of setting page
-     */
-    // const updateKey = (pref: any) => {
-    //     if (pref) {
-    //         const keys = pref.value.map((key) => key.key).join('+');
-    //         const mapping = { ...keyMap };
-    //         mapping[pref.parameter] = keys;
-    //         setKeyMap(mapping);
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     const shortCut = GetSettings(['spotLight']);
-    //     if (IsEmptyArray(shortCut)) return;
-
-    //     shortCut.forEach((pref) => {
-    //         updateKey(pref);
-    //     });
-    // }, [preferences]);
-
     const logout = () => {
         Logout();
         Navigation.navigate({ url: '/login' });
     };
 
     return (
-        <div className='admin-root'>
+        <div className='communication-root'>
             <title>{pageTitle}</title>
-            {!isLoadingMenu && !isLoadingPreferences ? (
+            {!isLoadingMenu ? (
                 <div className='flex flex-col min-h-screen app-container'>
                     <div className='page-container'>
                         <Sidebar
@@ -182,13 +158,6 @@ const AdminWrapper = ({
             ) : (
                 <DashboardLoader />
             )}
-
-            {/* {!isLoadingMenu && !isLoadingPreferences ? (
-                <SpotlightSearch
-                    menus={menus?.modules}
-                    queries={['menus', 'models']}
-                />
-            ) : null} */}
         </div>
     );
 };

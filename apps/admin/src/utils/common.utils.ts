@@ -1,25 +1,6 @@
 import { isEmptyArray, isUndefinedOrNull } from '@slabs/ds-utils';
 
-import { COLUMN_TYPE } from '@/constants/columnType.constants';
-import { FormTypes, ObjectDto } from '@/types';
-
-import { ExtractUrlFromColumnDefinition } from './assistGeneric.utils';
-
-/**
- * Accepts various params as object and prepare url for get call
- * @param  {string} url
- * @param  {object} params
- */
-export function BuildUrlForGetCall(url: string, params: ObjectDto) {
-    let newUrl = url + '?';
-    for (const i in params) {
-        const value = params[i];
-        if (value) {
-            newUrl += i + '=' + value + '&';
-        }
-    }
-    return newUrl.slice(0, -1);
-}
+import { ObjectDto } from '@/types';
 
 /**
  * Converts array to object
@@ -145,48 +126,5 @@ export const groupBy = <T>(
         }, {});
     } else {
         return {};
-    }
-};
-
-export const getColumnType = (column): FormTypes => {
-    const routeUrl = ExtractUrlFromColumnDefinition(column);
-
-    switch (column.type_id) {
-        case COLUMN_TYPE.NUMBER:
-            return 'number';
-
-        case COLUMN_TYPE.BOOLEAN:
-        case COLUMN_TYPE.CHECKBOX:
-            return 'boolean';
-
-        case COLUMN_TYPE.DATE:
-            return 'date';
-
-        case COLUMN_TYPE.DATETIME:
-            return 'datetime';
-
-        case COLUMN_TYPE.REFERENCE:
-            if (!routeUrl) return 'text';
-            return 'reference';
-
-        case COLUMN_TYPE.SELECT:
-            if (!routeUrl) return 'text';
-            return 'select';
-
-        case COLUMN_TYPE.UPLOAD:
-            return 'upload';
-
-        case COLUMN_TYPE.TEXT:
-        case COLUMN_TYPE.TEXT_AREA:
-            return 'textarea';
-
-        case COLUMN_TYPE.SCRIPT:
-            return 'script';
-
-        case COLUMN_TYPE.JSON:
-            return 'json';
-
-        default:
-            return 'text';
     }
 };

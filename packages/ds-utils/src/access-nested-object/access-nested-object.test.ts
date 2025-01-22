@@ -10,7 +10,7 @@ describe('accessNestedObject', () => {
                 },
                 age: 25,
             },
-            isAdmin: true,
+            iscommunication: true,
         };
 
         const path = 'user.name.first';

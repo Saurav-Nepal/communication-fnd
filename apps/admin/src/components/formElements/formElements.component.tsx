@@ -3,10 +3,6 @@ import { cn } from '@slabs/ds-utils';
 
 import { InputElementProps } from '@/types';
 
-import JSONInput from '../inputs/jsonInput.component';
-import ReferenceInput from '../inputs/referenceInput.component';
-import { ScriptInput } from '../inputs/scriptInput.component';
-
 const formElements = ({
     type = 'text',
     key,
@@ -148,17 +144,7 @@ const formElements = ({
                 </div>
             );
         case 'reference':
-            return (
-                <ReferenceInput
-                    key={key}
-                    value={value}
-                    error={error}
-                    onChange={(value) => onChange(value)}
-                    dict={dict}
-                    {...{ required }}
-                    {...props}
-                />
-            );
+            return <></>;
         case 'date':
             return (
                 <div className='flex flex-col'>
@@ -212,40 +198,8 @@ const formElements = ({
                     )}
                 </div>
             );
-        case 'script':
-            return (
-                <ScriptInput
-                    key={key}
-                    value={value}
-                    payload={payload}
-                    column={dict}
-                    onSave={(value, ...args) => {
-                        // const { payload, setSubmitting } = props;
-                        // if (args.length && args[0].saveWhileTyping) {
-                        //checking if args contain data or not. Proceed into 'if' only when saveWhileTyping has some value
-                        // submitGenericForm({
-                        //     payload,
-                        //     newValues: { [column.name]: value },
-                        //     setSubmitting,
-                        // });
-                        // }
-
-                        onChange(value);
-                    }}
-                    {...props}
-                />
-            );
         case 'json':
-            return (
-                <JSONInput
-                    key={key}
-                    value={value}
-                    payload={payload}
-                    column={dict}
-                    {...{ required, onChange }}
-                    {...props}
-                />
-            );
+            return <></>;
         case 'hidden':
             return <></>;
         default:

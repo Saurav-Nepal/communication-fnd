@@ -17,7 +17,6 @@ import {
  * @param {boolean} noTitleBackground - Whether or not to display a background on the modal header.
  * @return {JSX.Element} The rendered modal container.
  *
- * @author Rumesh Udash
  */
 export const ModalContainer = ({
     children,
@@ -45,7 +44,6 @@ export const ModalContainer = ({
  * @param {any} children - The children to render inside the body of the modal.
  * @return {JSX.Element} - The div container with the provided children and optional className.
  *
- * @author Rumesh Udash
  */
 export const ModalBody = ({
     children,
@@ -76,7 +74,6 @@ export const ModalBody = ({
  * @param {ReactNode} rightComponent - Optional component to be displayed on the right side.
  *
  * @return {JSX.Element} - The ModalTitle component.
- * @author Rumesh Udash
  */
 export const ModalTitle = ({
     title,
@@ -124,7 +121,6 @@ export const ModalTitle = ({
  * @param {any} children - The child elements to render inside the modal footer.
  * @return {JSX.Element} Returns the rendered modal footer component.
  *
- * @author Rumesh Udash
  */
 export const ModalFooter = ({
     children,

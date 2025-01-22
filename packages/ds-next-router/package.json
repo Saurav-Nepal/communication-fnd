@@ -1,9 +1,8 @@
 {
     "name": "@slabs/ds-next-router",
     "version": "0.0.0",
-    "description": "Dynamic router used internally in admin (Next.js)",
+    "description": "Dynamic router used internally in communication (Next.js)",
     "license": "MIT",
-    "author": "Rumesh Udash <rumesh.udas@gmail.com>",
     "keywords": [
         "react",
         "ui"

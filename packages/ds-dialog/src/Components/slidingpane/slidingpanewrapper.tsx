@@ -8,8 +8,6 @@ import { SlidingPaneProps } from './slidingpane.types';
  * Component representing a modal wrapper.
  *
  * @extends {BaseWrapper<SlidingPaneProps>}
- *
- * @author Rumesh Udash
  */
 export class SlidingPaneWrapper extends BaseWrapper<SlidingPaneProps> {
     /**

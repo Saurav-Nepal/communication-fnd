@@ -1,5 +1,3 @@
-import { isValidString } from '@slabs/ds-utils';
-
 import { GLOBAL } from '@/constants/global.constants';
 import { HOME_ROUTE } from '@/constants/routeName.constants';
 import { Authentication, Post } from '@/services';
@@ -19,15 +17,8 @@ const useLogin = () => {
     } = useMutation({
         networkMode: 'always',
         mutationFn: (data) => {
-            if (!isValidString(GLOBAL.ROUTE_URL)) {
-                return Promise.resolve({
-                    success: false,
-                    response: 'No Backend URL Set!',
-                } as any);
-            }
-
             return Post({
-                url: 'user-auth/login',
+                url: 'auth/login',
                 urlPrefix: GLOBAL.ROUTE_URL,
                 data,
             });

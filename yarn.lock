@@ -7515,51 +7515,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"admin@workspace:apps/admin":
-  version: 0.0.0-use.local
-  resolution: "admin@workspace:apps/admin"
-  dependencies:
-    "@hookform/resolvers": "npm:^3.9.0"
-    "@slabs/ds-core": "npm:*"
-    "@slabs/ds-dialog": "npm:*"
-    "@slabs/ds-hooks": "npm:*"
-    "@slabs/ds-next-router": "npm:*"
-    "@slabs/ds-utils": "npm:*"
-    "@tanstack/react-query": "npm:^5.51.15"
-    "@tanstack/react-query-devtools": "npm:^5.51.15"
-    "@types/js-beautify": "npm:^1"
-    "@types/node": "npm:^20"
-    "@types/react": "npm:^18"
-    "@types/react-beautiful-dnd": "npm:^13"
-    "@types/react-dom": "npm:^18"
-    ace-builds: "npm:^1.35.4"
-    axios: "npm:^1.7.2"
-    eslint: "npm:^8"
-    eslint-config-next: "npm:14.2.5"
-    joi: "npm:^17.13.3"
-    js-beautify: "npm:^1.15.1"
-    lucide-react: "npm:^0.427.0"
-    next: "npm:14.2.5"
-    postcss: "npm:^8"
-    react: "npm:^18"
-    react-ace: "npm:^12.0.0"
-    react-animate-height: "npm:^3.2.3"
-    react-beautiful-dnd: "npm:^13.1.1"
-    react-dom: "npm:^18"
-    react-hook-form: "npm:^7.52.1"
-    react-hotkeys: "npm:^2.0.0"
-    react-querybuilder: "npm:7.6.1"
-    react-select: "npm:^5.8.0"
-    react-toastify: "npm:^10.0.5"
-    react-use: "npm:^17.5.1"
-    sass: "npm:^1.77.8"
-    state-manager-utility: "npm:^2.0.1"
-    storage-utility: "npm:^3.1.3"
-    tailwindcss: "npm:^3.4.1"
-    typescript: "npm:5.5.4"
-  languageName: unknown
-  linkType: soft
-
 "agent-base@npm:5":
   version: 5.1.1
   resolution: "agent-base@npm:5.1.1"
@@ -9095,6 +9050,51 @@ __metadata:
   checksum: 10c0/33a124960e471c25ee19280c9ce31ccc19574b566dc514fe4f4ca4c34fa8b0b57cf437671f5de380e11353ea9426213fca17687dd2ef03134fea2dbc53809fd6
   languageName: node
   linkType: hard
+
+"communication@workspace:apps/admin":
+  version: 0.0.0-use.local
+  resolution: "communication@workspace:apps/admin"
+  dependencies:
+    "@hookform/resolvers": "npm:^3.9.0"
+    "@slabs/ds-core": "npm:*"
+    "@slabs/ds-dialog": "npm:*"
+    "@slabs/ds-hooks": "npm:*"
+    "@slabs/ds-next-router": "npm:*"
+    "@slabs/ds-utils": "npm:*"
+    "@tanstack/react-query": "npm:^5.51.15"
+    "@tanstack/react-query-devtools": "npm:^5.51.15"
+    "@types/js-beautify": "npm:^1"
+    "@types/node": "npm:^20"
+    "@types/react": "npm:^18"
+    "@types/react-beautiful-dnd": "npm:^13"
+    "@types/react-dom": "npm:^18"
+    ace-builds: "npm:^1.35.4"
+    axios: "npm:^1.7.2"
+    eslint: "npm:^8"
+    eslint-config-next: "npm:14.2.5"
+    joi: "npm:^17.13.3"
+    js-beautify: "npm:^1.15.1"
+    lucide-react: "npm:^0.427.0"
+    next: "npm:14.2.5"
+    postcss: "npm:^8"
+    react: "npm:^18"
+    react-ace: "npm:^12.0.0"
+    react-animate-height: "npm:^3.2.3"
+    react-beautiful-dnd: "npm:^13.1.1"
+    react-dom: "npm:^18"
+    react-hook-form: "npm:^7.52.1"
+    react-hotkeys: "npm:^2.0.0"
+    react-querybuilder: "npm:7.6.1"
+    react-select: "npm:^5.8.0"
+    react-toastify: "npm:^10.0.5"
+    react-use: "npm:^17.5.1"
+    sass: "npm:^1.77.8"
+    state-manager-utility: "npm:^2.0.1"
+    storage-utility: "npm:^3.1.3"
+    tailwindcss: "npm:^3.4.1"
+    typescript: "npm:5.5.4"
+  languageName: unknown
+  linkType: soft
 
 "component-emitter@npm:^1.2.1":
   version: 1.3.1
@@ -18613,9 +18613,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"slab-admin@workspace:.":
+"slab-communication@workspace:.":
   version: 0.0.0-use.local
-  resolution: "slab-admin@workspace:."
+  resolution: "slab-communication@workspace:."
   dependencies:
     "@ianvs/prettier-plugin-sort-imports": "npm:^4.1.1"
     "@radix-ui/react-accordion": "npm:^1.1.2"

@@ -10,7 +10,7 @@ export type USER_TYPE = {
     email: string;
     username: string;
     password: string;
-    isSuperAdmin?: boolean;
+    isSupercommunication?: boolean;
 };
 
 export type COLUMN_DATA_TYPE = {
@@ -134,8 +134,8 @@ export type ToastContainerType = React.ForwardRefExoticComponent<
     React.RefAttributes<ToastFns>
 >;
 
-/* Admin Wrapper */
-export interface AdminWrapperProps {
+/* communication Wrapper */
+export interface communicationWrapperProps {
     children: ReactNode;
     isLoadingMenu?: boolean;
     isLoadingPreferences?: boolean;

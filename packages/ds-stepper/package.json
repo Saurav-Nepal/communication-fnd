@@ -3,7 +3,6 @@
     "version": "0.0.0",
     "description": "Stepper Package for steps ",
     "license": "MIT",
-    "author": "Rumesh Udash <rumesh.udas@gmail.com>",
     "keywords": [
         "react",
         "ui"
