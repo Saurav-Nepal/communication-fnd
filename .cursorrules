@@ -1,0 +1,105 @@
+You are an expert in TypeScript, Node.js, Next.js App Router, React, Shadcn UI, Radix UI and Tailwind.
+
+## Code Style and Structure
+
+-   Write concise, technical TypeScript code with accurate examples
+-   Use functional and declarative programming patterns; avoid classes
+-   Prefer iteration and modularization over code duplication
+-   Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError)
+-   Structure files: exported component, subcomponents, helpers, static content, types
+-   Adhere to the Separation of Concerns (SoC) principle
+-   Implement Container/Presentational pattern for complex components
+
+## Naming Conventions
+
+-   Use PascalCase for component names
+-   Use lowercase with dashes for directories (e.g., components/auth-wizard)
+-   Favor named exports for components
+-   For compound components, use a common prefix (e.g., Menu, MenuItem, MenuHeader)
+-   Prefix custom hooks with "use"
+
+## TypeScript Usage
+
+-   Use TypeScript for all code; prefer interfaces over types
+-   Avoid enums; use maps instead
+-   Use functional components with TypeScript interfaces
+-   Implement TypeScript types or interfaces for function parameters and return values
+-   Use generics where appropriate for flexible, reusable utility functions
+
+## Component Creation
+
+-   Prefer composition and props drilling over inheritance
+-   Define propTypes for all props
+-   Document each prop's purpose, type, and required status
+-   Use default props where appropriate
+-   Implement error boundaries and provide fallback UI
+
+## Hooks Creation
+
+-   Keep hooks focused on a single concern or task
+-   Minimize side effects within hooks
+-   Declare all dependencies in the dependency array of useEffect
+-   Design hooks to be reusable across different components and contexts
+
+## Utils Creation
+
+-   Write utility functions as pure functions
+-   Group related utility functions under meaningful namespaces or modules
+-   Anticipate and handle edge cases gracefully
+-   Provide clear documentation and examples for edge case behavior
+
+## UI and Styling
+
+-   Use Shadcn UI, Radix, and Tailwind for components and styling
+-   Implement responsive design with Tailwind CSS; use a mobile-first approach
+-   Avoid inline styles unless absolutely necessary
+-   Utilize Tailwind's responsive and state variants for adaptive designs
+
+## Accessibility
+
+-   Ensure components are accessible by following accessibility best practices
+-   Use semantic HTML elements and provide appropriate ARIA attributes
+-   Implement keyboard navigation support for interactive components
+-   Test components with screen readers and keyboard-only navigation
+
+## Performance Optimization
+
+-   Use React.memo() for components that render often with the same props
+-   Implement useMemo() and useCallback() hooks to memoize expensive calculations and callback functions
+-   Leverage code-splitting and lazy loading for large component trees
+-   Profile components using React DevTools to identify performance bottlenecks
+-   Minimize 'use client', 'useEffect', and 'setState'; favor React Server Components (RSC)
+-   Wrap client components in Suspense with fallback
+-   Use dynamic loading for non-critical components
+-   Optimize images: use WebP format, include size data, implement lazy loading
+
+## State Management
+
+-   Use 'nuqs' for URL search parameter state management
+-   For simple applications, use React's built-in useState and useContext hooks
+-   For more complex state management, consider using libraries like Redux, MobX, or Recoil
+
+## Testing Strategies
+
+-   Implement unit tests for individual components, hooks, and utility functions
+-   Use integration tests to verify the interaction between multiple components
+-   Implement end-to-end tests for critical user flows
+-   Consider using Testing Library for component testing and Cypress for end-to-end testing
+-   Aim for high test coverage, prioritizing critical and complex parts of the application
+
+## Next.js Specific Guidelines
+
+-   Optimize Web Vitals (LCP, CLS, FID)
+-   Limit 'use client':
+    -   Favor server components and Next.js SSR
+    -   Use only for Web API access in small components
+    -   Avoid for data fetching or state management
+-   Follow Next.js docs for Data Fetching, Rendering, and Routing
+
+## Documentation
+
+-   Document the purpose, parameters, and return values of each utility function
+-   Use JSDoc comments for inline documentation
+-   Provide comprehensive guidelines for creating consistent, maintainable, and reusable components, hooks, and utility functions
+
+By following these guidelines, we aim to maintain consistency, readability, and maintainability across our React component library, enabling efficient collaboration and development within our team.

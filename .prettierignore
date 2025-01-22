@@ -1,0 +1,12 @@
+# Add files here to ignore them from prettier formatting
+
+/dist
+/publish
+/node_modules
+
+*.d.ts
+packages/**/styles.css
+*.mdx
+*.md
+docs/.next
+docs/out

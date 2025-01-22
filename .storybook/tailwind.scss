@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    #storybook-root {
+        height: 100vh;
+    }
+    #storybook-docs {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Jost', sans-serif;
+        }
+        p,
+        a,
+        table {
+            font-family: 'Inter', sans-serif;
+        }
+    }
+}

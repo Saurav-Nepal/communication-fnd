@@ -1,0 +1,16 @@
+{
+    "cSpell.words": [
+        "clsx",
+        "esno",
+        "execa",
+        "ianvs",
+        "signale",
+        "tailwindcss",
+        "tsbuildinfo",
+        "typecheck"
+    ],
+    "tailwindCSS.experimental.classRegex": [
+        ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+        ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+    ]
+}
