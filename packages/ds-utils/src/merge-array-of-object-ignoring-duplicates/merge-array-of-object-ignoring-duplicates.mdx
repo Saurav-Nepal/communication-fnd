@@ -1,0 +1,33 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Array/mergeArrayOfObjectIgnoringDuplicates' />
+
+# mergeArrayOfObjectIgnoringDuplicates Function
+
+## Description
+
+Merge two arrays of objects while ignoring duplicates based on a unique key.
+
+## Usage
+
+<Source code={`
+import { mergeArrayOfObjectIgnoringDuplicates } from '@slabs/ds-utils';
+
+const arr1 = [
+    { id: 1, name: 'Alice' },
+    { id: 2, name: 'Bob' },
+];
+const arr2 = [
+    { id: 2, name: 'Charlie' },
+    { id: 3, name: 'David' },
+];
+const result = mergeArrayOfObjectIgnoringDuplicates(arr1, arr2, 'id');
+console.log(result);
+/* Output: 
+[
+    { id: 1, name: 'Alice' },
+    { id: 2, name: 'Bob' },
+    { id: 3, name: 'David' },
+]
+*/
+`} dark={true} language='tsx' />

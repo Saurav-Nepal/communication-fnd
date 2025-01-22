@@ -1,0 +1,60 @@
+import {
+  Canvas,
+  Controls,
+  Description,
+  Meta,
+  Subtitle,
+  Story,
+  Source
+} from '@storybook/blocks';
+
+import * as HamburgerStories from './hamburger.story';
+
+<Meta of={HamburgerStories} title='Components/Hamburger' />
+
+# Hamburger Component
+
+The Hamburger component is a animated toggle button typically used for expanding and collapsing navigation menus or sidebars. It transforms between a hamburger icon and a chevron icon based on its state.
+
+## Usage
+
+The Hamburger component can be easily integrated into your application to provide a visually appealing toggle for navigation elements.
+
+<Canvas>
+  <Story of={HamburgerStories.Example} />
+</Canvas>
+
+<Source
+  code={`
+import React from 'react';
+import { useBoolean } from '@slabs/ds-hooks';
+import { Hamburger } from '@slabs/ds-core';
+
+const Example = () => {
+  const [isCollapsed, setIsCollapsed] = useBoolean(false);
+
+  return (
+    <Hamburger
+      isCollapsed={isCollapsed}
+      setIsCollapsed={setIsCollapsed}
+    />
+  );
+};
+`}
+  dark={true}
+  language='tsx'
+/>
+
+## Props
+
+The Hamburger component accepts the following props:
+
+### `isCollapsed`
+- **Type:** `boolean`
+- **Required:** Yes
+- **Description:** Controls the state of the hamburger icon. When `true`, the icon appears as a chevron left (`<`) button. When `false`, it appears as a hamburger menu icon.
+
+### `setIsCollapsed`
+- **Type:** `(isCollapsed: boolean) => void`
+- **Required:** Yes
+- **Description:** Function to update the `isCollapsed` state. It's called when the hamburger button is clicked.

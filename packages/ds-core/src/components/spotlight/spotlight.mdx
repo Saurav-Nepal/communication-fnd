@@ -1,0 +1,253 @@
+import {
+  Canvas,
+  Controls,
+  Description,
+  Meta,
+  Subtitle,
+  Story,
+  Source
+} from '@storybook/blocks';
+
+import * as SpotlightStories from './spotlight.story';
+
+<Meta of={SpotlightStories} title='Components/Spotlight' />
+
+# Spotlight Component
+
+The Spotlight component provides a command palette-style interface for quick navigation and action execution within your application. It offers a searchable list of actions or navigation options, enhancing user efficiency and accessibility.
+
+# Usage
+
+The Spotlight component allows for easy implementation of a powerful search and command interface in your application. It supports customizable triggers, search input, and hierarchical command structures.
+
+<Canvas>
+ <Story of={SpotlightStories.Example} />
+</Canvas>
+
+<Source code={`import { Spotlight } from "@slabs/ds-core"`} dark={true} language='tsx' />
+<Source code={`
+import React from 'react';
+import { useBoolean } from '@slabs/ds-hooks';
+import { ArrowRight } from 'lucide-react';
+import { InputGroup, InputGroupText } from '../Input/Input-group/input-group';
+
+const Example = () => {
+  const [isOpen, setIsOpen] = useBoolean(false);
+
+  return (
+    <Spotlight
+      trigger={
+        <InputGroup hasMerged onClick={() => setIsOpen(true)}>
+            <InputGroupText>
+                <SearchIcon size={12} />
+            </InputGroupText>
+            <Input />
+            <InputGroupText className='text-xs text-muted-foreground'>
+                {os === 'macos' ? '⌘' : 'Ctrl'} + K
+            </InputGroupText>
+        </InputGroup>
+      }
+      isOpen={isOpen}
+      setIsOpen={setIsOpen}
+    >
+      <SpotlightInput placeholder="What do you need?" />
+      <SpotlightList>
+        <SpotlightEmpty />
+        <SpotlightGroup heading="Menus">
+          <SpotlightItem
+            icon={ArrowRight}
+            title={["Application Modules 1", "Subtitle", "Subtitle 4"]}
+            onClick={() => {}}
+          />
+          <SpotlightItem
+            icon={ArrowRight}
+            title="Application Modules 2"
+            onClick={() => {}}
+          />
+          <SpotlightItem
+            icon={ArrowRight}
+            title="Application Modules 3"
+            onClick={() => {}}
+          />
+          <SpotlightItem
+            icon={ArrowRight}
+            title="Application Modules 4"
+            onClick={() => {}}
+          />
+        </SpotlightGroup>
+      </SpotlightList>
+    </Spotlight>
+  );
+};
+`} dark={true} language='tsx' />
+
+# Props
+
+The Spotlight component and its sub-components accept the following props:
+
+## Spotlight
+
+### `children`
+- **Type:** `React.ReactNode`
+- **Required:** Yes
+- **Description:** The content of the Spotlight component, typically including SpotlightInput, SpotlightList, and SpotlightGroups.
+
+### `trigger`
+- **Type:** `React.ReactNode`
+- **Required:** False
+- **Description:** The element that triggers the Spotlight to open when clicked.
+
+### `keys`
+- **Type:** `string[]`
+- **Required:** No
+- **Description:** Keyboard shortcuts to open the Spotlight.
+- **Default:** `['ctrl+k', 'cmd+k']`
+
+### `isOpen`
+- **Type:** `boolean`
+- **Required:** No
+- **Description:** Controls whether the Spotlight is open or closed.
+
+### `setIsOpen`
+- **Type:** `(isOpen: boolean) => void`
+- **Required:** No
+- **Description:** Function to update the `isOpen` state.
+
+## SpotlightInput
+
+### `placeholder`
+- **Type:** `string`
+- **Required:** No
+- **Default:** `"What do you need?"`
+- **Description:** Placeholder text for the search input.
+
+## SpotlightList
+
+### `children`
+- **Type:** `React.ReactNode`
+- **Required:** Yes
+- **Description:** The content of the SpotlightList, typically SpotlightGroups and SpotlightItems.
+
+## SpotlightGroup
+
+### `heading`
+- **Type:** `string`
+- **Required:** Yes
+- **Description:** The heading text for the group of SpotlightItems.
+
+### `children`
+- **Type:** `React.ReactNode`
+- **Required:** Yes
+- **Description:** The SpotlightItems contained within this group.
+
+## SpotlightItem
+
+### `onClick`
+- **Type:** `() => void`
+- **Required:** Yes
+- **Description:** Function to be called when the item is selected.
+
+### `title`
+- **Type:** `string | React.ReactNode | string[]`
+- **Required:** Yes
+- **Description:** The title of the item. Can be a string, React node, or an array of strings for nested titles.
+
+### `subtitle`
+- **Type:** `string`
+- **Required:** No
+- **Description:** Optional subtitle for the item.
+
+### `icon`
+- **Type:** `React.ComponentType`
+- **Required:** No
+- **Default:** `MoveRight`
+- **Description:** Icon component to be displayed alongside the item.
+
+### `iconSize`
+- **Type:** `number`
+- **Required:** No
+- **Default:** `20`
+- **Description:** Size of the icon in pixels.
+
+## SpotlightEmpty
+
+### `hidden`
+- **Type:** `boolean`
+- **Required:** No
+- **Default:** `false`
+- **Description:** Whether to hide the empty state message.
+
+### `text`
+- **Type:** `string`
+- **Required:** No
+- **Default:** `"No results found."`
+- **Description:** The text to display when no results are found.
+
+# Prop Types
+
+## SpotlightProps
+
+```typescript
+type SpotlightProps = {
+  children: React.ReactNode;
+  trigger: React.ReactNode;
+  isOpen?: boolean;
+  setIsOpen?: (isOpen: boolean) => void;
+};
+```
+
+## SpotlightInputProps
+
+```typescript
+type SpotlightInputProps = {
+  placeholder?: string;
+};
+```
+
+## SpotlightListProps
+
+```typescript
+type SpotlightListProps = {
+  children: React.ReactNode;
+};
+```
+
+## SpotlightGroupProps
+
+```typescript
+type SpotlightGroupProps = {
+  heading: string;
+  children: React.ReactNode;
+};
+```
+
+## SpotlightItemProps
+
+```typescript
+type SpotlightItemProps = {
+  onClick: () => void;
+  title: string | React.ReactNode | string[];
+  subtitle?: string;
+  icon?: React.ComponentType;
+  iconSize?: number;
+};
+```
+
+## SpotlightEmptyProps
+
+```typescript
+type SpotlightEmptyProps = {
+  hidden?: boolean;
+  text?: string;
+};
+```
+
+# Usage Notes
+
+- The Spotlight component is designed to be a top-level component in your application, typically rendered at the root level to ensure it can appear above other UI elements.
+- Use the `trigger` prop to define how users will open the Spotlight. This can be a button, keyboard shortcut, or any other interactive element.
+- The `SpotlightInput` component provides the search functionality. Users can type here to filter the available commands or actions.
+- Use `SpotlightGroup` components to organize your commands into logical categories.
+- `SpotlightItem` components represent individual actions or navigation options. The `onClick` prop defines what happens when an item is selected.
+- The `SpotlightEmpty` component allows you to customize the message displayed when no results match the user's search.
+- For keyboard navigation, ensure that your application sets up appropriate key bindings to open and navigate the Spotlight component.

@@ -1,0 +1,27 @@
+import { Meta, Title, Source, Stories } from '@storybook/blocks';
+import * as StoryBook from './use-toggle.story';
+
+<Meta of={StoryBook} />
+
+<Title />
+Creates a toggle state and a function to toggle the state with the given options.
+The hook takes an array of values for the toggle state and returns a tuple containing the current option and a function to toggle the state.
+The function to toggle the state can optionally take a new value to set the state to.
+
+## Usage
+<Source code={`
+import { Button } from '@slabs/ds-core';
+import { useToggle } from '@slabs/ds-hooks';
+
+function Demo() {
+  const [mode, toggle] = useToggle(['dark', 'light', 'system']);
+
+  return (
+    <Button onClick={() => toggle()}>
+      {mode}
+    </Button>
+  );
+}
+`} dark={true} language='tsx' />
+
+<Stories title='Examples'/>

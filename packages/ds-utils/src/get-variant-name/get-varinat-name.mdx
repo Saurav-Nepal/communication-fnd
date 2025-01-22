@@ -1,0 +1,24 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Misc/getVariantName' />
+
+# getVariantName Function
+
+## Description
+
+The `getVariantName` function gives the variant name for a given quantity and unit. It concatenates the quantity and the unit's name to form a descriptive variant name.
+
+## Usage
+
+
+<Source code={`
+import { getVariantName } from '@slabs/ds-utils';
+// Example usage
+const productQuantity = 5;
+const productUnit = { name: 'pieces' };
+
+const variantName = getVariantName(productQuantity, productUnit);
+// Output: '5 pieces'
+`}
+
+ dark={true} language='tsx' />

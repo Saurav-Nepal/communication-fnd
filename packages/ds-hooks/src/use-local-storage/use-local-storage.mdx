@@ -1,0 +1,34 @@
+import { Meta, Title, Source, Stories } from '@storybook/blocks';
+import * as StoryBook from './use-local-storage.story'
+
+<Meta of={StoryBook} />
+
+
+<Title />
+
+
+The `useLocalStorage` hook is a custom React hook designed to simplify the management of data stored in the browser's local storage. It takes an optional initial value and returns a tuple containing the stored value, a function to update the stored value, and a function to remove the stored value from local storage.
+
+
+
+## Usage
+<Source code={`
+import { Button } from '@slabs/ds-core';
+import { useLocalStorage } from '@slabs/ds-hooks';
+
+function Demo() {
+
+    const [value, setValue] = useLocalStorage('key', 'initialValue');
+
+    return (
+        <div>
+            <p>Value: {value}</p>
+            <Button onClick={() => setValue('newValue')}>Set Value</Button>
+        </div>
+        )
+  
+  );
+}
+`} dark={true} language='tsx' />
+
+<Stories title='Examples'/>

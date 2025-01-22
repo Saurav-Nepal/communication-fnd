@@ -1,0 +1,35 @@
+import { Meta, Title, Source, Stories } from '@storybook/blocks';
+import * as StoryBook from './use-mounted.story'
+
+<Meta of={StoryBook} />
+
+
+<Title />
+
+The `useMounted` hook is a simple hook that returns a boolean value indicating whether the component has been mounted or not.
+
+
+## Usage
+
+
+<Source
+
+code ={`
+import { useMounted } from '@slabs/ds-hooks'
+
+const MyComponent = () => {
+  const isMounted = useMounted()
+
+  return (
+    <div>
+      {isMounted ? 'Mounted' : 'Not Mounted'}
+    </div>
+  )
+}`}
+
+dark={true} language='tsx'/>
+
+<Stories title='Examples'/>
+
+
+

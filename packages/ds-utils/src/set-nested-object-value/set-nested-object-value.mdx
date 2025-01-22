@@ -1,0 +1,55 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Object/setNestedObjectValue' />
+
+# setNestedObjectValue Function
+
+## Description
+
+The `setNestedObjectValue` function is used to set the value of any object, including nested objects, based on the provided path.
+
+## Usage
+
+
+<Source code={`
+import { setNestedObjectValue } from '@slabs/ds-utils';
+
+// Example usage
+const originalObject = {
+    user: {
+        profile: {
+            name: 'John Doe',
+            age: 30,
+        },
+    },
+    settings: {
+        theme: 'dark',
+    },
+};
+
+const updatedObject = setNestedObjectValue(originalObject, 'user.profile.age', 31);
+// Output: {
+//     user: {
+//         profile: {
+//             name: 'John Doe',
+//             age: 31,
+//         },
+//     },
+//     settings: {
+//         theme: 'dark',
+// }
+
+const nestedPath = ['settings', 'theme'];
+const anotherUpdatedObject = setNestedObjectValue(originalObject, nestedPath, 'light');
+// Output: {
+//     user: {
+//         profile: {
+//             name: 'John Doe',
+//             age: 30,
+//         },
+//     },
+//     settings: {
+//         theme: 'light',
+//     },
+// }
+`} dark={true} language='tsx' />

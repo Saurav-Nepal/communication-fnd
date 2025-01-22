@@ -1,0 +1,38 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Misc/px' />
+
+# px Function
+
+## Description
+
+The `px` function converts a value to pixels. It supports both numeric values and string representations with units like 'px', 'rem', and 'em'. The conversion is based on a default font size of 16 pixels.
+
+## Usage
+
+
+<Source code={`
+import { px } from '@slabs/ds-utils';
+
+// Example usage
+const numericValue = px(20);
+// Output: 20
+
+const stringValueInPx = px('30px');
+// Output: 30
+
+const stringValueInRem = px('2rem');
+// Output: 32 (2rem * 16px)
+
+const stringValueInEm = px('1.5em');
+// Output: 24 (1.5em * 16px)
+
+const stringValueWithoutUnit = px('40');
+// Output: 40
+
+const calcExpression = px('calc(100% - 20px)');
+// Output: 'calc(100% - 20px)'
+
+const varExpression = px('var(--spacing)');
+// Output: 'var(--spacing)'
+`} dark={true} language='tsx' />

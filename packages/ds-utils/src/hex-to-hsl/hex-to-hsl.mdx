@@ -1,0 +1,25 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Misc/hexToHSL' />
+
+# hexToHsl Function
+
+## Description
+
+The `hexToHsl` function converts a hexadecimal color code to HSL (Hue, Saturation, Lightness) values and returns an array containing the HSL values [Hue, Saturation, Lightness]. The `hexToHslString` function takes a hex color code and returns its HSL representation as a string.
+
+## Usage
+
+
+<Source code={`
+import { hexToHsl, hexToHslString } from '@slabs/ds-utils';
+
+
+// Example usage
+const hexColorCode = '#3498db';
+const hslValues = hexToHsl(hexColorCode);
+// Output: [207, 83, 61]
+
+const hslString = hexToHslString(hexColorCode);
+// Output: '207 83% 61%'
+`} dark={true} language='tsx'/>

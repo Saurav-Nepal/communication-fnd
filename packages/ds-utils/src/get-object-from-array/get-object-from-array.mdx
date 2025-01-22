@@ -1,0 +1,56 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Array/getObjectFromArrayByValue' />
+
+# getObjectFromArrayByValue Function
+
+## Description
+
+The `getObjectFromArrayByValue` function retrieves the first object in an array of objects where the specified key matches the specified value. It internally uses the `indexOfObjectInArray` function to find the index of the object and returns the object if found, or `null` if not found.
+
+## Usage
+
+
+<Source code={`
+
+
+import { getObjectFromArrayByValue } from '@slabs/ds-utils';
+
+// Example usage
+ const inputArray = [
+            {
+                name: 'John',
+                age: 30,
+                address: {
+                    city: 'New York',
+                    country: 'USA',
+                },
+                phone: null,
+                email: undefined,
+                hobbies: [],
+            },
+            {
+                name: 'Abc',
+                age: 30,
+                address: {
+                    city: 'New York',
+                    country: 'USA',
+                },
+                phone: null,
+                email: undefined,
+                hobbies: [],
+            },
+        ];
+const objectWithValue = getObjectFromArrayByValue(arrayOfObjects, 'name', 'Jane Doe');
+{/* Output: {
+            name: 'John',
+            age: 30,
+            address: {
+                city: 'New York',
+                country: 'USA',
+            },
+            phone: null,
+            email: undefined,
+            hobbies: [],
+        }; */}
+`} dark={true} language='tsx' />

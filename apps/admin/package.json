@@ -1,0 +1,53 @@
+{
+    "name": "admin",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "@hookform/resolvers": "^3.9.0",
+        "@slabs/ds-core": "*",
+        "@slabs/ds-dialog": "*",
+        "@slabs/ds-hooks": "*",
+        "@slabs/ds-next-router": "*",
+        "@slabs/ds-utils": "*",
+        "@tanstack/react-query": "^5.51.15",
+        "@tanstack/react-query-devtools": "^5.51.15",
+        "ace-builds": "^1.35.4",
+        "axios": "^1.7.2",
+        "joi": "^17.13.3",
+        "js-beautify": "^1.15.1",
+        "lucide-react": "^0.427.0",
+        "next": "14.2.5",
+        "react": "^18",
+        "react-ace": "^12.0.0",
+        "react-animate-height": "^3.2.3",
+        "react-beautiful-dnd": "^13.1.1",
+        "react-dom": "^18",
+        "react-hook-form": "^7.52.1",
+        "react-hotkeys": "^2.0.0",
+        "react-querybuilder": "7.6.1",
+        "react-select": "^5.8.0",
+        "react-toastify": "^10.0.5",
+        "react-use": "^17.5.1",
+        "state-manager-utility": "^2.0.1",
+        "storage-utility": "^3.1.3"
+    },
+    "devDependencies": {
+        "@types/js-beautify": "^1",
+        "@types/node": "^20",
+        "@types/react": "^18",
+        "@types/react-beautiful-dnd": "^13",
+        "@types/react-dom": "^18",
+        "eslint": "^8",
+        "eslint-config-next": "14.2.5",
+        "postcss": "^8",
+        "sass": "^1.77.8",
+        "tailwindcss": "^3.4.1",
+        "typescript": "5.5.4"
+    }
+}

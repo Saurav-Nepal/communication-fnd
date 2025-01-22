@@ -1,0 +1,30 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Array/accessNestedObject' />
+
+# accessNestedObject  Function
+
+## Description
+
+The `accessNestedObject` function enables the retrieval of an object from an array based on a unique identifier. It proves especially useful when dealing with arrays of objects and needing to access a specific object using a unique key. This function efficiently locates and returns the desired object, providing a convenient way to access nested objects within the array.
+
+## Usage
+
+<Source code={`
+import {accessNestedObject  } from '@slabs/ds-utils';
+
+ const obj = [
+            { id: '1', value: 'One' },
+            { id: '2', value: 'Two' },
+        ];
+
+        const path = '1';
+        
+const result = accessNestedObject(obj, path);
+
+console.log(result);
+/* Output: 
+ { id: '2', value: 'Two' };
+*/
+`}  dark={true} language='tsx'/>
+`;

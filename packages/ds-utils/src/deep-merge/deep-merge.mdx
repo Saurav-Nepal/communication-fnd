@@ -1,0 +1,24 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Object/deepMerge' />
+
+# deepMerge Function
+
+## Description
+
+The `deepMerge` function merges the properties of two objects deeply, combining nested objects while preserving the structure of the target object. This utility is especially useful for merging complex objects with nested structures.
+
+## Usage
+
+
+<Source code={`
+import { deepMerge } from '@slabs/ds-utils';
+import { isObject } from '../is-object/is-object';
+
+// Example usage
+const targetObject = { a: 1, b: { c: 2 } };
+const sourceObject = { b: { d: 3 }, e: 4 };
+
+const mergedObject = deepMerge(targetObject, sourceObject);
+// Output: { a: 1, b: { c: 2, d: 3 }, e: 4 }
+`} dark={true} language='tsx'/>

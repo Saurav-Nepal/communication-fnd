@@ -1,0 +1,30 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Array/calculateSumFromArrObj' />
+
+# calculateSumFromArrObj Function
+
+## Description
+
+The `calculateSumFromArrObj` function is designed to calculate the sum of a specified numeric property across an array of objects. It's particularly useful when dealing with datasets represented as arrays of objects, where you need to aggregate numeric values based on a specific property.
+
+## Usage
+
+
+<Source code={`
+import { calculateSumFromArrObj } from '@slabs/ds-utils';
+
+
+// Example array of objects with a numeric property 'amount'
+const objArray: ObjectDto[] = [
+    { id: '1', amount: 100 },
+    { id: '2', amount: 150 },
+    // ... other objects
+];
+
+// Calculating the sum of 'amount' property using calculateSumFromArrObj
+const totalAmount = calculateSumFromArrObj(objArray, 'amount');
+
+// Output: 250
+console.log(totalAmount);
+`} dark={true} language='tsx' />

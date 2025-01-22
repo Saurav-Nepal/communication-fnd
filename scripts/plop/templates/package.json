@@ -1,0 +1,64 @@
+{
+    "name": "{{packageName}}",
+    "version": "0.0.0",
+    "description": "{{description}}",
+    "license": "MIT",
+    "author": "Rumesh Udash <rumesh.udas@gmail.com>",
+    "keywords": [
+        "react",
+        "ui"
+    ],
+    "sideEffects": [
+        "*.css"
+    ],
+    "entry": "./src/index.ts",
+    "main": "./cjs/index.cjs",
+    "module": "./esm/index.mjs",
+    "types": "./lib/index.d.ts",
+    "exports": {
+        ".": {
+            "import": {
+                "types": "./lib/index.d.mts",
+                "default": "./esm/index.mjs"
+            },
+            "require": {
+                "types": "./lib/index.d.ts",
+                "default": "./cjs/index.cjs"
+            }
+        },
+        "./styles.css": "./styles.css",
+        "./styles.layer.css": "./styles.layer.css"
+    },
+    "scripts": {
+        "build": "esno ../../scripts/build {{package}}",
+        "dev": "nodemon --exec \"esno ../../scripts/build {{package}}\""
+    },
+    "peerDependencies": {
+        "react": "^18.3.1"
+    },
+    "devDependencies": {
+        "{{namespace}}/ds-core": "*",
+        "{{namespace}}/ds-utils": "*",
+        "{{namespace}}/ds-hooks": "*",
+        "{{namespace}}/ds-dialog": "*",
+        "{{namespace}}/eslint-config": "*",
+        "@types/node": "^20.5.2",
+        "@types/eslint": "^8.44.7",
+        "@types/react": "^18.3.3",
+        "@types/react-dom": "^18.3.0",
+        "eslint": "^8.56.0",
+        "react": "^18.3.1",
+        "typescript": "5.5.4"
+    },
+    "nodemonConfig": {
+        "ignore": [
+            "**/lib/**",
+            "**/esm/**",
+            "**/cjs/**",
+            "**/src/**/*.test.ts"
+        ],
+        "ext": "*.ts, *.tsx",
+        "delay": 1500,
+        "stdin": false
+    }
+}

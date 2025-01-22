@@ -1,0 +1,36 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Array/indexOfObjectInArray' />
+
+# indexOfObjectInArray Function
+
+## Description
+
+The `indexOfObjectInArray` function returns the index of an object in an array based on a specified key and value. It uses the `findIndex` method to iterate through the array and find the index of the first object where the specified key's value matches the provided value.
+
+## Usage
+
+
+<Source code={`
+import { indexOfObjectInArray } from '@slabs/ds-utils';
+// Example usage
+ const inputArray = [
+            {
+                name: 'John',
+                age: 30,
+                address: {
+                    city: 'New York',
+                    country: 'USA',
+                },
+                phone: null,
+                email: undefined,
+                hobbies: [],
+            },
+            {
+                name: '',
+            },
+        ];
+
+const index = indexOfObjectInArray(arrayOfObjects, 'name', '');
+// Output: 1 (index of the object with name '' in the array)
+`} dark={true} language='tsx'/>

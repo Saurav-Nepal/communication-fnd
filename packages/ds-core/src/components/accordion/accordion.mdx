@@ -1,0 +1,165 @@
+import {
+  Canvas,
+  Controls,
+  Description,
+  Meta,
+  Subtitle,
+  Story,
+  Source
+} from '@storybook/blocks';
+
+import * as AccordionStories from './accordion.story';
+
+<Meta of={AccordionStories} title="Components/Accordion" />
+
+# Accordion Component
+
+The Accordion component provides an expandable and collapsible content container, allowing users to show and hide sections of related content. It's built on top of Radix UI's Accordion primitive and offers customization options for styling and behavior.
+
+## Usage
+
+The Accordion component allows for easy implementation of expandable content sections in your application. It supports both single and multiple open items, customizable triggers and content, and various styling options.
+
+<Canvas>
+  <Story of={AccordionStories.Single} />
+</Canvas>
+
+<Source code={`import { Accordion } from "@slabs/ds-core"`} dark={true} language="tsx" />
+<Source
+  code={`
+import React from 'react';
+import { Accordion } from '@slabs/ds-core';
+
+const Example = () => {
+  const items = [
+    {
+      key: 'item-1',
+      trigger: 'Accordion Item 1',
+      content: 'Content for Accordion Item 1',
+    },
+    {
+      key: 'item-2',
+      trigger: 'Accordion Item 2',
+      content: 'Content for Accordion Item 2',
+    },
+    {
+      key: 'item-3',
+      trigger: 'Accordion Item 3',
+      content: 'Content for Accordion Item 3',
+    },
+  ];
+
+  return (
+    <Accordion
+      type="single"
+      collapsible
+      items={items}
+      showArrowIcon
+      variant="connected"
+      isRounded
+    />
+  );
+};
+`}
+  dark={true}
+  language="tsx"
+/>
+
+## Props
+
+The Accordion component accepts the following props:
+
+### `type`
+- **Type:** `'single' | 'multiple'`
+- **Required:** Yes
+- **Description:** Determines whether one or multiple items can be opened at a time.
+
+### `collapsible`
+- **Type:** `boolean`
+- **Required:** No (only applicable when `type` is `'single'`)
+- **Description:** Allows the open item to be closed when `type` is `'single'`.
+
+### `defaultValue`
+- **Type:** `string | string[]`
+- **Required:** No
+- **Description:** The default open item(s) when the Accordion is uncontrolled.
+
+### `value`
+- **Type:** `string | string[]`
+- **Required:** No
+- **Description:** The controlled open item(s) of the Accordion.
+
+### `onValueChange`
+- **Type:** `(value: string | string[]) => void`
+- **Required:** No
+- **Description:** Callback fired when the open items change.
+
+### `showArrowIcon`
+- **Type:** `boolean`
+- **Required:** No
+- **Default:** `true`
+- **Description:** Controls the visibility of the arrow icon in the trigger.
+
+### `items`
+- **Type:** `Array<{ key: string; trigger: React.ReactNode; content: React.ReactNode }>`
+- **Required:** Yes
+- **Description:** Array of accordion items, each with a unique key, trigger content, and expandable content.
+
+### `variant`
+- **Type:** `'connected' | 'separated'`
+- **Required:** No
+- **Default:** `'connected'`
+- **Description:** Determines the visual style of the accordion items.
+
+### `isRounded`
+- **Type:** `boolean`
+- **Required:** No
+- **Default:** `false`
+- **Description:** Applies rounded corners to the accordion items.
+
+### `isUnstyled`
+- **Type:** `boolean`
+- **Required:** No
+- **Default:** `false`
+- **Description:** Removes default styling, allowing for complete custom styling.
+
+### `arrowSize`
+- **Type:** `number`
+- **Required:** No
+- **Default:** `16`
+- **Description:** Sets the size of the arrow icon.
+
+### `className`
+- **Type:** `string`
+- **Required:** No
+- **Description:** Additional CSS class for the root element.
+
+### `itemClassName`
+- **Type:** `string`
+- **Required:** No
+- **Description:** Additional CSS class for each accordion item.
+
+### `triggerClassName`
+- **Type:** `string`
+- **Required:** No
+- **Description:** Additional CSS class for the trigger elements.
+
+### `contentClassName`
+- **Type:** `string`
+- **Required:** No
+- **Description:** Additional CSS class for the content container of accordion items.
+
+### `arrowClassName`
+- **Type:** `string`
+- **Required:** No
+- **Description:** Additional CSS class for the arrow icon.
+
+## Customization
+
+The Accordion component offers several ways to customize its appearance and behavior:
+
+1. Use the `variant` prop to choose between connected or separated item styles.
+2. Apply the `isRounded` prop for rounded corners on the accordion items.
+3. Customize the arrow icon size and visibility with `arrowSize` and `showArrowIcon` props.
+4. Use the various `*ClassName` props to apply custom CSS classes to different parts of the accordion.
+5. Set `isUnstyled` to `true` for complete control over the component's styling.

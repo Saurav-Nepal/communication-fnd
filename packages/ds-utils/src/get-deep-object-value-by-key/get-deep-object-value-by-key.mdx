@@ -1,0 +1,30 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Object/getDeepObjectValueByKey' />
+
+# getDeepObjectValueByKey Function
+
+## Description
+
+The `getDeepObjectValueByKey` function finds and retrieves a deeply nested value in an object based on a given key. It recursively searches through nested objects to locate the specified key and returns its value. If the key is not found, it returns the provided default value.
+
+## Usage
+
+<Source code={`
+import { getDeepObjectValueByKey } from '@slabs/ds-utils';
+
+// Example usage
+const nestedObject = {
+    id: 1,
+    details: {
+        name: 'NestedObject',
+        properties: {
+            color: 'Blue',
+            size: 'Medium',
+        },
+    },
+};
+
+const valueToFind = getDeepObjectValueByKey(nestedObject, 'size', 'Not Found');
+// Output: 'Medium'
+`} dark={true} language='tsx' />

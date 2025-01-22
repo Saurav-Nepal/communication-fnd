@@ -1,0 +1,33 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Misc/createConverter' />
+
+# createConverter Function
+
+## Description
+
+The `createConverter` function creates a converter function that converts a value to a string with the specified units. The created converter function accepts a value and returns a string with the specified units. It supports numeric values and string representations with units like 'px', and converts them to 'rem' or 'em' based on a default font size of 16 pixels.
+
+## Usage
+
+
+<Source code={`
+import { createConverter, rem, em } from '@slabs/ds-utils';
+
+// Example usage of createConverter
+const toRem = createConverter('rem');
+const toEm = createConverter('em');
+
+const remValue = toRem(24);
+// Output: '1.5rem'
+
+const emValue = toEm('20px');
+// Output: '1.25em'
+
+// Example usage of rem and em
+const remResult = rem(32);
+// Output: '2rem'
+
+const emResult = em('16px');
+// Output: '1em'
+`} dark={true} language='tsx'/>

@@ -1,0 +1,174 @@
+import {
+  Canvas,
+  Controls,
+  Description,
+  Meta,
+  Subtitle,
+  Story,
+  Source
+} from '@storybook/blocks';
+
+import * as SelectBoxStories from './select-box.story';
+
+<Meta of={SelectBoxStories} />
+
+
+# Made with Combobox
+Select is an opinionated component built on top of Combobox component. It has a limited set of features to cover only the basic use cases. If you need more advanced features, you can build your own component with Combobox. You can find examples of custom select components on the examples page.
+
+
+# Usage
+Select allows capturing user input based on suggestions from the list. Unlike Autocomplete, Select does not allow entering custom values.
+
+<Canvas>
+ <Story of={SelectBoxStories.Example} />
+ 
+</Canvas>
+<Source code={`import { SelectBoxValueType } from "@slabs/ds-core"`} dark={true} language='tsx' />
+<Source code={`
+import { SelectBox } from '@slabs/ds-core';
+    const [value, setValue] = useState<SelectBoxValueType>();
+            <SelectBox
+                className='max-w-[300px]'
+                value={value}
+                onChange={(value) => setValue(value)}
+                options={[
+                    {
+                        value: 1,
+                        label: 'Next.js',
+                        // subLabel: 'Great React framework',
+                    },
+                    {
+                        value: 2,
+                        label: 'SvelteKit',
+                    },
+                    {
+                        value: 3,
+                        label: 'Nuxt.js',
+                    },
+                    {
+                        value: 4,
+                        label: 'Remix',
+                    },
+                    {
+                        value: 5,
+                        label: 'Astro',
+                    },
+                ]}
+            />
+
+`} dark={true} language='tsx' />
+
+# Controlled
+Select value must be a string, other types are not supported. onChange function is called with a string value as a single argument.
+
+
+# Clearable
+Set clearable prop to display the clear button in the right section. The button is not displayed when:
+
+* The component does not have a value
+* The component is disabled
+* The component is read only
+
+# Controlled And Uncontrolled Search
+Both controlled and Uncontrolled search support. For controlled, search you have to pass  **searchValue** and **onSearchValue** props
+
+<Canvas>
+ <Story of={SelectBoxStories.SearchableExample} />
+</Canvas>
+
+<Source code={`
+import { SelectBox } from '@slabs/ds-core';
+ const [value, setValue] = useState<SelectBoxValueType>();
+    const [searchValue, setSearchValue] = useState<string>();
+    return (
+        <div className='flex flex-col w-full gap-1 '>
+            <Typography variant={'info'} weight={'medium'}>
+                Searchable Example
+            </Typography>
+            <SelectBox
+                searchValue={searchValue}
+                onSearchValue={setSearchValue}
+                className='max-w-[300px]'
+                value={value}
+                onChange={(value) => setValue(value)}
+                options={[
+                    {
+                        value: 1,
+                        label: 'Next.js',
+                        // subLabel: 'Great React framework',
+                    },
+                    {
+                        value: 2,
+                        label: 'SvelteKit',
+                    },
+                    {
+                        value: 3,
+                        label: 'Nuxt.js',
+                    },
+                    {
+                        value: 4,
+                        label: 'Remix',
+                    },
+                    {
+                        value: 5,
+                        label: 'Astro',
+                    },
+                ]}
+            />
+        </div>
+    );
+
+`} dark={true} language='tsx' />
+
+# Option Icon
+you can provide icon as a by using suffix props
+
+<Canvas>
+ <Story of={SelectBoxStories.ExampleWithIcon} />
+</Canvas>
+
+<Source code={`
+export const ExampleWithIcon: StoryFn<typeof SelectBox> = ({ ...args }) => {
+    const [value, setValue] = useState<SelectBoxValueType>();
+    const [searchValue, setSearchValue] = useState<string>();
+    return (
+        <div className='flex flex-col w-full gap-1 '>
+            <Typography variant={'info'} weight={'medium'}>
+                Searchable Example
+            </Typography>
+            <SelectBox
+                suffix={<SunIcon />}
+                prefix={() => <SunIcon />}
+                searchValue={searchValue}
+                onSearchValue={setSearchValue}
+                className='max-w-[300px]'
+                value={value}
+                onChange={(value) => setValue(value)}
+                options={[
+                    {
+                        value: 1,
+                        label: 'Next.js',
+                        // subLabel: 'Great React framework',
+                    },
+                    {
+                        value: 2,
+                        label: 'SvelteKit',
+                    },
+                    {
+                        value: 3,
+                        label: 'Nuxt.js',
+                    },
+                    {
+                        value: 4,
+                        label: 'Remix',
+                    },
+                    {
+                        value: 5,
+                        label: 'Astro',
+                    },
+                ]}
+            />
+        </div>
+    );
+};`} dark={true} language='tsx' />

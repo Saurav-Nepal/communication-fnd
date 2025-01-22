@@ -1,0 +1,22 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Misc/parseCurrencyString' />
+
+# parseCurrencyString Function
+
+## Description
+
+The `parseCurrencyString` function parses a currency string to a number by removing any non-numeric characters and converting it to a floating-point number.
+
+## Usage
+
+
+<Source code={`
+import { parseCurrencyString } from '@slabs/ds-utils';
+
+
+// Example usage
+const currencyString = '$1,234.56';
+const parsedNumber = parseCurrencyString(currencyString);
+// Output: 1234.56 (parsed number from the currency string)
+`} dark={true} language='tsx'/>

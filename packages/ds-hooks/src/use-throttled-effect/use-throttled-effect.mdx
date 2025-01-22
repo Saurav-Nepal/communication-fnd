@@ -1,0 +1,29 @@
+import { Meta, Title, Source, Stories } from '@storybook/blocks';
+import * as StoryBook from './use-throttled-effect.story'
+
+<Meta of={StoryBook} />
+
+
+<Title />
+
+`useThrottledEffect` is a custom hook that allows you to throttle the execution of a function. It is similar to `useEffect`, but it will only execute the function at most once every `delay` milliseconds.
+
+<Source
+ code={`
+    import { useEffect } from 'react';
+    import { useThrottledEffect } from '@slabs/ds-hooks';
+
+    function MyComponent() {
+        useThrottledEffect(() => {
+            console.log('This will only be logged once every 1000ms');
+        }, 1000);
+
+        return null;
+    }
+
+
+ `} 
+/>
+
+
+<Stories of={StoryBook} />

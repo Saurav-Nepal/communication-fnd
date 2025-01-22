@@ -1,0 +1,32 @@
+import { Meta, Title, Source, Stories } from '@storybook/blocks';
+import * as StoryBook from './use-uncontrolled.story';
+
+<Meta of={StoryBook} />
+
+<Title />
+Manage state of both controlled and uncontrolled components.
+Returns a tuple containing the controlled/uncontrolled value, a function to update the value,
+and a boolean indicating if the value is controlled or not.
+
+## Usage
+<Source code={`
+import { useUncontrolled } from '@slabs/ds-hooks';
+
+function CustomInput({ value: propsValue, defaultValue, onChange }) {
+  const [value, handleChange] = useUncontrolled({
+    value: propsValue,
+    defaultValue,
+    onChange,
+  });
+
+  return (
+    <input
+      type="text"
+      value={value}
+      onChange={(event) => handleChange(event.currentTarget.value)}
+    />
+  );
+}
+`} dark={true} language='tsx' />
+
+<Stories title='Examples'/>

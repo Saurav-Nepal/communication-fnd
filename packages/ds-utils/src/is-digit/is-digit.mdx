@@ -1,0 +1,26 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/String/isDigit' />
+
+# isDigit Function
+
+## Description
+
+The `isDigit` function checks if a string consists of only digit characters (0-9). It returns `true` if the string contains only digit characters, and `false` otherwise.
+
+## Usage
+
+
+<Source code={`
+
+import { isDigit } from '@slabs/ds-utils';
+// Example usage
+const digitString = '12345';
+const nonDigitString = 'ABC123';
+
+const isDigitResult1 = isDigit(digitString);
+// Output: true (digitString contains only digit characters)
+
+const isDigitResult2 = isDigit(nonDigitString);
+// Output: false (nonDigitString contains non-digit characters)
+`} dark={true} language='tsx'/>

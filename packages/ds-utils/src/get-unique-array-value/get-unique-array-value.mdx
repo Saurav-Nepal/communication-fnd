@@ -1,0 +1,21 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Array/getUniqueArrayValues' />
+
+# getUniqueArrayValues Function
+
+## Description
+
+The `getUniqueArrayValues` function returns an array containing unique values from the input array. It utilizes the `Set` data structure to remove duplicate values and create a new array with only distinct elements.
+
+## Usage
+
+<Source code={`
+import { getUniqueArrayValues } from '@slabs/ds-utils';
+
+
+// Example usage
+const arrayWithDuplicates = [1, 2, 3, 2, 4, 5, 1, 6];
+const uniqueArray = getUniqueArrayValues(arrayWithDuplicates);
+// Output: [1, 2, 3, 4, 5, 6]
+`} dark={true} language='tsx' />

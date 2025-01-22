@@ -1,0 +1,32 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/String/isValidString' />
+
+# isValidString Function
+
+## Description
+
+The `isValidString` function checks if a given value is a valid string (non-empty). It returns `true` if the value is a valid string, and `false` otherwise.
+
+## Usage
+
+
+<Source code={`
+
+import { isValidString } from '@slabs/ds-utils';
+
+
+// Example usage
+const validString = 'Hello, World!';
+const emptyString = '';
+const nonStringValue = 42;
+
+const isValidStringResult1 = isValidString(validString);
+// Output: true (validString is a non-empty string)
+
+const isValidStringResult2 = isValidString(emptyString);
+// Output: false (emptyString is an empty string)
+
+const isValidStringResult3 = isValidString(nonStringValue);
+// Output: false (nonStringValue is not a string)
+`} dark={true} language='tsx' />

@@ -1,0 +1,80 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Misc/getVisibleAndHiddenItemIndices' />
+
+# `getVisibleAndHiddenItemIndices` Function
+
+## Description
+
+The `getVisibleAndHiddenItemIndices` function is used to determine which items in a list should be visible and which should be hidden based on the available container width. This is particularly useful for responsive layouts where you need to show/hide items dynamically based on the available space.
+
+## Function Signature
+
+<Source code={`
+function getVisibleAndHiddenItemIndices<TItem extends ObjectDto>(
+    items: TItem[],
+    selected: number,
+    disclosureWidth: number,
+    itemWidths: number[],
+    containerWidth: number
+): {
+    visibleItems: number[];
+    hiddenItems: number[];
+}`}
+
+ dark={true} language='tsx' />
+
+## Parameters
+
+- `items: TItem[]` - An array of items to be displayed. Each item should extend the `ObjectDto` type.
+- `selected: number` - The index of the currently selected item.
+- `disclosureWidth: number` - The width of the disclosure element (e.g., a "more" button) that shows hidden items.
+- `itemWidths: number[]` - An array of widths corresponding to each item in the `items` array.
+- `containerWidth: number` - The total available width of the container.
+
+## Return Value
+
+The function returns an object with two properties:
+
+- `visibleItems: number[]` - An array of indices representing the items that should be visible.
+- `hiddenItems: number[]` - An array of indices representing the items that should be hidden.
+
+## Behavior
+
+1. If the total width of all items is less than or equal to the container width, all items are marked as visible.
+2. If the total width exceeds the container width:
+   - The selected item is always included in the visible items.
+   - The function starts adding items to the visible list until the next item would exceed the available space (considering the disclosure width).
+   - Any remaining items are added to the hidden list.
+
+## Usage Example
+
+<Source code={`
+import { getVisibleAndHiddenItemIndices } from './path-to-your-file';
+
+const items = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }];
+const selected = 2; // The third item (index 2) is selected
+const disclosureWidth = 50;
+const itemWidths = [100, 100, 100, 100, 100];
+const containerWidth = 250;
+
+const result = getVisibleAndHiddenItemIndices(
+    items,
+    selected,
+    disclosureWidth,
+    itemWidths,
+    containerWidth
+);
+
+console.log(result);
+// Output: { visibleItems: [0, 2], hiddenItems: [1, 3, 4] }`}
+
+ dark={true} language='tsx' />
+
+In this example, the function determines that only two items can be shown within the container width (250px), considering the disclosure width (50px). The selected item (index 2) is always included, and the first item (index 0) fits within the remaining space. The other items are marked as hidden.
+
+## Notes
+
+- The function assumes that the `itemWidths` array has the same length as the `items` array.
+- The selected item is always included in the visible items, even if it might cause the total width to exceed the container width.
+- This function is generic and works with any type that extends `ObjectDto`.

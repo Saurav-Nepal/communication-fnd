@@ -1,0 +1,27 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Array/isArray' />
+
+# isArray Function
+
+## Description
+
+The `isArray` function checks if the given item is an array. It returns `true` if the item is an array, otherwise `false`.
+
+## Usage
+
+
+<Source code={`
+import { isArray } from '@slabs/ds-utils';
+
+
+// Example usage
+const arrayExample = [1, 2, 3];
+const nonArrayExample = 'Not an array';
+
+const isArrayResult1 = isArray(arrayExample);
+// Output: true (arrayExample is an array)
+
+const isArrayResult2 = isArray(nonArrayExample);
+// Output: false (nonArrayExample is not an array)
+`} dark={true} language='tsx'/>

@@ -1,0 +1,27 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Date/isDateEqualIgnoringTime' />
+
+# isDateEqualIgnoringTime Function
+
+## Description
+
+The `isDateEqualIgnoringTime` function checks if two dates are equal, ignoring the time component. It returns `true` if the dates are equal (ignoring time), and `false` otherwise.
+
+## Usage
+
+
+<Source code={`
+
+import { isDateEqualIgnoringTime } from '@slabs/ds-utils';
+// Example usage
+const today = new Date();
+const tomorrow = new Date();
+tomorrow.setDate(today.getDate() + 1);
+
+const isEqualResult1 = isDateEqualIgnoringTime(today, today);
+// Output: true (today is equal to itself)
+
+const isEqualResult2 = isDateEqualIgnoringTime(today, tomorrow);
+// Output: false (today and tomorrow have different dates)
+`} dark={true} language='tsx'/>

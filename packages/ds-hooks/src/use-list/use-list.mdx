@@ -1,0 +1,71 @@
+
+import { Meta, Title, Source, Stories } from '@storybook/blocks';
+import * as StoryBook from './use-list.story'
+
+<Meta of={StoryBook} />
+
+<Title />
+
+The `useList` hook is a simple hook that allows you to create a list of items and manage them. It provides a way to add, remove, and update items in the list.
+
+
+
+<Source
+
+code={`
+import { useList} from '@slabs/ds-hooks'
+
+export function Usage (){
+
+       const initList = [
+        {
+            name: 'John',
+            age: 20,
+        },
+        {
+            name: 'Doe',
+            age: 30,
+        },
+    ];
+    const [list, { updateAt}] = useList(initList);
+
+
+    return (
+        <div className='flex flex-col gap-2'>
+            {'List:'}
+
+            {list.map((item, index) => (
+                <div key={index} className='flex flex-col gap-2'>
+                    <div className='flex flex-row gap-2'>
+                        <p>{item.name}</p>
+                        <p>{item.age}</p>
+                    </div>
+
+                    <div className='flex flex-row gap-2'>
+                        <button
+                            type='button'
+                            onClick={() =>
+                                updateAt(index, { name: 'Updated', age: 100 })
+                            }
+                            className='w-24 px-4 py-2 text-white bg-blue-500 rounded-md'
+                        >
+                            update
+                        </button>
+                     </div>
+                </div>
+            ))}
+
+         
+           
+        </div>
+    );
+
+
+
+
+}
+
+`}
+dark={true} language='tsx'/>
+
+<Stories title='Examples'/>

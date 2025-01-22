@@ -1,0 +1,27 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Misc/returnOpenProperty' />
+
+# ReturnOpenProperty Function
+## Description
+
+The `ReturnOpenProperty` function is used to return a property value with an option to convert it to a boolean if needed.
+
+## Usage
+
+<Source code={`
+import { ReturnOpenProperty } from '@slabs/ds-utils';
+
+// Example usage
+const stringValue = 'true';
+const numericValue = 42;
+
+const stringResult = ReturnOpenProperty(stringValue);
+// Output: 'true'
+
+const numericResult = ReturnOpenProperty(numericValue, { convertBoolean: true });
+// Output: 42 (not converted to boolean)
+
+const booleanResult = ReturnOpenProperty(stringValue, { convertBoolean: true });
+// Output: true (converted to boolean)
+`} dark={true} language='tsx'/>

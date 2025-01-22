@@ -1,0 +1,41 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Object/removeEmptyObjectKeys' />
+
+# removeEmptyObjectKeys Function
+
+## Description
+
+The `removeEmptyObjectKeys` function removes keys with empty values (null, undefined, or objects/arrays with no keys) from an object.
+
+## Usage
+
+
+<Source code={`
+import { removeEmptyObjectKeys } from '@slabs/ds-utils';
+
+// Example usage
+const inputObject = {
+    name: 'John',
+    age: null,
+    address: {
+        street: '123 Main St',
+        city: '',
+        zipCode: undefined,
+    },
+    hobbies: [],
+    isActive: true,
+};
+
+const resultObject = removeEmptyObjectKeys(inputObject);
+/* 
+Output: 
+{
+    name: 'John',
+    address: {
+        street: '123 Main St',
+    },
+    isActive: true,
+}
+*/
+`} dark={true} language='tsx'/>

@@ -1,0 +1,27 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Misc/isUndefined' />
+
+# isUndefined  Function
+
+## Description
+
+The `isUndefined` function checks if a given value is `undefined`. It returns `true` if the value is `undefined`, and `false` otherwise.
+
+## Usage
+
+
+<Source code={`
+import { isUndefined } from '@slabs/ds-utils';
+
+
+// Example usage
+const undefinedValue = undefined;
+const definedValue = 'Hello, World!';
+
+const isUndefinedResult1 = isUndefined(undefinedValue);
+// Output: true (undefinedValue is undefined)
+
+const isUndefinedResult2 = isUndefined(definedValue);
+// Output: false (definedValue is not undefined)
+`} dark={true} language='tsx' />

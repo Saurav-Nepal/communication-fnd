@@ -1,0 +1,190 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Getting Started' />
+
+# Getting Started
+
+Welcome to our React Component Design System documentation. This guide is intended to provide comprehensive guidelines for creating consistent, maintainable, and reusable components, hooks, and utility functions within our React ecosystem.
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Component Creation Guidelines](#component-creation-guidelines)
+   - [Naming Conventions](#naming-conventions)
+   - [Composition over Inheritance](#composition-over-inheritance)
+   - [Props and PropTypes](#props-and-proptypes)
+   - [Styling](#styling)
+   - [Accessibility](#accessibility)
+   - [Separation of Concerns](#separation-of-concerns)
+   - [Performance Optimization](#performance-optimization)
+   - [Error Handling](#error-handling)
+- [Hook Creation Guidelines](#hook-creation-guidelines)
+   - [Single Responsibility Principle](#single-responsibility-principle)
+   - [Naming Conventions](#naming-conventions-1)
+   - [Side Effects and Dependencies](#side-effects-and-dependencies)
+   - [Reusability and Composition](#reusability-and-composition)
+   - [Memoization](#memoization)
+- [Utils Creation Guidelines](#utils-creation-guidelines)
+   - [Pure Functions](#pure-functions)
+   - [Naming Conventions](#naming-conventions-2)
+   - [Handling Edge Cases](#handling-edge-cases)
+   - [Documentation and Testing](#documentation-and-testing)
+   - [Type Safety](#type-safety)
+- [State Management](#state-management)
+- [Testing Strategies](#testing-strategies)
+- [Useful Resources](#useful-resources)
+   - [Code References](#code-references)
+   - [References](#references)
+
+## Component Creation Guidelines
+
+### Naming Conventions
+
+- Components should be named descriptively, indicating their purpose and functionality.
+- Use PascalCase for component names.
+- For compound components, use a common prefix (e.g., `Menu`, `MenuItem`, `MenuHeader`).
+
+### Composition over Inheritance
+
+- Prefer composition and props drilling over inheritance for sharing code between components.
+- Utilize React's composition model to build complex UIs from simpler components.
+- Consider using the Render Props pattern for flexible component composition.
+- [Click here](https://legacy.reactjs.org/docs/composition-vs-inheritance.html) for reference.
+
+### Props and PropTypes
+
+- Define propTypes for all props to ensure type safety and documentation.
+- Document each prop's purpose, type, and required status.
+- Use default props where appropriate to reduce the need for null checks.
+- Consider using TypeScript interfaces or PropTypes for more robust type checking.
+
+### Styling
+
+- We use only TailwindCSS classes for styling our components, with the help of cva for better maintainability and modularity.
+- Avoid inline styles unless absolutely necessary.
+- Utilize Tailwind's responsive and state variants for adaptive designs.
+
+### Accessibility
+
+- Ensure components are accessible by following accessibility best practices.
+- Use semantic HTML elements and provide appropriate ARIA attributes for screen reader support.
+- Implement keyboard navigation support for interactive components.
+- Test components with screen readers and keyboard-only navigation.
+
+### Separation of Concerns
+
+- To maintain code sanity, adhere to the Separation of Concerns (SoC) principle.
+- Ensure that your components focus on their respective responsibilities, whether it's rendering UI, handling business logic, or managing state.
+- This segregation not only makes code easier to understand but also facilitates testing and debugging.
+- Consider using the Container/Presentational pattern for complex components.
+
+### Performance Optimization
+
+- Use React.memo() for components that render often with the same props.
+- Implement useMemo() and useCallback() hooks to memoize expensive calculations and callback functions.
+- Leverage code-splitting and lazy loading for large component trees.
+- Profile your components using React DevTools to identify performance bottlenecks.
+
+### Error Handling
+
+- Implement error boundaries to catch and handle errors gracefully.
+- Provide fallback UI for components that might fail to render.
+- Use try-catch blocks for async operations within components.
+
+## Hook Creation Guidelines
+
+### Single Responsibility Principle
+
+- Keep hooks focused on a single concern or task.
+- Avoid creating overly complex hooks that handle multiple unrelated functionalities.
+- Consider breaking down complex hooks into smaller, more focused hooks.
+
+### Naming Conventions
+
+- Use descriptive names that clearly indicate the purpose of the hook.
+- Prefix custom hooks with "use" to distinguish them from regular functions.
+- For hooks that return multiple values, consider using an object return type with named properties.
+
+### Side Effects and Dependencies
+
+- Minimize side effects within hooks, and clearly document any side effects that are necessary.
+- Declare all dependencies in the dependency array of useEffect to prevent unintended side effects.
+
+### Reusability and Composition
+
+- Design hooks to be reusable across different components and contexts.
+- Encourage composition by building hooks that work well together.
+- Consider creating higher-order hooks that enhance or combine existing hooks.
+
+### Memoization
+
+- Use useMemo() to memoize expensive computations within hooks.
+- Leverage useCallback() for memoizing functions, especially when passing callbacks to child components.
+
+## Utils Creation Guidelines
+
+### Pure Functions
+
+- Write utility functions as pure functions, which do not modify input data and always return the same output for the same input.
+- Avoid relying on external state or side effects within utility functions.
+- Consider using the functional programming paradigm for complex operations.
+
+### Naming Conventions
+
+- Use descriptive names that clearly convey the purpose of the utility function.
+- Group related utility functions under meaningful namespaces or modules.
+- Use camelCase for function names and PascalCase for class names.
+
+### Handling Edge Cases
+
+- Anticipate and handle edge cases gracefully within utility functions.
+- Provide clear documentation and examples for edge case behavior.
+- Consider implementing parameter validation to catch invalid inputs early.
+
+### Documentation and Testing
+
+- Document the purpose, parameters, and return values of each utility function.
+- Write comprehensive unit tests to ensure the correctness of utility functions under various scenarios.
+- Use JSDoc comments for inline documentation that can be used by IDEs for better developer experience.
+
+### Type Safety
+
+- Implement TypeScript types or interfaces for function parameters and return values.
+- Use generics where appropriate to create flexible, reusable utility functions.
+- Consider using TypeScript's strict mode for maximum type safety.
+
+## State Management
+
+- Choose the appropriate state management solution based on the complexity of your application.
+- For simple applications, use React's built-in useState and useContext hooks.
+- For more complex state management, consider using libraries like Redux, MobX, or Recoil.
+- Implement a clear and consistent state update pattern across your application.
+
+## Testing Strategies
+
+- Implement unit tests for individual components, hooks, and utility functions.
+- Use integration tests to verify the interaction between multiple components.
+- Implement end-to-end tests for critical user flows.
+- Consider using Testing Library for component testing and Cypress for end-to-end testing.
+- Aim for high test coverage, but prioritize testing critical and complex parts of your application.
+
+By adhering to these guidelines, we aim to maintain consistency, readability, and maintainability across our React component library, enabling efficient collaboration and development within our team.
+
+## Useful Resources
+
+### Code References
+- shadcn/ui. [Docs](https://ui.shadcn.com/docs) | [Git](https://github.com/shadcn-ui/ui)
+- Mantine. [Docs](https://mantine.dev/getting-started) | [Git](https://github.com/mantinedev/mantine)
+- Reshaped. [Docs](https://reshaped.so/docs/getting-started/overview)
+- streamich/react-use: React Hooks. [Docs](https://streamich.github.io/react-use/) | [Git](https://github.com/streamich/react-use)
+- usehooks ts. [Docs](https://usehooks-ts.com/introduction) | [Git](https://github.com/juliencrn/usehooks-ts)
+- Redux Toolkit. [Docs](https://redux-toolkit.js.org/) | [Git](https://github.com/reduxjs/redux-toolkit)
+- React Testing Library. [Docs](https://testing-library.com/docs/react-testing-library/intro/) | [Git](https://github.com/testing-library/react-testing-library)
+
+### References
+- [How I approach and structure Enterprise frontend applications after 4 years of using Next.js](https://dev.to/josemukorivo/how-i-approach-and-structure-enterprise-frontend-applications-after-4-years-of-using-nextjs-2f5)
+- [Design System Checklist](https://www.designsystemchecklist.com/)
+- [React Performance Optimization](https://reactjs.org/docs/optimizing-performance.html)
+- [React Hooks Best Practices](https://www.smashingmagazine.com/2020/04/react-hooks-best-practices/)
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
+- [A11Y Project Checklist](https://www.a11yproject.com/checklist/)

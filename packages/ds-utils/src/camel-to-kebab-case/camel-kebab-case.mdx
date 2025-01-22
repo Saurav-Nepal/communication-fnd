@@ -1,0 +1,20 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/String/camelToKebabCase' />
+
+# camelToKebabCase Function
+
+## Description
+
+The `camelToKebabCase` function efficiently converts a camel case string to kebab case. This is particularly useful when working with naming conventions in web development, where kebab case is commonly used for CSS classes, HTML attributes, and file names.
+
+## Usage
+
+<Source code={`
+import { camelToKebabCase } from '@slabs/ds-utils';
+const camelCaseString = 'myCamelCaseString';
+const kebabCaseString = camelToKebabCase(camelCaseString);
+
+// Output: 'my-camel-case-string'
+console.log(kebabCaseString);
+`}  dark={true} language='tsx'/>

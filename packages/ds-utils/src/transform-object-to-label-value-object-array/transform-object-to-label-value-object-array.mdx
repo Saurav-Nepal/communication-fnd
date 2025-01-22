@@ -1,0 +1,36 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Object/transformObjectToLabelValueObjectArray' />
+
+# transformObjectToLabelValueObjectArray Function
+## Description
+
+The `transformObjectToLabelValueObjectArray` function transforms a given object into an array of label and value pairs. You can specify the keys for the label and value properties.
+
+## Usage
+
+
+<Source code={`
+import { transformObjectToLabelValueObjectArray } from '@slabs/ds-utils';
+
+// Example usage
+const inputObject = {
+    id1: 'Option 1',
+    id2: 'Option 2',
+    id3: 'Option 3',
+};
+
+const transformedArray = transformObjectToLabelValueObjectArray(inputObject, 'id', 'name');
+// Output: [
+//     { id: 'id1', name: 'Option 1' },
+//     { id: 'id2', name: 'Option 2' },
+//     { id: 'id3', name: 'Option 3' },
+// ]
+
+const customKeysArray = transformObjectToLabelValueObjectArray(inputObject, 'key', 'label');
+// Output: [
+//     { key: 'id1', label: 'Option 1' },
+//     { key: 'id2', label: 'Option 2' },
+//     { key: 'id3', label: 'Option 3' },
+// ]
+`} dark={true} language='tsx'/>

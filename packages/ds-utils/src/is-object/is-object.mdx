@@ -1,0 +1,25 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Object/isObject' />
+
+# isObject Function
+
+## Description
+
+The `isObject` function checks if the given item is an object. It returns `true` if the item is an object, and `false` otherwise.
+
+## Usage
+
+<Source code={`
+import { isObject } from '@slabs/ds-utils';
+
+// Example usage
+const objectItem = { key: 'value' };
+const nonObjectItem = 'Not an object';
+
+const isObjectResult1 = isObject(objectItem);
+// Output: true (objectItem is an object)
+
+const isObjectResult2 = isObject(nonObjectItem);
+// Output: false (nonObjectItem is not an object)
+`}dark={true} language='tsx' />

@@ -1,0 +1,68 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/React/getTextFromReactNode' />
+
+# getTextFromReactNode Function
+
+## Description
+
+The `getTextFromReactNode` function extracts the text content from a React node. It recursively traverses the node structure, handling various types of nodes including strings, numbers, arrays, and React elements. This function is useful for situations where you need to obtain the raw text content of a complex React structure.
+
+## Usage
+
+<Source code={`
+import { getTextFromReactNode } from '@slabs/ds-utils';
+
+// Example usage
+const complexNode = (
+  <div>
+    Hello <span>Beautiful</span> World!
+    <button>Click me</button>
+  </div>
+);
+
+const extractedText = getTextFromReactNode(complexNode);
+console.log(extractedText);
+// Output: "Hello Beautiful World!Click me"
+`} dark={true} language='tsx' />
+
+## Parameters
+
+- `node` (React.ReactNode): The React node from which to extract text.
+
+## Return Value
+
+- `string`: The extracted text content as a string.
+
+## Behavior
+
+1. For string nodes, it returns the string directly.
+2. For number nodes, it converts the number to a string.
+3. For array nodes, it recursively extracts text from each element and concatenates the results.
+4. For React elements, it recursively extracts text from the `children` prop.
+5. For null, undefined, or other types, it returns an empty string.
+
+## Example with Different Node Types
+
+<Source code={`
+import React from 'react';
+import { getTextFromReactNode } from '@slabs/ds-utils';
+
+const mixedContent = (
+  <div>
+    <h1>Title</h1>
+    <p>Paragraph with <strong>bold</strong> and <em>italic</em> text.</p>
+    <ul>
+      <li>Item 1</li>
+      <li>Item 2</li>
+    </ul>
+    {42}
+  </div>
+);
+
+const extractedText = getTextFromReactNode(mixedContent);
+console.log(extractedText);
+// Output: "TitleParagraph with bold and italic text.Item 1Item 242"
+`} dark={true} language='tsx' />
+
+This example demonstrates how the function handles a complex structure with nested elements, different HTML tags, and mixed content types.

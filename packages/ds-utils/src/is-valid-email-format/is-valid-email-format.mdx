@@ -1,0 +1,25 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Misc/isValidEmailFormat' />
+
+# isValidEmailFormat function
+
+## Description
+
+The `isValidEmailFormat` function checks if a given email string follows a valid email format. It returns `true` if the email format is valid, and `false` otherwise.
+
+## Usage
+
+<Source code={`
+
+import { isValidEmailFormat } from '@slabs/ds-utils';
+// Example usage
+const validEmail = 'example@example.com';
+const invalidEmail = 'invalid.email@.com';
+
+const isValidEmailResult1 = isValidEmailFormat(validEmail);
+// Output: true (validEmail follows a valid email format)
+
+const isValidEmailResult2 = isValidEmailFormat(invalidEmail);
+// Output: false (invalidEmail does not follow a valid email format)
+`} dark={true} language='tsx' />

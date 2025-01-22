@@ -1,0 +1,126 @@
+import { Meta, Title, Source, Stories } from '@storybook/blocks';
+
+import * as FilterContextStories from './use-filter.story';
+
+<Meta of={FilterContextStories} />
+
+<Title />
+
+`FilterContext`, `useFilter`, and `withFilter` are utilities for managing filtering, sorting, and pagination state in React applications. They provide a centralized way to handle these common data management tasks, with optional URL synchronization.
+
+## FilterContext
+
+`FilterContext` is a React context that manages the state of filters, sorting, and pagination. It provides this state and associated functions to its children through the `useFilter` hook.
+
+<Source
+  code={`
+import { FilterProvider } from '@slab/ds-hooks';
+
+const App = () => (
+  <FilterProvider defaultFilters={{ status: 'all' }} options={{ isSyncWithQueryString: true }}>
+    <MyComponent />
+  </FilterProvider>
+);
+`}
+  dark
+  language="tsx"
+/>
+
+## useFilter Hook
+
+`useFilter` is a custom hook that allows child components to access and manipulate the filter state provided by `FilterContext`. It returns an object containing the current filter state and functions to update it.
+
+<Source
+  code={`
+import { useFilter } from '@slab/ds-hooks';
+
+const MyComponent = () => {
+  const {
+    filters,
+    setFilter,
+    clearFilters,
+    sortBy,
+    sortDirection,
+    setSorting,
+    currentPage,
+    itemsPerPage,
+    setItemsPerPage,
+    nextPage,
+    prevPage,
+    goToPage
+  } = useFilter();
+
+  return (
+    <div>
+      <button onClick={() => setFilter('status', 'active')}>Set Active</button>
+      <button onClick={() => setSorting('name')}>Sort by Name</button>
+      <button onClick={nextPage}>Next Page</button>
+      <div>Current filters: {JSON.stringify(filters)}</div>
+      <div>Sort: {sortBy} ({sortDirection})</div>
+      <div>Page: {currentPage}</div>
+    </div>
+  );
+};
+`}
+  dark
+  language="tsx"
+/>
+
+## withFilter HOC
+
+`withFilter` is a Higher-Order Component that wraps your component with `FilterProvider` and injects the filter props into it.
+
+<Source
+  code={`
+import { withFilter } from '@slab/ds-hooks';
+
+const MyComponent = ({ filters, setFilter, sortBy, setSorting, nextPage }) => (
+  <div>
+    <button onClick={() => setFilter('status', 'active')}>Set Active</button>
+    <button onClick={() => setSorting('name')}>Sort by Name</button>
+    <button onClick={nextPage}>Next Page</button>
+  </div>
+);
+
+const MyComponentWithFilter = withFilter(MyComponent, {
+  defaultFilters: { status: 'all' },
+  isSyncWithQueryString: true
+});
+
+// Use it in your app
+const App = () => <MyComponentWithFilter />;
+`}
+  dark
+  language="tsx"
+/>
+
+## API
+
+### FilterProvider Props
+
+- `children`: React.ReactNode
+- `defaultFilters`: object (optional) - Initial filter values
+- `options`: object (optional)
+  - `isSyncWithQueryString`: boolean - Whether to sync state with URL query parameters
+
+### useFilter Hook Return Value
+
+- `filters`: object - Current filter values
+- `setFilter`: (key: string, value: any) => void - Set a filter value
+- `clearFilters`: () => void - Reset filters to default
+- `sortBy`: string | null - Current sort field
+- `sortDirection`: 'asc' | 'desc' - Current sort direction
+- `setSorting`: (key: string) => void - Set sorting field (toggles direction if already set)
+- `currentPage`: number - Current page number
+- `itemsPerPage`: number - Number of items per page
+- `setItemsPerPage`: (count: number) => void - Set items per page
+- `nextPage`: () => void - Go to next page
+- `prevPage`: () => void - Go to previous page
+- `goToPage`: (page: number) => void - Go to specific page
+
+### withFilter HOC Config
+
+- `defaultFilters`: object (optional) - Initial filter values
+- `isSyncWithQueryString`: boolean (optional) - Whether to sync state with URL query parameters
+
+<Stories />

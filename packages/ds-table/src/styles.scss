@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .col-flex {
+        @apply flex flex-col;
+    }
+    .row-flex {
+        @apply flex flex-row;
+    }
+}
+
+.table {
+    position: relative;
+    width: 100%;
+    text-align: left;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.finnoto__table {
+    $table-sizes: xs, sm, md, lg;
+    @apply flex flex-col border border-t-0;
+
+    &__container {
+        .table-header-group,
+        thead {
+            .table-cell,
+            th {
+                @apply uppercase;
+                font-size: 13px;
+            }
+        }
+        .body-row {
+            @apply bg-white;
+            &:hover {
+                @apply bg-white/50;
+            }
+            .table-cell,
+            td {
+                @apply text-sm;
+            }
+        }
+
+        .table-cell,
+        td,
+        th {
+            @apply whitespace-nowrap align-middle;
+        }
+
+        .table-cell-text-top {
+            @apply align-text-top;
+        }
+
+        &.appearance-lightgray {
+            .table-header-group,
+            thead {
+                @apply bg-white text-foreground uppercase font-medium;
+            }
+            .finnoto__table--stickyaction {
+                @apply bg-white;
+            }
+            .table-button {
+                @apply text-foreground hover:bg-white;
+            }
+        }
+        &.appearance-primary {
+            .table-header-group,
+            thead {
+                @apply bg-primary text-primary-foreground;
+            }
+        }
+        &.appearance-secondary {
+            .table-header-group,
+            thead {
+                @apply bg-secondary text-secondary-foreground;
+            }
+        }
+        &.appearance-error {
+            .table-header-group,
+            thead {
+                @apply bg-error text-error-foreground;
+            }
+        }
+        &.appearance-warning {
+            .table-header-group,
+            thead {
+                @apply bg-warning text-warning-foreground;
+            }
+        }
+        &.appearance-info {
+            .table-header-group,
+            thead {
+                @apply bg-info text-info-foreground;
+            }
+        }
+
+        &.size-xs {
+            .table-header-group {
+                .table-cell {
+                    .table-button {
+                        font-size: 13px;
+                    }
+                }
+            }
+        }
+
+        &.size-sm {
+            .body-row,
+            .table-header-group {
+                .table-cell {
+                    @apply px-2 py-1;
+                }
+            }
+        }
+
+        &.table-bordered {
+            .table-row,
+            tr {
+                .table-cell:not(:first-child),
+                td:not(:first-child),
+                th:not(:first-child) {
+                    @apply border-l border-border;
+                }
+            }
+            .body-row,
+            tr {
+                .table-cell,
+                td,
+                th {
+                    @apply border-b;
+                }
+            }
+        }
+    }
+    & .rounded-corners {
+        @apply rounded overflow-hidden;
+    }
+
+    &.table-fullheight {
+        @apply h-full;
+    }
+}

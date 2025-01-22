@@ -1,0 +1,182 @@
+import {
+  Canvas,
+  Controls,
+  Description,
+  Meta,
+  Subtitle,
+  Story,
+  Source
+} from '@storybook/blocks';
+
+import * as HeaderStories from './header.story';
+
+<Meta of={HeaderStories} title='Components/Header' />
+
+# Header Component
+
+The Header component is a versatile top-level navigation element that includes a collapsible menu toggle, user information, and customizable actions. It's designed to provide a consistent and user-friendly navigation experience across your application.
+
+## Usage
+
+The Header component can be easily integrated into your application to provide a top-level navigation bar with user information and actions.
+
+<Canvas>
+  <Story of={HeaderStories.Example} />
+</Canvas>
+
+<Source code={`import { Header } from '@slabs/ds-core'`} dark={true} language='tsx' />
+<Source
+  code={`
+import React from 'react';
+import { useBoolean } from '@slabs/ds-hooks';
+import { Header } from '@slabs/ds-core';
+
+const Example = () => {
+  const [isCollapsed, setIsCollapsed] = useBoolean(false);
+
+  return (
+    <Header
+      isCollapsed={isCollapsed}
+      setIsCollapsed={setIsCollapsed}
+      user={{
+        title: 'John Doe',
+        subtitle: 'john@example.com',
+        image: 'https://picsum.photos/200/300',
+        actions: [
+          {
+            key: 'profile',
+            name: 'Profile',
+            action: () => {},
+          },
+          {
+            key: 'theme',
+            name: 'Theme',
+            subMenuActions: [
+              { key: 'system', name: 'System' },
+              { key: 'dark', name: 'Dark' },
+              { key: 'light', name: 'Light' },
+            ],
+          },
+          {
+            key: 'logout',
+            name: 'Logout',
+            action: () => {},
+            isCancel: true,
+          },
+        ],
+      }}
+    />
+  );
+};
+`}
+  dark={true}
+  language='tsx'
+/>
+
+## Props
+
+The Header component accepts the following props:
+
+### `isCollapsed`
+- **Type:** `boolean`
+- **Required:** Yes
+- **Description:** Controls the state of the collapsible menu. When `true`, the menu is collapsed.
+
+### `setIsCollapsed`
+- **Type:** `(isCollapsed: boolean) => void`
+- **Required:** Yes
+- **Description:** Function to update the `isCollapsed` state. It's called when the menu toggle button is clicked.
+
+### `user`
+- **Type:** `UserProps`
+- **Required:** Yes
+- **Description:** Object containing user information and actions.
+
+### `rightComponent`
+- **Type:** `React.ReactNode`
+- **Required:** No
+- **Description:** Custom component to be rendered on the right side of the header.
+
+## UserProps
+
+The `user` prop accepts an object with the following properties:
+
+### `title`
+- **Type:** `string`
+- **Required:** Yes
+- **Description:** The user's display name.
+
+### `subtitle`
+- **Type:** `string`
+- **Required:** Yes
+- **Description:** Additional user information, typically an email address.
+
+### `image`
+- **Type:** `string`
+- **Required:** Yes
+- **Description:** URL of the user's profile image.
+
+### `actions`
+- **Type:** `UserAction[]`
+- **Required:** No
+- **Description:** Array of action items for the user menu.
+
+### `customTrigger`
+- **Type:** `React.ReactNode`
+- **Required:** No
+- **Description:** Custom component to replace the default user menu trigger.
+
+## UserAction
+
+Each item in the `actions` array can have the following properties:
+
+### `key`
+- **Type:** `string`
+- **Required:** Yes
+- **Description:** Unique identifier for the action.
+
+### `name`
+- **Type:** `string`
+- **Required:** Yes
+- **Description:** Display name for the action.
+
+### `action`
+- **Type:** `() => void`
+- **Required:** No
+- **Description:** Function to be called when the action is selected.
+
+### `isCancel`
+- **Type:** `boolean`
+- **Required:** No
+- **Description:** If true, the action is styled as a cancel/delete action.
+
+### `subMenuActions`
+- **Type:** `{ key: string; name: string }[]`
+- **Required:** No
+- **Description:** Array of sub-menu items for nested actions.
+
+## Variants
+
+### Custom User Trigger
+
+You can provide a custom trigger for the user menu using the `customTrigger` prop.
+
+<Canvas>
+  <Story of={HeaderStories.CustomUserTrigger} />
+</Canvas>
+
+### No Actions
+
+The Header can be rendered without user actions.
+
+<Canvas>
+  <Story of={HeaderStories.NoActions} />
+</Canvas>
+
+### Custom Right Component
+
+You can add custom components to the right side of the Header.
+
+<Canvas>
+  <Story of={HeaderStories.CustomRightComponent} />
+</Canvas>

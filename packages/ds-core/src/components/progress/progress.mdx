@@ -1,0 +1,146 @@
+import {
+  Canvas,
+  Controls,
+  Description,
+  Meta,
+  Subtitle,
+  Story,
+  Source
+} from '@storybook/blocks';
+
+import * as ProgressStories from './progress.story';
+
+<Meta of={ProgressStories} title="Components/Progress" />
+
+# Progress Component
+
+The Progress component provides a visual representation of a progress bar, allowing users to see the completion status of a task or process. It offers various customization options for styling and behavior.
+
+## Usage
+
+The Progress component allows for easy implementation of progress indicators in your application. It supports customizable sizes, variants, backgrounds, and animations.
+
+<Canvas>
+  <Story of={ProgressStories.Basic} />
+</Canvas>
+
+<Source code={`import { Progress } from "@slabs/ds-core"`} dark={true} language="tsx" />
+<Source
+  code={`
+import React from 'react';
+import { Progress } from '@slabs/ds-core';
+
+const Example = () => {
+  return (
+    <Progress
+      value={75}
+      size="md"
+      variant="primary"
+      background="muted"
+      radius="md"
+      animate
+    />
+  );
+};
+`}
+  dark={true}
+  language="tsx"
+/>
+
+## Props
+
+The Progress component accepts the following props:
+
+### `value`
+- **Type:** `number`
+- **Required:** Yes
+- **Description:** The current progress value.
+
+### `background`
+- **Type:** `'primary' | 'secondary' | 'accent' | 'success' | 'warning' | 'destructive' | 'info' | 'muted'`
+- **Required:** No
+- **Default:** `'muted'`
+- **Description:** Determines the background color of the progress bar container.
+
+### `size`
+- **Type:** `'sm' | 'md' | 'lg'`
+- **Required:** No
+- **Default:** `'md'`
+- **Description:** Sets the height of the progress bar.
+
+### `radius`
+- **Type:** `'sm' | 'md' | 'lg' | 'xl' | 'none'`
+- **Required:** No
+- **Default:** `'md'`
+- **Description:** Sets the border radius of the progress bar.
+
+### `variant`
+- **Type:** `'primary' | 'secondary' | 'accent' | 'success' | 'warning' | 'destructive' | 'info' | 'muted'`
+- **Required:** No
+- **Default:** `'primary'`
+- **Description:** Sets the color variant of the progress indicator.
+
+### `duration`
+- **Type:** `number`
+- **Required:** No
+- **Description:** Sets the transition duration (in milliseconds) for the progress indicator.
+
+### `animate`
+- **Type:** `boolean`
+- **Required:** No
+- **Default:** `false`
+- **Description:** Enables a striped animation effect on the progress indicator.
+
+### `maxValue`
+- **Type:** `number`
+- **Required:** No
+- **Default:** `100`
+- **Description:** Sets the maximum value for the progress bar.
+
+### `minValue`
+- **Type:** `number`
+- **Required:** No
+- **Default:** `0`
+- **Description:** Sets the minimum value for the progress bar.
+
+### `className`
+- **Type:** `string`
+- **Required:** No
+- **Description:** Additional CSS class for the root element.
+
+### `indicatorClassName`
+- **Type:** `string`
+- **Required:** No
+- **Description:** Additional CSS class for the progress indicator element.
+
+## Accessibility
+
+The Progress component is built with accessibility in mind:
+
+- It uses the appropriate ARIA attributes (`role="progressbar"`, `aria-valuenow`, `aria-valuemin`, and `aria-valuemax`) to ensure screen reader compatibility.
+
+## Examples
+
+### Basic Progress Bar
+
+<Canvas>
+  <Story of={ProgressStories.Basic} />
+</Canvas>
+
+### Animated Progress Bar
+
+<Canvas>
+  <Story of={ProgressStories.Animated} />
+</Canvas>
+
+### Large Size
+
+<Canvas>
+  <Story of={ProgressStories.Large} />
+</Canvas>
+
+### Color Variants
+
+<Canvas>
+  <Story of={ProgressStories.Variants} />
+</Canvas>

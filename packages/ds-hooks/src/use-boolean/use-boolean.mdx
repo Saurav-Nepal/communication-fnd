@@ -1,0 +1,27 @@
+import { Meta, Title, Source, Stories } from '@storybook/blocks';
+import * as StoryBook from './use-boolean.story';
+
+<Meta of={StoryBook} />
+
+<Title />
+Creates a boolean state and a function to toggle the state. 
+The hook takes an optional initial value for the boolean state and returns a tuple containing the boolean state and a function to toggle the state. 
+The function to toggle the state can optionally take a new boolean value to set the state to.
+
+## Usage
+<Source code={`
+import { Button } from '@slabs/ds-core';
+import { useBoolean } from '@slabs/ds-hooks';
+
+function Demo() {
+  const [isValue, toggle] = useBoolean(false); // Initial Value is optional
+
+  return (
+    <Button onClick={() => toggle()}>
+      {isValue ? 'Yes' : 'No'}
+    </Button>
+  );
+}
+`} dark={true} language='tsx' />
+
+<Stories title='Examples'/>

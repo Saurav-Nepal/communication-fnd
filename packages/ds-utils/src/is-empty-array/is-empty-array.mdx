@@ -1,0 +1,27 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Array/isEmptyArray' />
+
+# isEmptyArray Function
+
+## Description
+
+The `isEmptyArray` function checks if the given item is an empty array. It returns `true` if the item is an empty array or undefined, otherwise `false`.
+
+## Usage
+
+
+<Source code={`
+import { isEmptyArray } from 'slabs/ds-utils';
+
+
+// Example usage
+const emptyArray = [];
+const nonEmptyArray = [1, 2, 3];
+
+const isEmptyArrayResult1 = isEmptyArray(emptyArray);
+// Output: true (emptyArray is an empty array)
+
+const isEmptyArrayResult2 = isEmptyArray(nonEmptyArray);
+// Output: false (nonEmptyArray is not an empty array)
+`} dark={true} language='tsx' />

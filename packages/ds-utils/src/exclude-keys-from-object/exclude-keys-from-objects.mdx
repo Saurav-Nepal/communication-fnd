@@ -1,0 +1,21 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Object/excludeKeysFromObject' />
+
+# excludeKeysFromObject Function
+
+## Description
+
+The `excludeKeysFromObject` function creates a new object by excluding specified keys from an existing object. This utility is useful when you need to derive a new object without certain properties.
+
+## Usage
+
+<Source code={`
+import { excludeKeysFromObject } from '@slabs/ds-utils';
+// Example usage
+const originalObject = { a: 1, b: 2, c: 3 };
+const keysToExclude = ['b', 'c'];
+
+const newObject = excludeKeysFromObject(keysToExclude, originalObject);
+// Output: { a: 1 }
+`} dark={true} language='tsx'/>

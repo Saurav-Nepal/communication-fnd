@@ -1,0 +1,57 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Array/getUniqueObjectsFromArrayByKey' />
+
+# getUniqueObjectsFromArrayByKey Function
+
+## Description
+
+The `getUniqueObjectsFromArrayByKey` function retrieves unique objects from an array based on a specified key. It uses the `Map` data structure to keep track of unique keys and their associated objects, ensuring that only the first occurrence of each key is included in the resulting array.
+
+## Usage
+
+<Source code={`
+
+import { getUniqueObjectsFromArrayByKey } from '@slabs/ds-utils';
+
+
+// Example usage
+ const inputArray = [
+            {
+                name: 'John',
+                age: 30,
+                address: {
+                    city: 'New York',
+                    country: 'USA',
+                },
+                phone: null,
+                email: undefined,
+                hobbies: [],
+            },
+            {
+                name: 'John',
+                age: 30,
+                address: {
+                    city: 'New York',
+                    country: 'USA',
+                },
+                phone: null,
+                email: undefined,
+                hobbies: [],
+            },
+        ];
+const uniqueObjects = getUniqueObjectsFromArrayByKey(arrayOfObjects, 'name');
+{/* Output:  [
+            {
+                name: 'John',
+                age: 30,
+                address: {
+                    city: 'New York',
+                    country: 'USA',
+                },
+                phone: null,
+                email: undefined,
+                hobbies: [],
+            },
+        ]; */}
+`}  dark={true} language='tsx' />

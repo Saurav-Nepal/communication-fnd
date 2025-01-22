@@ -1,0 +1,21 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Misc/parseJSONString' />
+
+# parseJSONString Function
+
+## Description
+
+The `parseJSONString` function parses a JSON string and returns the corresponding JavaScript object.
+
+## Usage
+
+<Source code={`
+
+import { parseJSONString } from '@slabs/ds-utils';
+
+// Example usage
+const jsonString = '{"name": "John", "age": 30, "city": "New York"}';
+const parsedObject = parseJSONString(jsonString);
+// Output: { name: 'John', age: 30, city: 'New York' } (parsed object from the JSON string)
+`} dark={true} language='tsx' />

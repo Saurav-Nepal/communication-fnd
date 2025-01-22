@@ -1,0 +1,28 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Object/isKeyInObject' />
+
+# isKeyInObject Function
+
+## Description
+
+The `isKeyInObject` function returns `true` if the given object has key and is not empty. It returns `false` if the object is empty or not an object.
+
+## Usage
+
+
+<Source code={`
+
+import { isKeyInObject } from '@slabs/ds-utils';
+
+
+// Example usage
+const objectWithKeys = { key: 'value' };
+
+const hasKeysResult1 = isKeyInObject(objectWithKeys, 'key');
+// Output: true (objectWithKeys has key)
+
+const hasKeysResult2 = isKeyInObject(emptyObject, 'name');
+// Output: false (emptyObject is an empty object)
+
+`} dark={true} language='tsx' />

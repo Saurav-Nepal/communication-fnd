@@ -1,0 +1,133 @@
+import {
+  Canvas,
+  Controls,
+  Description,
+  Meta,
+  Subtitle,
+  Story,
+  Source
+} from '@storybook/blocks';
+
+import * as MultiSelectBoxStories from './multi-select-box.story';
+
+
+<Meta of={MultiSelectBoxStories} />
+
+# Made with Combobox
+MultiSelectBox is an opinionated component built on top of Combobox component. It has a limited set of features to cover only the basic use cases. If you need more advanced features, you can build your own component with Combobox. You can find examples of custom multi select components on the examples page.
+
+# Usage
+-MultiSelect provides a way to enter multiple values. MultiSelect is similar to TagsInput, but it does not allow entering custom values.
+
+<Canvas>
+ <Story of={MultiSelectBoxStories.Example} />
+</Canvas>
+<Source code={`import { SelectBoxValueType } from "@slabs/ds-core"`} dark={true} language='tsx' />
+<Source code={`export const Example: StoryFn<typeof MultiSelectBox> = ({ ...args }) => {
+    const [value, setValue] = useState<SelectBoxValueType[]>([]);
+    return (
+        <div className='flex flex-col w-full gap-1 '>
+            <Typography variant={'info'} weight={'medium'}>
+                Your favorite libraries
+            </Typography>
+            <MultiSelectBox
+                className='max-w-[300px]'
+                value={value}
+                onChange={(value) => setValue(value || [])}
+                options={[
+                    {
+                        value: 1,
+                        label: 'Next.js',
+                        // subLabel: 'Great React framework',
+                    },
+                    {
+                        value: 2,
+                        label: 'SvelteKit',
+                    },
+                    {
+                        value: 3,
+                        label: 'Nuxt.js',
+                    },
+                    {
+                        value: 4,
+                        label: 'Remix',
+                    },
+                    {
+                        value: 5,
+                        label: 'Astro',
+                    },
+                ]}
+            />
+        </div>
+    );
+}`} dark={true} language='tsx' />
+
+# Controlled
+MultiSelect value must be an array of string or number, other types are not supported. onChange function is called with an array of strings as a single argument.
+
+
+# Clearable
+Set clearable prop to display the clear button in the right section. The button is not displayed when:
+
+* The component does not have a value
+* The component is disabled
+* The component is read only
+
+# Controlled And Uncontrolled Search
+Both controlled and Uncontrolled search support. For controlled, search you have to pass  **searchValue** and **onSearchValue** props
+
+<Canvas>
+ <Story of={MultiSelectBoxStories.SearchableExample} />
+</Canvas>
+
+<Source code={`export const SearchableExample: StoryFn<typeof MultiSelectBox> = ({
+    ...args
+}) => {
+    const [value, setValue] = useState<SelectBoxValueType[]>([]);
+    const [searchValue, setSearchValue] = useState<string>();
+    return (
+        <div className='flex flex-col w-full gap-1 '>
+            <Typography variant={'info'} weight={'medium'}>
+                Searchable Example
+            </Typography>
+            <MultiSelectBox
+                searchValue={searchValue}
+                onSearchValue={setSearchValue}
+                className='max-w-[300px]'
+                value={value}
+                onChange={(value) => setValue(value || [])}
+                options={[
+                    {
+                        value: 1,
+                        label: 'Next.js',
+                        // subLabel: 'Great React framework',
+                    },
+                    {
+                        value: 2,
+                        label: 'SvelteKit',
+                    },
+                    {
+                        value: 3,
+                        label: 'Nuxt.js',
+                    },
+                    {
+                        value: 4,
+                        label: 'Remix',
+                    },
+                    {
+                        value: 5,
+                        label: 'Astro',
+                    },
+                ]}
+            />
+        </div>
+    );
+};`} dark={true} language='tsx' />
+
+
+# Option Icon
+you can provide icon as a by using suffix props
+
+<Canvas>
+ <Story of={MultiSelectBoxStories.ExampleWithIcon} />
+</Canvas>

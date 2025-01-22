@@ -1,0 +1,24 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Misc/UUIDv4' />
+
+# uuidV4 Function
+
+## Description
+
+The `uuidV4` function generates a unique UUID (Universally Unique Identifier) following the version 4 format. It uses a random algorithm to create a string with the pattern 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx', where each 'x' is replaced with a random hexadecimal digit, and 'y' is replaced with a random hexadecimal digit from the set [8, 9, A, or B].
+
+## Usage
+
+
+<Source code={`
+
+import { uuidV4 } from '@slabs/ds-utiils';
+
+// Example usage
+const uniqueUUID = uuidV4();
+// Output: 'f47ac10b-58cc-4372-a567-0e02b2c3d479'
+
+
+`} 
+ dark={true} language='tsx'/>

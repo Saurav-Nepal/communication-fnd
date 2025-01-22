@@ -1,0 +1,56 @@
+import { Meta, Title, Source, Stories } from '@storybook/blocks';
+import * as StoryBook from './use-queue.story'
+
+<Meta of={StoryBook} />
+
+
+<Title />
+
+The `useQueue` hook is a simple hook that allows you to create a queue of items that you can add to and remove from. It is useful for creating a queue of items that you want to process in a specific order.
+
+<Source code={`
+
+import { useQueue } from '@slabs/ds-hooks';
+
+export function Usage() {
+    const initValues = ['a', 'b', 'c', 'd', 'e'];
+    const { state, queue, add, } = useQueue({
+        initialValues: initValues,
+        limit: 5,
+    });
+
+    return (
+        <div className='flex flex-col gap-2'>
+            <div>
+                <h2>State</h2>
+                <div>{state.join(', ')}</div>
+                {/* 
+                    This will output: 
+                    a, b, c, d, e
+                 */}
+            </div>
+            <div>
+                <h2>Queue</h2>
+                <div>{queue.join(', ')}</div>
+                {/* 
+                    This will output: 
+                  k, l, m 
+                  when we click the add button
+                 */}
+            </div>
+            <div className='flex flex-row gap-2'>
+                <button
+                    onClick={() => add('k', 'l', 'm')}
+                    className='px-2 py-1 text-white bg-blue-500 rounded'
+                >
+                    Add
+                </button>
+
+               
+        </div>
+    );
+    }
+
+`}dark={true} language='tsx'/>
+
+<Stories title='Examples'/>

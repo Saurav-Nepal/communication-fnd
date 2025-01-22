@@ -1,0 +1,24 @@
+
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/String/capitalize' />
+
+# capitalize Function
+
+## Description
+
+The `capitalize` function transforms a given string by capitalizing its first letter and the first letter after each space. This utility is helpful when you want to ensure consistent capitalization, such as when presenting user-friendly content or formatting titles.
+
+## Usage
+
+<Source code={`
+// Import the capitalize function
+import {capitalize} '@slabs/ds-utils';';
+
+// Example usage
+const lowercaseString = 'hello world';
+const capitalizedString = capitalize(lowercaseString);
+
+// Output: 'Hello World'
+console.log(capitalizedString);
+`}  dark={true} language='tsx' />

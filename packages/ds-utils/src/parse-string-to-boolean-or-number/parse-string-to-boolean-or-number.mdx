@@ -1,0 +1,31 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Misc/parseStringToBooleanOrNumber' />
+
+# parseStringToBooleanOrNumber Function
+
+## Description
+
+The `parseStringToBooleanOrNumber` function attempts to parse and normalize a string value to a boolean or number. If the value is a boolean or number, it returns the parsed value; otherwise, it returns the original string.
+
+## Usage
+
+
+<Source code={`
+
+import { parseStringToBooleanOrNumber } from '@slabs/ds-utils';
+
+
+// Example usage
+const stringValue = 'true';
+const parsedValue = parseStringToBooleanOrNumber(stringValue);
+// Output: true (parsed boolean from the string value)
+
+const numericString = '42';
+const parsedNumericValue = parseStringToBooleanOrNumber(numericString);
+// Output: 42 (parsed number from the numeric string)
+
+const nonParsedValue = 'hello';
+const originalValue = parseStringToBooleanOrNumber(nonParsedValue);
+// Output: 'hello' (original value as it is not a boolean or number)
+`} dark={true} language='tsx' />

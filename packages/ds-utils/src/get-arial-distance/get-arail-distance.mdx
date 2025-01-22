@@ -1,0 +1,24 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Misc/aerialDistance' />
+
+# aerialDistance Function
+
+## Description
+
+The `aerialDistance` function calculates the distance between two geographical points on the Earth's surface using their latitude and longitude coordinates. The result is returned in the specified unit, where 'K' represents kilometers and 'N' represents nautical miles.
+
+## Usage
+
+
+<Source code={`
+import {aerialDistance} from ''@slabs/ds-utils'
+
+
+// Example usage
+const distanceInKilometers = aerialDistance(37.7749, -122.4194, 34.0522, -118.2437, 'K');
+// Output: 559.05 kilometers
+
+const distanceInNauticalMiles = aerialDistance(37.7749, -122.4194, 34.0522, -118.2437, 'N');
+// Output: 302.22 nautical miles
+`} dark={true} language='tsx' />

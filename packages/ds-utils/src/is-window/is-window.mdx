@@ -1,0 +1,22 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Misc/isWindow' />
+
+# isWindow function
+
+## Description
+
+The `isWindow` function checks if the 'window' global object is available. The 'window' object is not available during server-side rendering (SSR) of Next.js.
+
+## Usage
+
+<Source code={`
+
+import { isWindow } from '@slabs/ds-utils';
+
+
+// Example usage
+const isWindowAvailable = isWindow();
+// Output: true (if running in a browser environment where 'window' is available)
+// Output: false (if running in an SSR environment where 'window' is not available)
+`} dark={true} language='tsx' />

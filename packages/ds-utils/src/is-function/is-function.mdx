@@ -1,0 +1,26 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Function/isFunction' />
+
+# isFunction Function
+
+## Description
+
+The `isFunction` function checks if the given data is a function. It returns `true` if the data is a function, and `false` otherwise.
+
+## Usage
+
+
+<Source code={`
+import { isFunction } from '@slabs/ds-utils';
+
+// Example usage
+const functionData = () => console.log('Hello, World!');
+const nonFunctionData = 'Not a function';
+
+const isFunctionResult1 = isFunction(functionData);
+// Output: true (functionData is a function)
+
+const isFunctionResult2 = isFunction(nonFunctionData);
+// Output: false (nonFunctionData is not a function)
+`} dark={true} language='tsx'/>

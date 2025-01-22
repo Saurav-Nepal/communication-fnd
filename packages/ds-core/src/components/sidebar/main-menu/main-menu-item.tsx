@@ -1,0 +1,59 @@
+import React, { useMemo } from 'react';
+
+import { cn } from '@slabs/ds-utils';
+
+import { Tooltip } from '../../tooltip/tooltip';
+import { Typography } from '../../typography/typography';
+import { useSidebarContext } from '../sidebar.context';
+import { MenuItemType } from '../sidebar.types';
+
+export type MainMenuItemType = Pick<MenuItemType, 'icon' | 'title'>;
+
+export const MainMenuItem = ({ icon, title }: MainMenuItemType) => {
+    const { setActiveMenu, activeMenu, setIsSidebarOpen } = useSidebarContext();
+
+    const Icon = icon;
+
+    const isActive = useMemo(() => activeMenu?.title === title, [activeMenu]);
+
+    return (
+        <Tooltip
+            message={title}
+            type='right'
+            sideOffset={5}
+            delayDuration={150}
+            onOpenChange={() => {}}
+        >
+            <div
+                className={cn(
+                    'w-10 h-10 rounded flex justify-center items-center cursor-pointer text-neutral-foreground group/link hover:bg-neutral-foreground hover:text-neutral transition-all',
+                    {
+                        'bg-neutral-foreground text-neutral': isActive,
+                    }
+                )}
+                onClick={() => {
+                    setActiveMenu(title);
+                    setIsSidebarOpen(true);
+                }}
+            >
+                {icon ? (
+                    <Icon
+                        className={cn(
+                            'transition-all text-foreground group-hover/link:text-primary dark:group-hover/link:text-primary-foreground',
+                            {
+                                'text-primary dark:text-primary-foreground':
+                                    isActive,
+                            }
+                        )}
+                        size={20}
+                    />
+                ) : (
+                    <Typography>
+                        {title.charAt(0).toUpperCase() +
+                            title.slice(-1).toUpperCase()}
+                    </Typography>
+                )}
+            </div>
+        </Tooltip>
+    );
+};

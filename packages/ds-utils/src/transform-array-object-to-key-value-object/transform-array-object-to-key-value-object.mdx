@@ -1,0 +1,36 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Object/transformArrayObjectToKeyValueObject' />
+
+# transformArrayObjectToKeyValueObject Function
+
+## Description
+
+The `transformArrayObjectToKeyValueObject` function transforms an array of objects into a key-value pair object. You can specify the keys for the label and value properties.
+
+## Usage
+
+<Source code={`
+import { transformArrayObjectToKeyValueObject } from '@slabs/ds-utils';
+
+// Example usage
+const inputArray = [
+    { key: 'id1', name: 'Option 1' },
+    { key: 'id2', name: 'Option 2' },
+    { key: 'id3', name: 'Option 3' },
+];
+
+const transformedObject = transformArrayObjectToKeyValueObject(inputArray, 'key', 'name');
+// Output: {
+//     'id1': 'Option 1',
+//     'id2': 'Option 2',
+//     'id3': 'Option 3',
+// }
+
+const customKeysObject = transformArrayObjectToKeyValueObject(inputArray, 'id', 'label');
+// Output: {
+//     'id1': 'Option 1',
+//     'id2': 'Option 2',
+//     'id3': 'Option 3',
+// }
+`} dark={true} language='tsx'/>

@@ -1,0 +1,26 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Array/getArrayFromObjArray' />
+
+# getArrayFromObjArray Function
+
+## Description
+
+The `getArrayFromObjArray` function extracts values from an array of objects based on the specified key. It returns a new array containing the values associated with the specified key from each object in the original array.
+
+## Usage
+
+
+<Source code={`
+import { getArrayFromObjArray } from '@slabs/ds-utils';
+
+// Example usage
+const arrayOfObjects = [
+    { id: 1, name: 'Apple', color: 'Red' },
+    { id: 2, name: 'Banana', color: 'Yellow' },
+    { id: 3, name: 'Orange', color: 'Orange' },
+];
+
+const extractedValues = getArrayFromObjArray(arrayOfObjects, 'name');
+// Output: ['Apple', 'Banana', 'Orange']
+`} dark={true} language='tsx' />

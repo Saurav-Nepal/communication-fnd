@@ -1,0 +1,31 @@
+import { Meta, Title, Source, Stories } from '@storybook/blocks';
+import * as StoryBook from './use-copy-to-clipboard.story'
+
+<Meta of={StoryBook} />
+
+<Title />
+
+The `useCopyToClipboard` hook is a hook that allows you to copy text to the clipboard. It returns a function that you can call with the text you want to copy. It also returns a boolean value that indicates whether the copy was successful or not.
+
+## Usage
+<Source code={`
+import { useCopyToClipboard } from '@slabs/ds-hooks';
+
+function MyComponent() {
+ const [copiedText, copy] = useCopyToClipboard();
+
+  return (
+    <div>
+      <button onClick={() => copy('Hello, world!')}>
+        Copy to clipboard
+      </button>
+        {copiedText && <div>{copiedText}</div>}
+    </div>
+  );
+}
+
+`} 
+
+dark={true} language='tsx'/>
+
+<Stories title='Examples'/>

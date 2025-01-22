@@ -1,0 +1,94 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Component/WidthMeasurer/useWidthMeasurer' />
+
+# `useWidthMeasurer` Hook
+
+## Overview
+
+The `useWidthMeasurer` hook is a custom React hook designed to manage the visibility of items in a list based on available container width. It's particularly useful for creating responsive layouts where items need to be shown or hidden dynamically.
+
+## Hook Signature
+
+```typescript
+function useWidthMeasurer<TItems extends ObjectDto>(props: {
+    items: TItems[];
+    activeItemIndex: number;
+}): {
+    visibleItems: TItems[];
+    hiddenItems: TItems[];
+    handleMeasurement: (measurements: WidthMeasurements) => void;
+}
+```
+
+## Parameters
+
+- `items: TItems[]`: An array of items to be measured and displayed.
+- `activeItemIndex: number`: The index of the currently active item in the list.
+
+## Return Value
+
+- `visibleItems: TItems[]`: Items that should be visible based on current measurements.
+- `hiddenItems: TItems[]`: Items that should be hidden based on current measurements.
+- `handleMeasurement: (measurements: WidthMeasurements) => void`: Callback to update measurements.
+
+## WidthMeasurements Interface
+
+```typescript
+interface WidthMeasurements {
+    containerWidth: number;
+    disclosureWidth: number;
+    hiddenElementWidths: number[];
+}
+```
+
+## Usage Example
+
+```jsx
+import React from 'react';
+import { useWidthMeasurer } from '@slabs/ds-hooks';
+import { WidthMeasurer } from '@slabs/ds-components';
+
+function ResponsiveTabList({ tabs, active, onChangeTab }) {
+    const { visibleItems, hiddenItems, handleMeasurement } = useWidthMeasurer({
+        items: tabs,
+        activeItemIndex: tabs.findIndex(tab => tab.id === active),
+    });
+
+    const disclosureActivatorVisible = hiddenItems.length > 0;
+
+    return (
+        <>
+            <WidthMeasurer handleMeasurement={handleMeasurement}>
+                {tabs.map(tab => <Tab key={tab.id} {...tab} />)}
+            </WidthMeasurer>
+            <div role="tablist">
+                {visibleItems.map(tab => (
+                    <Tab
+                        key={tab.id}
+                        {...tab}
+                        onClick={() => onChangeTab(tab.id)}
+                        active={tab.id === active}
+                    />
+                ))}
+                {disclosureActivatorVisible && <MoreTabsButton tabs={hiddenItems} />}
+            </div>
+        </>
+    );
+}
+```
+
+## Key Points
+
+- Works in tandem with the `WidthMeasurer` component for DOM measurements.
+- Automatically handles recalculation of visible and hidden items when measurements change.
+- Ensures the active item is always included in `visibleItems`.
+- Optimizes performance using memoization techniques.
+
+## Notes
+
+- Relies on the `getVisibleAndHiddenItemIndices` utility from `@slabs/ds-utils`.
+- Does not handle rendering logic; that should be implemented in your component.
+- Always provide a `key` when rendering list items for optimal React performance.
+
+For more details on how to perform the actual width measurements, refer to the `WidthMeasurer` component documentation.

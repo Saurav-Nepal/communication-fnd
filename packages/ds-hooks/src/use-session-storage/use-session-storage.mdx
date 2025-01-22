@@ -1,0 +1,34 @@
+import { Meta, Title, Source, Stories } from '@storybook/blocks';
+import * as StoryBook from './use-session-storage.story'
+
+<Meta of={StoryBook} />
+
+
+<Title />
+
+
+The `useSession` hook is a custom React hook designed to simplify the management of data stored in the browser's session storage. It takes an optional initial value and returns a tuple containing the stored value, a function to update the stored value, and a function to remove the stored value from session storage.
+
+
+
+## Usage
+<Source code={`
+import { Button } from '@slabs/ds-core';
+import { useSessionStorage } from '@slabs/ds-core';
+
+function Demo() {
+
+    const [value, setValue] = useSessionStorage('key', 'initialValue');
+
+    return (
+        <div>
+            <p>Value: {value}</p>
+            <Button onClick={() => setValue('newValue')}>Set Value</Button>
+        </div>
+        )
+  
+  );
+}
+`} dark={true} language='tsx' />
+
+<Stories title='Examples'/>

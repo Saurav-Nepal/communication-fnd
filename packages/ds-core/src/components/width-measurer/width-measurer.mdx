@@ -1,0 +1,89 @@
+import {
+  Canvas,
+  Controls,
+  Description,
+  Meta,
+  Subtitle,
+  Stories,
+  Source
+} from '@storybook/blocks';
+
+import * as WidthMeasurerStories from './width-measurer.story';
+
+<Meta of={WidthMeasurerStories} title='Component/WidthMeasurer' />
+
+
+# `WidthMeasurer` Component
+
+## Overview
+
+The `WidthMeasurer` component is a utility component that measures the widths of its children elements. It's designed to work in conjunction with the `useWidthMeasurer` hook to enable responsive layouts.
+
+## Props
+
+```typescript
+interface WidthMeasurerProps {
+    discloserButton?: React.ReactNode;
+    handleMeasurement: (measurements: WidthMeasurements) => void;
+    children: React.ReactNode;
+    className?: string;
+    disabled?: boolean;
+}
+```
+
+## Usage
+
+```jsx
+import React from 'react';
+import { WidthMeasurer } from '@slabs/ds-components';
+import { useWidthMeasurer } from '@slabs/ds-hooks';
+
+function ResponsiveTabList({ tabs }) {
+    const { handleMeasurement } = useWidthMeasurer({
+        items: tabs,
+        activeItemIndex: 0,
+    });
+
+    return (
+        <WidthMeasurer
+            handleMeasurement={handleMeasurement}
+            discloserButton={<MoreButton />}
+        >
+            {tabs.map(tab => <Tab key={tab.id} {...tab} />)}
+        </WidthMeasurer>
+    );
+}
+```
+
+## Behavior
+
+1. Renders an invisible container with the provided children.
+2. Measures widths of children elements and container on mount and resize.
+3. Calls `handleMeasurement` with the `WidthMeasurements` object.
+4. Does not render anything if `disabled` is true.
+
+## Integration with useWidthMeasurer Hook
+
+The `WidthMeasurer` component is designed to provide measurement data to the `useWidthMeasurer` hook:
+
+1. `useWidthMeasurer` provides a `handleMeasurement` function.
+2. This function is passed to `WidthMeasurer` as a prop.
+3. `WidthMeasurer` calls this function with measured widths.
+4. The hook uses these measurements to determine visible and hidden items.
+
+## Implementation Details
+
+- Uses `requestAnimationFrame` for efficient measurements.
+- Accounts for padding and margins in container width calculation.
+- Designed to be invisible to not affect page layout.
+- Includes the `discloserButton` in measurements for accuracy.
+
+## Notes
+
+- Ensure the measured content structure matches the visible content for accurate results.
+- The component is typically rendered alongside the actual visible content, not replacing it.
+- For complex layouts, you might need multiple `WidthMeasurer` components.
+
+For more information on how to use the measurement data, refer to the `useWidthMeasurer` hook documentation.
+
+<Stories />

@@ -1,0 +1,12 @@
+export const REFRESH_TOAST = 'refreshToastnotification';
+export const REFRESH_MENU_DETAIL = 'refreshMenuDetail';
+export const RIGHT_CLICK_DATA = 'rightClickData';
+export const LOGGED_USER = 'loggedUser';
+export const MENUS = 'menu_list';
+export const TOGGLE_MENU = 'toggled_menu';
+export const SHOW_MENU_NAME = 'show_menu_name';
+export const PARENT_LISTING_DATA = 'parentListingData';
+export const TOGGLE_ADVANCED_FILTER = 'ToggleAdvancedFilter';
+export const OPEN_SPOTLIGHT = 'OpenSpotlight';
+export const RECENT_PATH = 'RecentPath';
+export const SHOW_TOAST = 'SHOW_TOAST';

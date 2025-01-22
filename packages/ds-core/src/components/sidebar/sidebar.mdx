@@ -1,0 +1,236 @@
+import {
+  Canvas,
+  Controls,
+  Description,
+  Meta,
+  Subtitle,
+  Story,
+  Source
+} from '@storybook/blocks';
+
+import * as SidebarStories from './sidebar.story';
+
+<Meta of={SidebarStories} title='Components/Sidebar' />
+
+# Sidebar Component
+
+The Sidebar component provides a collapsible sidebar with both main menu items and submenu items, supporting multi-level navigation. It can be both controlled and uncontrolled, allowing for easy integration into your application.
+
+# Usage
+
+The Sidebar component allows for easy implementation of a navigation structure in your application. It supports main menu items, submenu items, and customizable headers and footers.
+
+<Canvas>
+ <Story of={SidebarStories.Example} />
+</Canvas>
+
+<Source code={`import { SidebarType } from "@slabs/ds-core"`} dark={true} language='tsx' />
+<Source code={`
+import React from 'react';
+import { useBoolean } from '@slabs/ds-hooks';
+
+const Example = () => {
+  const [isOpen, setIsOpen] = useBoolean(true); 
+
+  return (
+    <Sidebar
+      setIsOpen={setIsOpen}
+      isOpen={isOpen}
+      menus={[...args.menus, ...bottomList]}
+    >
+        <MainMenu>
+            <MainMenuTopList>
+                {args.menus.map((menu) => (
+                    <a href={menu.href}>
+                        <MainMenuItem
+                            {...menu}
+                            key={menu.title}
+                            icon={undefined}
+                        />
+                    </a>
+                ))}
+            </MainMenuTopList>
+            <MainMenuBottomList>
+                {bottomList.map((menu) => (
+                    <a href={menu.href}>
+                        <MainMenuItem
+                            {...menu}
+                            key={menu.title}
+                            icon={undefined}
+                        />
+                    </a>
+                ))}
+            </MainMenuBottomList>
+        </MainMenu>
+        <SubMenu>
+            <SubMenuTitle />
+            <SubMenuList>
+                {(activeMenu) => {
+                    return activeMenu?.menus?.map((menu) => {
+                        if (menu.href)
+                            return (
+                                <a href={menu.href}>
+                                    <SingleSubmenuItem
+                                        {...menu}
+                                        key={menu.title}
+                                    />
+                                </a>
+                            );
+
+                        return (
+                            <NestedSubmenuItem
+                                {...menu}
+                                key={menu.title}
+                            >
+                                {menu.menus?.map((submenu) => {
+                                    if (submenu.href) {
+                                        return (
+                                            <a href={submenu.href}>
+                                                <NestedSubmenuChildSingle
+                                                    {...submenu}
+                                                />
+                                            </a>
+                                        );
+                                    }
+
+                                    return (
+                                        <NestedSubmenuChildNested
+                                            title={submenu.title}
+                                        >
+                                            {submenu.menus?.map(
+                                                (nested) => (
+                                                    <a
+                                                        href={
+                                                            nested.href
+                                                        }
+                                                    >
+                                                        <NestedSubmenuChildNestedChild
+                                                            {...nested}
+                                                        />
+                                                    </a>
+                                                )
+                                            )}
+                                        </NestedSubmenuChildNested>
+                                    );
+                                })}
+                            </NestedSubmenuItem>
+                        );
+                    });
+                }}
+            </SubMenuList>
+        </SubMenu>
+    </Sidebar>
+  );
+};
+`} dark={true} language='tsx' />
+
+# Props
+
+The Sidebar component accepts the following props:
+
+## `isOpen`
+- **Type:** `boolean`
+- **Required:** No
+- **Description:** Controls whether the sidebar is expanded or collapsed.
+
+## `setIsOpen`
+- **Type:** `(value: boolean) => void`
+- **Required:** No
+- **Description:** Function to update the `isOpen` state. Called when the sidebar toggle button is clicked.
+
+## `menus`
+- **Type:** `MenuItemType[]`
+- **Required:** Yes
+- **Description:** Array of main menu items. Defines the primary navigation structure.
+
+## `bottomMenus`
+- **Type:** `MenuItemType[]`
+- **Required:** No
+- **Default:** `[]`
+- **Description:** Array of bottom menu items. These appear at the bottom of the sidebar, below the main menu items.
+
+## `mainMenuHeading`
+- **Type:** `React.ReactNode`
+- **Required:** Yes
+- **Description:** Custom content for the main menu header. Typically used for a logo or title.
+
+## `mainMenuFooter`
+- **Type:** `React.ReactNode`
+- **Required:** No
+- **Description:** Custom content for the main menu footer. Often used for user profile information or additional actions.
+
+## `subMenuFooter`
+- **Type:** `SidebarSubmenuFooterType`
+- **Required:** Yes
+- **Description:** Footer content for the submenu. Can be either a custom React node or an object with title, subtitle, and action.
+
+## `menuBorderType`
+- **Type:** `'dashed' | 'solid'`
+- **Required:** No
+- **Default:** `'dashed'`
+- **Description:** Style of the menu border.
+
+# Prop Types
+
+## MenuItemType
+
+```typescript
+type MenuItemType = {
+    title: string;       // The text to display for the menu item
+    icon: React.ComponentType;  // The icon component to display next to the title
+    href?: string;       // Optional URL for the menu item. If not provided, it's treated as a dropdown trigger.
+    menus?: SubmenuItemType[];  // Optional array of submenu items
+};
+```
+
+## SubmenuItemType
+
+```typescript
+type SubmenuItemType = {
+    href?: string;       // Optional URL for the submenu item
+    title: string;       // The text to display for the submenu item
+    icon?: React.ComponentType;  // Optional icon component for the submenu item
+    menus?: SubmenuItemChildType[];  // Optional array of nested submenu items
+};
+```
+
+## SubmenuItemChildType
+
+```typescript
+type SubmenuItemChildType = {
+    href?: string;       // Optional URL for the nested submenu item
+    title: string;       // The text to display for the nested submenu item
+    menus?: SubmenuItemChildNestedType[];  // Optional array of deeply nested submenu items
+};
+```
+
+## SubmenuItemChildNestedType
+
+```typescript
+type SubmenuItemChildNestedType = {
+    href: string;        // URL for the deeply nested submenu item
+    title: string;       // The text to display for the deeply nested submenu item
+};
+```
+
+## SidebarSubmenuFooterType
+
+```typescript
+type SidebarSubmenuFooterType =
+    | {
+          renderFooter: React.ReactNode;  // Custom React node to render as the submenu footer
+      }
+    | {
+          title: string;        // Title text for the submenu footer
+          subtitle: string;     // Subtitle text for the submenu footer
+          action: () => void;   // Action to perform when the footer action button is clicked
+      };
+```
+
+# Usage Notes
+
+- The `menus` prop is the primary way to define the sidebar's navigation structure. Each item in this array can either be a link (if `href` is provided) or a dropdown menu (if `menus` is provided).
+- `bottomMenus` works similarly to `menus`, but the items are rendered at the bottom of the sidebar. This is useful for things like settings or logout options.
+- `mainMenuHeading` and `mainMenuFooter` allow for customization of the sidebar's appearance and can include any valid React nodes.
+- The `subMenuFooter` can either be a fully custom React node (by providing an object with a `renderFooter` property) or a pre-structured footer with title, subtitle, and action button (by providing an object with `title`, `subtitle`, and `action` properties).
+- When using nested menus, be mindful of the depth to maintain good user experience. Extremely deep nesting can make navigation confusing.

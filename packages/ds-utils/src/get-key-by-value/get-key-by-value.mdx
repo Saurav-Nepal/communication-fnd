@@ -1,0 +1,28 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Object/getKeyByValue' />
+
+# getKeyByValue Function
+
+## Description
+
+The `getKeyByValue` function retrieves the first key in an object whose corresponding value matches the specified value. It searches through the object's properties and returns the key associated with the first occurrence of the specified value.
+
+## Usage
+
+<Source code={`
+
+import { getKeyByValue } from '@slabs/ds-utils';
+
+
+// Example usage
+const sampleObject = {
+    id: 1,
+    name: 'John Doe',
+    age: 30,
+    role: 'Developer',
+};
+
+const keyForValue = getKeyByValue(sampleObject, 'John Doe');
+// Output: 'name'
+`} dark={true} language='tsx' />

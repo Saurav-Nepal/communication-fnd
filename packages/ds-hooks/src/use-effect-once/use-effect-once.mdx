@@ -1,0 +1,32 @@
+
+
+import { Meta, Title, Source, Stories } from '@storybook/blocks';
+
+import * as StoryBook from './use-effect-once.story'
+
+<Meta of={StoryBook} />
+
+<Title />
+
+`useEffectOnce` is a custom hook that runs an effect only once, when the component mounts. It's a common pattern to run an effect only once, and this hook makes it easy to do so.
+
+
+<Source code={`
+import {useEffectOnce} from '@slabs/ds-hooks';
+
+const Demo = () => {
+  useEffectOnce(() => {
+    console.log('Running effect once on mount')
+
+    return () => {
+      console.log('Running clean-up of effect on unmount')
+    }
+  });
+
+  return null;
+};`
+}
+
+dark={true} language='tsx'/>
+
+<Stories title='Examples'/>

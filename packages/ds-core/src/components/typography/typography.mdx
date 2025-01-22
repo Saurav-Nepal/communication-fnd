@@ -1,0 +1,64 @@
+import { Meta, Title, Source, Story } from '@storybook/blocks';
+import * as TypographyStories from './typography.story';
+import {Typography} from './typography.tsx';
+
+<Meta of={TypographyStories} />
+
+<Title />
+Typography is used to render text and paragraphs within an interface.
+
+## Usage
+<Source code={`
+import { Typography } from '@slabs/ds-core';
+
+<Typography variant="heading" as="p">
+    Some Text
+</Typography>
+
+`} dark={true} language='tsx' />
+
+## Variants
+<Story of={TypographyStories.Title}/>
+<Story of={TypographyStories.Heading}/>
+<Story of={TypographyStories.SubHeading}/>
+<Story of={TypographyStories.Info}/>
+<Story of={TypographyStories.SubInfo}/>
+
+## Font Size
+Utilities for controlling font size of the text element.
+<Story of={TypographyStories.Text3Xl}/>
+<Story of={TypographyStories.Text2Xl}/>
+<Story of={TypographyStories.TextXl}/>
+<Story of={TypographyStories.TextLg}/>
+<Story of={TypographyStories.TextMd}/>
+<Story of={TypographyStories.TextSm}/>
+<Story of={TypographyStories.TextXs}/>
+
+## Font Weight
+Utilities for controlling font weight of the text element.
+<Story of={TypographyStories.Bold}/>
+<Story of={TypographyStories.SemiBold}/>
+<Story of={TypographyStories.Medium}/>
+<Story of={TypographyStories.Normal}/>
+
+## Transform
+Utilities for controlling transform property of the text element.
+<Story of={TypographyStories.Uppercase}/>
+<Story of={TypographyStories.Capitalize}/>
+<Story of={TypographyStories.Lowercase}/>
+<Story of={TypographyStories.None}/>
+
+## Font Style
+Utilities for controlling transform property of the text element.
+<Story of={TypographyStories.FontStyleItalic}/>
+<Story of={TypographyStories.FontStyleNormal}/>
+
+## Font Color
+Utilities for controlling color of the text element.
+<Story of={TypographyStories.TextPrimary}/>
+<Story of={TypographyStories.TextAccent}/>
+<Story of={TypographyStories.TextSecondary}/>
+<Story of={TypographyStories.TextInfo}/>
+<Story of={TypographyStories.TextWarning}/>
+<Story of={TypographyStories.TextMuted}/>
+<Story of={TypographyStories.TextSuccess}/>

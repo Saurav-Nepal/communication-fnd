@@ -1,0 +1,59 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Array/removeEmptyArray' />
+
+# removeEmptyArray Function
+## Description
+
+The `removeEmptyArray` function removes empty values (null, undefined, or objects/arrays with no keys) from an array.
+
+## Usage
+
+
+<Source code={`
+import { removeEmptyArray } from '@slabs/ds-utils';
+
+// Example usage
+ const inputArray = [
+            {
+                name: 'John',
+                age: 30,
+                address: {
+                    city: 'New York',
+                    country: 'USA',
+                },
+                phone: null,
+                email: undefined,
+                hobbies: [],
+            },
+            {
+                name: 'John',
+                age: 30,
+                address: {
+                    city: 'New York',
+                    country: 'USA',
+                },
+                phone: null,
+                email: undefined,
+                hobbies: [],
+            },
+        ];
+
+const resultArray = removeEmptyArray(inputArray);
+// Output: [ {
+                name: 'John',
+                age: 30,
+                address: {
+                    city: 'New York',
+                    country: 'USA',
+                },
+            },
+            {
+                name: 'John',
+                age: 30,
+                address: {
+                    city: 'New York',
+                    country: 'USA',
+                },
+            },]
+`} dark={true} language='tsx' />

@@ -1,0 +1,31 @@
+
+import { Meta, Title, Source, Stories } from '@storybook/blocks';
+import * as StoryBook from './use-shallow-effect.story'
+
+<Meta of={StoryBook} />
+
+
+<Title />
+
+`useShallowEffect` works exactly like `useEffect`, but performs shallow dependencies comparison instead of referential comparison.
+
+## Usage
+
+<Source code={`
+
+import { useEffect } from 'react';
+import { useShallowEffect } from '@slabs/hooks';
+
+// Will be called on each render
+useEffect(() => {}, [{ a: 1 }]);
+
+// Will be called only once
+useShallowEffect(() => {}, [{ a: 1 }]);
+
+
+`}
+
+
+dark={true} language='tsx'
+
+/>

@@ -1,0 +1,22 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Object/keys' />
+
+# keys Function
+
+## Description
+
+The `keys` function returns an array of keys from the given object.
+
+## Usage
+
+
+<Source code={`
+import { keys } from '@slabs/ds-utils';
+
+// Example usage
+const sampleObject = { name: 'John', age: 30, city: 'New York' };
+
+const objectKeys = keys(sampleObject);
+// Output: ['name', 'age', 'city'] (array of keys from the sampleObject)
+`} dark={true} language='tsx' />

@@ -1,0 +1,27 @@
+
+
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/String/capitalizeFirst' />
+
+# capitalizeFirst Function
+
+## Description
+
+The `capitalizeFirst` function capitalizes the first letter of a given string. This utility is useful when you only need to capitalize the initial letter and maintain the rest of the string unchanged.
+
+## Usage
+
+
+<Source code={`
+
+import { capitalizeFirst } from '@slabs/ds-utils';
+
+
+// Example usage
+const lowercaseString = 'hello world';
+const capitalizedFirstString = capitalizeFirst(lowercaseString);
+
+// Output: 'Hello world'
+console.log(capitalizedFirstString);
+`}  dark={true} language='tsx' />

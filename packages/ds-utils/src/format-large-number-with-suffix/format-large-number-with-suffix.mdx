@@ -1,0 +1,23 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Number/formatLargeNumberWithSuffix' />
+
+# formatLargeNumberWithSuffix Function
+
+## Description
+
+The `formatLargeNumberWithSuffix` function converts a numeric value into a human-readable string with a suffix (K, M, B, T, P, E) for thousands, millions, billions, trillions, etc.
+
+## Usage
+
+
+<Source code={`
+
+ import {formatLargeNumberWithSuffix} from '@slabs/ds-utils
+
+
+// Example usage
+const largeNumber = 123456789;
+const formattedNumber = formatLargeNumberWithSuffix(largeNumber);
+// Output: '123.46M' (or equivalent based on the number)
+`} dark={true} language='tsx' />

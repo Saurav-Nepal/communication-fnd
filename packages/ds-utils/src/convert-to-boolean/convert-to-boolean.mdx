@@ -1,0 +1,37 @@
+import { Meta, Source } from '@storybook/blocks';
+
+<Meta title='Utils/Misc/convertToBoolean'/>
+
+# convertToBoolean Function
+
+## Description
+
+The `convertToBoolean` function converts a string or number to a boolean value, accommodating various representations such as 'true', 'false', numeric values {0, 1}, or any other numeric value. This utility is helpful when you need to interpret diverse data types as booleans.
+
+## Usage
+
+
+<Source code={`
+
+import {convertToBoolean} from '@slabs/ds-utils';
+
+
+// Examples
+const boolStringTrue = convertToBoolean('true');
+// Output: true
+
+const boolStringFalse = convertToBoolean('false');
+// Output: false
+
+const boolNumericTrue = convertToBoolean(1);
+// Output: true
+
+const boolNumericFalse = convertToBoolean(0);
+// Output: false
+
+const boolNumeric42 = convertToBoolean(42);
+// Output: true
+
+const boolNumericNegative = convertToBoolean(-3);
+// Output: true
+`} dark={true} language='tsx'/>
