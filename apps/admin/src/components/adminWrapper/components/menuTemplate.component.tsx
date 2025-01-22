@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 
 import { REFRESH_TOAST } from '@/constants/state.constants';
-import { useMenuDetail } from '@/hooks/useMenuDetail.hook';
 import { GetScene } from '@/utils/scene.utils';
 import { StoreEvent } from '@/utils/stateManager.utils';
 
@@ -17,7 +16,6 @@ const MenuTemplate = ({
     componentName,
     ...props
 }: MenuTemplateProps) => {
-    const { menuDetail = {} } = useMenuDetail(menuId);
     const Component = GetScene(componentName);
 
     useEffect(() => {
@@ -30,7 +28,7 @@ const MenuTemplate = ({
                 <Component
                     {...props}
                     menuId={menuId}
-                    menuDetail={menuDetail}
+                    menuDetail={<></>}
                     mode='boxed'
                 />
             ) : null}

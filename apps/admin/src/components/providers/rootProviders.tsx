@@ -11,11 +11,8 @@ import { Modal, ModalWrapper } from '@slabs/ds-dialog';
 
 import themesConstants from '@/constants/themes.constants';
 import { queryClient } from '@/lib/react-query';
-import { GenericDetailScene } from '@/scenes/genericDetail/genericDetail.scene';
-import { GenericListingScene } from '@/scenes/genericListing/genericListing.scenes';
 import { InitializeStorageUtility } from '@/utils/localStorage.utils';
 import { Navigation } from '@/utils/navigation.utils';
-import { RegisterScene } from '@/utils/scene.utils';
 import { InitializeStateManager } from '@/utils/stateManager.utils';
 import { QueryClientProvider } from '@tanstack/react-query';
 
