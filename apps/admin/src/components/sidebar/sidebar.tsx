@@ -45,7 +45,7 @@ const Sidebar = ({
                                 if (!menu.visibility) return;
                                 return {
                                     title: menu.name,
-                                    href: `/${menu.path}`,
+                                    href: menu.path,
                                     // icon: () => <i className={cn('fa', menu.image ?? '')} />,
                                 };
                             })
@@ -60,7 +60,6 @@ const Sidebar = ({
         Logout();
         Navigation.navigate({ url: '/login' });
     };
-
     return (
         <DsSidebar
             setIsOpen={setIsSidebarExpanded}

@@ -7,13 +7,18 @@ import { Typography } from '../../typography/typography';
 import { useSidebarContext } from '../sidebar.context';
 import { MenuItemType } from '../sidebar.types';
 
-export type MainMenuItemType = Pick<MenuItemType, 'icon' | 'title'>;
+export type MainMenuItemType = Pick<MenuItemType, 'icon' | 'title' | 'menus'>;
 
-export const MainMenuItem = ({ icon, title }: MainMenuItemType) => {
+export const MainMenuItem = ({ icon, title, menus }: MainMenuItemType) => {
     const { setActiveMenu, activeMenu, setIsSidebarOpen } = useSidebarContext();
+    const location = window.location.pathname;
 
     const Icon = icon;
-    const isActive = useMemo(() => activeMenu?.title === title, [activeMenu]);
+
+    const isActive = useMemo(() => {
+        if (activeMenu?.title === title) return true;
+        return menus?.some((val) => val?.href === location);
+    }, [activeMenu, location]);
 
     return (
         <Tooltip
