@@ -7,14 +7,18 @@ import { Typography } from '../../typography/typography';
 import { useSidebarContext } from '../sidebar.context';
 import { MenuItemType } from '../sidebar.types';
 
-export type MainMenuItemType = Pick<MenuItemType, 'icon' | 'title'>;
+export type MainMenuItemType = Pick<MenuItemType, 'icon' | 'title' | 'menus'>;
 
-export const MainMenuItem = ({ icon, title }: MainMenuItemType) => {
+export const MainMenuItem = ({ icon, title, menus }: MainMenuItemType) => {
     const { setActiveMenu, activeMenu, setIsSidebarOpen } = useSidebarContext();
+    const location = window.location.pathname;
 
     const Icon = icon;
 
-    const isActive = useMemo(() => activeMenu?.title === title, [activeMenu]);
+    const isActive = useMemo(() => {
+        if (activeMenu?.title === title) return true;
+        return menus?.some((val) => val?.href === location);
+    }, [activeMenu, location]);
 
     return (
         <Tooltip
@@ -26,7 +30,7 @@ export const MainMenuItem = ({ icon, title }: MainMenuItemType) => {
         >
             <div
                 className={cn(
-                    'w-10 h-10 rounded flex justify-center items-center cursor-pointer text-neutral-foreground group/link hover:bg-neutral-foreground hover:text-neutral transition-all',
+                    'flex justify-center items-center w-10 h-10 rounded transition-all cursor-pointer text-neutral-foreground group/link hover:bg-neutral-foreground hover:text-neutral',
                     {
                         'bg-neutral-foreground text-neutral': isActive,
                     }

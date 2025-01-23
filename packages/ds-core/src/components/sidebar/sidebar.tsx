@@ -39,7 +39,7 @@ export const Sidebar = (props: SidebarProps) => {
             <DismissableLayer
                 onDismiss={() => sidebarProps.setIsSidebarOpen(false)}
             >
-                <div className='fixed top-0 z-50 flex h-full start-0'>
+                <div className='flex fixed top-0 z-50 h-full start-0'>
                     {props.children}
                 </div>
             </DismissableLayer>
