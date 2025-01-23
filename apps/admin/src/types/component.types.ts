@@ -156,7 +156,7 @@ export interface ModuleProps {
 export interface MenuProps {
     id: number;
     name: string;
-    url: string;
+    path: string;
     image?: string;
     visibility: boolean;
     page_id: number;

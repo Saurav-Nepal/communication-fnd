@@ -1,20 +1,13 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
-import {
-    Header,
-    RightClick,
-    ThemeSwitcher,
-    useSlabTheme,
-} from '@slabs/ds-core';
+import { Header, ThemeSwitcher, useSlabTheme } from '@slabs/ds-core';
 import { useBoolean } from '@slabs/ds-hooks';
-import { capitalize, cn, isEmptyObject } from '@slabs/ds-utils';
+import { capitalize, cn } from '@slabs/ds-utils';
 
-import { RIGHT_CLICK_DATA } from '@/constants/state.constants';
 import themesConstants from '@/constants/themes.constants';
 import useUser from '@/hooks/useUser.hook';
 import { communicationWrapperProps } from '@/types';
 import { Navigation } from '@/utils/navigation.utils';
-import { SubscribeToEvent, UnsubscribeEvent } from '@/utils/stateManager.utils';
 import { GetUserDetail, Logout } from '@/utils/user.utils';
 
 import { DashboardLoader } from '../loader/dashboardLoader.component';
@@ -29,53 +22,13 @@ const AdminWrapper = ({
 }: communicationWrapperProps) => {
     const { setTheme } = useSlabTheme();
     const { user: currentUser } = useUser();
+
     const user = useMemo(() => {
         if (!currentUser) return undefined;
         return GetUserDetail(currentUser);
     }, [currentUser]);
 
     const [sideNavExpanded, setSideNavExpanded] = useBoolean(false);
-
-    const [menuDetails, setMenuDetails] = useState<any>();
-
-    useEffect(() => {
-        SubscribeToEvent({
-            eventName: RIGHT_CLICK_DATA,
-            callback: setMenuDetails,
-        });
-
-        return () => {
-            UnsubscribeEvent({
-                eventName: RIGHT_CLICK_DATA,
-                callback: setMenuDetails,
-            });
-        };
-    }, []);
-
-    const rowOptions = [
-        {
-            key: 'redirect-menu',
-            name: 'Redirect Menu Detail',
-            icon: 'fa-deaf',
-            onClick: (_, e) => {
-                const pageUrl = '/menu/' + menuDetails?.menuData.menuId;
-                Navigation.navigate({ url: pageUrl }, e);
-            },
-        },
-        {
-            key: 'redirect-model',
-            name: 'Redirect Model Detail',
-            icon: 'fa-info-circle',
-            onClick: (_, e) => {
-                const pageUrl =
-                    '/model/' +
-                    (menuDetails?.menuData.model
-                        ? menuDetails?.menuData.model.id
-                        : menuDetails?.menuData.modelId);
-                Navigation.navigate({ url: pageUrl }, e);
-            },
-        },
-    ];
 
     const logout = () => {
         Logout();
@@ -99,58 +52,48 @@ const AdminWrapper = ({
                                 'pb-10 h-full landing-wrapper ml-sidebar-width'
                             )}
                         >
-                            <RightClick
-                                actions={rowOptions}
-                                disabled={
-                                    isEmptyObject(menuDetails) ||
-                                    !user?.hasRole('developer')
+                            <Header
+                                isCollapsed={sideNavExpanded}
+                                setIsCollapsed={setSideNavExpanded}
+                                user={{
+                                    subtitle: user?.email ?? '',
+                                    title: user?.name ?? '',
+                                    actions: [
+                                        {
+                                            name: 'Theme',
+                                            key: 'theme',
+                                            subMenuActions: [
+                                                {
+                                                    key: 'base',
+                                                    name: 'Default',
+                                                    action: () =>
+                                                        setTheme('base'),
+                                                },
+                                                ...Object.keys(
+                                                    themesConstants
+                                                ).map((themeKey) => ({
+                                                    key: themeKey,
+                                                    name: capitalize(themeKey),
+                                                    action: () =>
+                                                        setTheme(themeKey),
+                                                })),
+                                            ],
+                                        },
+                                        {
+                                            name: 'Logout',
+                                            isCancel: true,
+                                            key: 'logout',
+                                            action: logout,
+                                        },
+                                    ],
+                                }}
+                                leftComponent={
+                                    <SpotlightSearch menus={menus} />
                                 }
-                            >
-                                <Header
-                                    isCollapsed={sideNavExpanded}
-                                    setIsCollapsed={setSideNavExpanded}
-                                    user={{
-                                        subtitle: user?.email ?? '',
-                                        title: user?.name ?? '',
-                                        actions: [
-                                            {
-                                                name: 'Theme',
-                                                key: 'theme',
-                                                subMenuActions: [
-                                                    {
-                                                        key: 'base',
-                                                        name: 'Default',
-                                                        action: () =>
-                                                            setTheme('base'),
-                                                    },
-                                                    ...Object.keys(
-                                                        themesConstants
-                                                    ).map((themeKey) => ({
-                                                        key: themeKey,
-                                                        name: capitalize(
-                                                            themeKey
-                                                        ),
-                                                        action: () =>
-                                                            setTheme(themeKey),
-                                                    })),
-                                                ],
-                                            },
-                                            {
-                                                name: 'Logout',
-                                                isCancel: true,
-                                                key: 'logout',
-                                                action: logout,
-                                            },
-                                        ],
-                                    }}
-                                    leftComponent={
-                                        <SpotlightSearch menus={menus} />
-                                    }
-                                    rightComponent={<ThemeSwitcher />}
-                                    className='dark:bg-neutral'
-                                    sticky
-                                />
-                            </RightClick>
+                                rightComponent={<ThemeSwitcher />}
+                                className='dark:bg-neutral'
+                                sticky
+                            />
                             {children}
                         </main>
                     </div>

@@ -39,12 +39,13 @@ const Sidebar = ({
                     return {
                         title: module.name,
                         icon: () => <i className={cn('fa', module.image)} />,
+                        href: module?.menus?.[0]?.path,
                         menus: module.menus
                             ?.map((menu) => {
                                 if (!menu.visibility) return;
                                 return {
                                     title: menu.name,
-                                    href: `/${menu.url}`,
+                                    href: `/${menu.path}`,
                                     // icon: () => <i className={cn('fa', menu.image ?? '')} />,
                                 };
                             })

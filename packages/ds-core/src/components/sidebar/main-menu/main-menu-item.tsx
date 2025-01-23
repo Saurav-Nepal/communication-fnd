@@ -13,7 +13,6 @@ export const MainMenuItem = ({ icon, title }: MainMenuItemType) => {
     const { setActiveMenu, activeMenu, setIsSidebarOpen } = useSidebarContext();
 
     const Icon = icon;
-
     const isActive = useMemo(() => activeMenu?.title === title, [activeMenu]);
 
     return (
@@ -26,7 +25,7 @@ export const MainMenuItem = ({ icon, title }: MainMenuItemType) => {
         >
             <div
                 className={cn(
-                    'w-10 h-10 rounded flex justify-center items-center cursor-pointer text-neutral-foreground group/link hover:bg-neutral-foreground hover:text-neutral transition-all',
+                    'flex justify-center items-center w-10 h-10 rounded transition-all cursor-pointer text-neutral-foreground group/link hover:bg-neutral-foreground hover:text-neutral',
                     {
                         'bg-neutral-foreground text-neutral': isActive,
                     }
