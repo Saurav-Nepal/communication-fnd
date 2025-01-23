@@ -46,8 +46,8 @@ const useSpotlightSearch = ({
                     return {
                         ...menu,
                         title: [module.name, menu.name],
-                        onClick: () => Navigation.navigate({ url: menu?.url }),
-                        url: '/' + menu?.url,
+                        onClick: () => Navigation.navigate({ url: menu?.path }),
+                        url: '/' + menu?.path,
                     };
                 });
         });
@@ -89,7 +89,7 @@ const useSpotlightSearch = ({
 
                 return {
                     ...item,
-                    onClick: () => Navigation.navigate({ url: menu.url }),
+                    onClick: () => Navigation.navigate({ url: menu.path }),
                 } as HistoryItem;
             })
             .toReversed();
@@ -115,7 +115,7 @@ const useSpotlightSearch = ({
         // if menu is already in history, don't add it again
         const isAlreadyExist = history
             .filter((val) => !isEmptyObject(val))
-            .some((val) => val.url === menu?.url);
+            .some((val) => val.url === menu?.path);
 
         if (isAlreadyExist) return;
 
@@ -124,7 +124,7 @@ const useSpotlightSearch = ({
             const newHistory = [
                 ...prev,
                 // only store the last part of the title. eg: ['Module', 'Menu'] => 'Menu'
-                { url: menu?.url, title: menu?.title.slice(-1)[0] },
+                { url: menu?.path, title: menu?.title.slice(-1)[0] },
             ];
 
             SetItem(HISTORY_KEY, newHistory, {
@@ -175,7 +175,7 @@ const transformMenusInfoFuseOptions = (title: string[]) => {
 
 const getMenuByUrl = (menus: MenuProps[], url: string) => {
     if (!menus) return null;
-    return menus.flat().find((menu) => menu.url === url);
+    return menus.flat().find((menu) => menu.path === url);
 };
 
 export default useSpotlightSearch;
