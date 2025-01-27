@@ -21,7 +21,6 @@ export type MenuItemType = {
     title: string;
     icon?: any;
     href?: string;
-
     // menu list of the active menu
     menus?: SubmenuItemType[];
 };
@@ -32,6 +31,7 @@ export type SubmenuItemType = {
     title: string;
     icon?: any;
     menus?: SubmenuItemChildType[];
+    visibility: boolean;
     className?: string;
 };
 export type SubmenuItemChildType = {

@@ -10,15 +10,15 @@ import { MenuItemType } from '../sidebar.types';
 export type MainMenuItemType = Pick<MenuItemType, 'icon' | 'title' | 'menus'>;
 
 export const MainMenuItem = ({ icon, title, menus }: MainMenuItemType) => {
-    const { setActiveMenu, activeMenu, setIsSidebarOpen } = useSidebarContext();
+    const { setActiveMenu, activeMenu, setIsSidebarOpen, isSidebarOpen } =
+        useSidebarContext();
     const location = window.location.pathname;
 
     const Icon = icon;
 
     const isActive = useMemo(() => {
-        if (activeMenu?.title === title) return true;
         return menus?.some((val) => val?.href === location);
-    }, [activeMenu, location]);
+    }, [activeMenu, location, isSidebarOpen]);
 
     return (
         <Tooltip

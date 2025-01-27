@@ -39,13 +39,13 @@ const Sidebar = ({
                     return {
                         title: module.name,
                         icon: () => <i className={cn('fa', module.image)} />,
-                        href: module?.menus?.[0]?.path,
+                        // href: module?.menus?.[0]?.path,
                         menus: module.menus
                             ?.map((menu) => {
-                                if (!menu.visibility) return;
                                 return {
                                     title: menu.name,
                                     href: menu.path,
+                                    visibility: menu.visibility,
                                     // icon: () => <i className={cn('fa', menu.image ?? '')} />,
                                 };
                             })
@@ -76,9 +76,7 @@ const Sidebar = ({
                 </div>
                 <MainMenuTopList>
                     {sidebarMenus.map((menu) => (
-                        <Link href={menu.href ?? ''}>
-                            <MainMenuItem {...menu} key={menu.title} />
-                        </Link>
+                        <MainMenuItem {...menu} key={menu.title} />
                     ))}
                 </MainMenuTopList>
             </MainMenu>
@@ -86,15 +84,18 @@ const Sidebar = ({
                 <SubMenuTitle />
                 <SubMenuList className='gap-1 px-2.5'>
                     {(activeMenu) => {
-                        return activeMenu?.menus?.map((menu) => (
-                            <Link href={menu.href ?? ''}>
-                                <SingleSubmenuItem
-                                    {...menu}
-                                    key={menu.title}
-                                    className='px-2 py-2'
-                                />
-                            </Link>
-                        ));
+                        return activeMenu?.menus?.map((menu) => {
+                            if (!menu.visibility) return;
+                            return (
+                                <Link href={menu.href ?? ''}>
+                                    <SingleSubmenuItem
+                                        {...menu}
+                                        key={menu.title}
+                                        className='px-2 py-2'
+                                    />
+                                </Link>
+                            );
+                        });
                     }}
                 </SubMenuList>
                 <SubmenuFooter
