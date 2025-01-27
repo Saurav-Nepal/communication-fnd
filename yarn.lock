@@ -4945,7 +4945,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@slabs/ds-table@workspace:packages/ds-table":
+"@slabs/ds-table@npm:*, @slabs/ds-table@workspace:packages/ds-table":
   version: 0.0.0-use.local
   resolution: "@slabs/ds-table@workspace:packages/ds-table"
   dependencies:
@@ -9105,6 +9105,7 @@ __metadata:
     "@slabs/ds-dialog": "npm:*"
     "@slabs/ds-hooks": "npm:*"
     "@slabs/ds-next-router": "npm:*"
+    "@slabs/ds-table": "npm:*"
     "@slabs/ds-utils": "npm:*"
     "@tanstack/react-query": "npm:^5.51.15"
     "@tanstack/react-query-devtools": "npm:^5.51.15"
