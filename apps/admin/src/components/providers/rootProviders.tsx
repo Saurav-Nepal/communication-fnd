@@ -16,6 +16,7 @@ import { Navigation } from '@/utils/navigation.utils';
 import { InitializeStateManager } from '@/utils/stateManager.utils';
 import { QueryClientProvider } from '@tanstack/react-query';
 
+import { Toast } from '../../utils/toast.utils';
 import AuthProvider from './auth.provider';
 
 let globalModalRef: any;
@@ -27,8 +28,13 @@ const RootProvider = ({
 }>) => {
     const navigationRef = useRouter();
 
-    Navigation.register(navigationRef);
+    Navigation.register({
+        ...navigationRef,
+        navigate: (url: string) => navigationRef.push(url),
+    });
+
     Modal.register(globalModalRef);
+    Toast.register();
 
     InitializeStorageUtility(StorageUtility);
     InitializeStateManager(StateManagerUtility);

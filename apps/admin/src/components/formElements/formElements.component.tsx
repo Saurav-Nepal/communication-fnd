@@ -25,7 +25,7 @@ const formElements = ({
         case 'email':
         case 'url':
             return (
-                <>
+                <div className='flex flex-col gap-2'>
                     {props.label && (
                         <Label
                             label={props.label}
@@ -53,7 +53,7 @@ const formElements = ({
                             error={error}
                         />
                     )}
-                </>
+                </div>
             );
 
         case 'password':

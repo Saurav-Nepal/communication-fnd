@@ -2,6 +2,7 @@ const ENDPOINT = process.env.NEXT_PUBLIC_SERVER_ENDPOINT_URL || '';
 
 export const ROUTE_URL = ENDPOINT;
 export const API_HOST = `${ROUTE_URL}api/`;
+export const BUSINESS_API_HOST = `${ROUTE_URL}api/b/`;
 
 const GLOBAL = {
     ROUTE_URL,

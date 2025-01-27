@@ -13,7 +13,7 @@ export const usePagination = ({
     totalRecords: number;
 }) => {
     const constraint = 5;
-    const { page = 1, limit = 20 } = pagination || {};
+    const { page = '1', limit = '20' } = pagination || {};
 
     const totalValue = useMemo(() => {
         return typeof pagination?.total !== 'undefined'
@@ -35,16 +35,16 @@ export const usePagination = ({
 
     // Options for page limit select box
     const pageLimit: SelectBoxOptionType[] = [
-        { label: '10 / Page', value: 10 },
-        { label: '20 / Page', value: 20 },
-        { label: '30 / Page', value: 30 },
-        { label: '40 / Page', value: 40 },
-        { label: '50 / Page', value: 50 },
-        { label: '60 / Page', value: 60 },
-        { label: '70 / Page', value: 70 },
-        { label: '80 / Page', value: 80 },
-        { label: '90 / Page', value: 90 },
-        { label: '100 / Page', value: 100 },
+        { label: '10 / Page', value: '10' },
+        { label: '20 / Page', value: '20' },
+        { label: '30 / Page', value: '30' },
+        { label: '40 / Page', value: '40' },
+        { label: '50 / Page', value: '50' },
+        { label: '60 / Page', value: '60' },
+        { label: '70 / Page', value: '70' },
+        { label: '80 / Page', value: '80' },
+        { label: '90 / Page', value: '90' },
+        { label: '100 / Page', value: '100' },
     ];
 
     const endItemNumber = useMemo(() => page * limit, [page, limit]);
@@ -52,8 +52,8 @@ export const usePagination = ({
     // Function to handle pagination change
     const handlePaginationChange = (key: 'limit' | 'page', value: number) => {
         const newData: ObjectDto = { [key]: value };
+        if (key === 'limit') newData.page = '1';
 
-        if (key === 'limit') newData.page = 1;
         onPaginationChange({
             limit,
             page,

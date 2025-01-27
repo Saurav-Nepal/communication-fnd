@@ -39,8 +39,8 @@ const AdminWrapper = ({
         <div className='communication-root'>
             <title>{pageTitle}</title>
             {!isLoadingMenu ? (
-                <div className='flex flex-col min-h-screen app-container'>
-                    <div className='page-container'>
+                <div className='h-screen app-container'>
+                    <div className='min-h-full page-container'>
                         <Sidebar
                             menus={menus}
                             user={currentUser}
@@ -49,7 +49,7 @@ const AdminWrapper = ({
                         />
                         <main
                             className={cn(
-                                'pb-10 h-full landing-wrapper ml-sidebar-width'
+                                'pb-10 h-screen landing-wrapper ml-sidebar-width'
                             )}
                         >
                             <Header

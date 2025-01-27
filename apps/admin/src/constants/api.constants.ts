@@ -12,4 +12,6 @@ export const SignupEndPoint = 'user'; // signup and
 export const GetMenusEndPoint = 'product/1/menu';
 export const GetMenuDetailEndPoint = 'menu/';
 
+export const CommunicationTemplateEndPoint = 'communication-whatsapp-templates';
+
 /** Private routes ends here */
