@@ -10,6 +10,14 @@
     }
 }
 
+.h-create-template-screen {
+    height: calc(1000vh - 126px);
+}
+
+.h-content-screen {
+    height: calc(1000vh - 50px);
+}
+
 .table-container {
     @apply relative flex-1 flex flex-col overflow-x-auto;
 
@@ -367,5 +375,23 @@ div.table {
         content: '';
         z-index: -1;
         @apply absolute inset-0 right-2/4 top-0 bottom-0 bg-primary;
+    }
+}
+.communication-table {
+    table {
+        thead {
+            tr {
+                th {
+                    @apply border-r border-white last:border-r-0;
+                }
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    @apply border-r border-b border-[#dbdbdb] last:border-r-0;
+                }
+            }
+        }
     }
 }

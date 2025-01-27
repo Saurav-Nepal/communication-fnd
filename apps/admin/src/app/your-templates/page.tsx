@@ -1,5 +1,3 @@
-const YourTemplatesPage = () => {
-    return <div>YourTemplatesPage</div>;
-};
+import YourTemplatesListModule from '../../modules/broadcast/your-templates/YourTempalatesListModule';
 
-export default YourTemplatesPage;
+export default YourTemplatesListModule;

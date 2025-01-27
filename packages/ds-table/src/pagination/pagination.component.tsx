@@ -31,7 +31,7 @@ export const Pagination = ({
     return (
         <div
             className={cn(
-                'pagination-container flex justify-between px-3 py-2 items-center bg-base-100 border-t border-base-300',
+                'flex justify-between items-center px-3 py-2 border-t pagination-container bg-base-100 border-base-300',
                 containerClass
             )}
             title='Pagination'
@@ -39,17 +39,18 @@ export const Pagination = ({
             <SelectBox
                 options={pageLimit}
                 value={limit}
-                onChange={(option: any) =>
-                    handlePaginationChange('limit', Number(option?.value))
-                }
+                onChange={(value: any) => {
+                    handlePaginationChange('limit', value);
+                }}
                 isSearchable={false}
+                labelClassName='whitespace-nowrap'
                 className='w-fit'
                 size='sm'
             />
 
             {showEntries && total ? (
-                <div className='flex items-center gap-1 text-sm'>
-                    <div className='flex items-center gap-1'>
+                <div className='flex gap-1 items-center text-sm'>
+                    <div className='flex gap-1 items-center'>
                         Showing{' '}
                         <span className='font-medium'>
                             {' '}
@@ -58,7 +59,7 @@ export const Pagination = ({
                         </span>
                     </div>
                     {Number(selectedCount) > 0 && (
-                        <div className='flex items-center '>
+                        <div className='flex items-center'>
                             {' >> '} Selected{' '}
                             <span className='pl-1 font-medium'>
                                 {selectedCount}/{limit < total ? limit : total}
@@ -67,7 +68,7 @@ export const Pagination = ({
                     )}
                 </div>
             ) : null}
-            <div className='items-center gap-2 row-flex '>
+            <div className='flex gap-2 items-center'>
                 <PaginationButton
                     text='Previous'
                     onlyIcon={buttonHideIcon}
@@ -144,6 +145,7 @@ const PaginationNumberButton = ({
     number,
     isActive,
     onClick = () => {},
+    disabled = false,
 }: {
     number: number;
     onClick: () => void;
@@ -154,8 +156,9 @@ const PaginationNumberButton = ({
         <Button
             className='pagination-number'
             onClick={onClick}
-            variant='default'
+            variant={isActive ? 'default' : 'outline'}
             size='sm'
+            disabled={disabled}
         >
             {number}
         </Button>
@@ -174,7 +177,7 @@ const PaginationButton = ({
     onlyIcon?: boolean;
 }) => {
     const previousSvg = (
-        <div className='flex items-center gap-2 '>
+        <div className='flex gap-2 items-center'>
             <svg
                 width='14'
                 height='14'
@@ -196,7 +199,7 @@ const PaginationButton = ({
     );
 
     const nextSvg = (
-        <div className='flex items-center gap-2 '>
+        <div className='flex gap-2 items-center'>
             {!onlyIcon && <span>Next</span>}
 
             <svg

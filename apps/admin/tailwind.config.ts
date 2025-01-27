@@ -23,6 +23,9 @@ const config: Config = {
                 // '2xl': ['24px', '32px'],
                 // '3xl': ['28px', '32px'],
             },
+            height: {
+                'content-screen': 'calc(100vh - var(--header-height))',
+            },
         },
         container: {
             center: true,

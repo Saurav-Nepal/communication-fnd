@@ -31,8 +31,6 @@ const AdminProvider = ({ children }: { children: ReactNode }) => {
         },
     });
 
-    console.log(menus);
-
     return (
         <AdminWrapper
             isLoadingMenu={status === 'pending'}

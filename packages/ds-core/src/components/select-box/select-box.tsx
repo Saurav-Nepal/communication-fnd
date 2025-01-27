@@ -351,7 +351,7 @@ const ItemsCard = ({
             }}
             className={cn(
                 {
-                    'bg-primary text-primary-foreground aria-selected:bg-primary aria-selected:text-primary-foreground':
+                    'bg-primary text-primary-foreground aria-selected:bg-primary  w-fit aria-selected:text-primary-foreground':
                         value === opt.value,
                 },
                 selectBoxItemsSize[size as 'sm' | 'md' | 'lg' | 'xl']

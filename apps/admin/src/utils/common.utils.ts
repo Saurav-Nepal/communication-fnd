@@ -1,6 +1,14 @@
-import { isEmptyArray, isUndefinedOrNull } from '@slabs/ds-utils';
+import { isDate, isValid, parse } from 'date-fns';
+
+import {
+    isEmptyArray,
+    isUndefinedOrNull,
+    isValidString,
+} from '@slabs/ds-utils';
 
 import { ObjectDto } from '@/types';
+
+import { Toast } from './toast.utils';
 
 /**
  * Converts array to object
@@ -126,5 +134,166 @@ export const groupBy = <T>(
         }, {});
     } else {
         return {};
+    }
+};
+
+/**
+ * Sort Array of Object.
+ *
+ * @param data `array` Array of object to sort.
+ * @param sortKey `string` Key to sort by. `Default: id`
+ * @param sortOrder `asc | desc` Sorting order. `Default: 'asc'`
+ * @returns `array`
+ */
+export const SortArrayObjectBy = <TData = any>(
+    data: TData[],
+    sortKey: string = 'id',
+    sortOrder: 'asc' | 'desc' = 'asc',
+    isDate?: boolean
+) => {
+    if (!sortKey || !data || isEmptyArray(data) || data.length < 2) return data;
+
+    let newData = [...data];
+    newData.sort((prev: any, next: any) => {
+        const prevVal = GetObjectProperty(prev, sortKey) || 0;
+        const nextVal = GetObjectProperty(next, sortKey) || 0;
+
+        if (sortOrder === 'asc') {
+            if (isDate) {
+                if (!prevVal || !nextVal) return 0;
+                return GetDateValue(prevVal) - GetDateValue(nextVal);
+            }
+            if (typeof prevVal === 'string') {
+                return prevVal
+                    .toString()
+                    .toLowerCase()
+                    .localeCompare(nextVal.toString().toLowerCase(), 'en', {
+                        numeric: true,
+                    });
+            }
+            if (typeof prevVal === 'number') {
+                return prevVal - nextVal;
+            }
+        }
+
+        if (sortOrder === 'desc') {
+            if (isDate) {
+                if (!prevVal || !nextVal) return 0;
+                return GetDateValue(nextVal) - GetDateValue(prevVal);
+            }
+            if (typeof prevVal === 'string') {
+                return nextVal
+                    .toString()
+                    .toLowerCase()
+                    .localeCompare(prevVal.toString().toLowerCase(), 'en', {
+                        numeric: true,
+                    });
+            }
+            if (typeof prevVal === 'number') {
+                return nextVal - prevVal;
+            }
+        }
+
+        return 0;
+    });
+    return newData;
+};
+
+export function GetObjectProperty(
+    object: any,
+    path: string | (string | number)[] = '',
+    defVal: any = undefined
+) {
+    if (typeof path === 'string') path = path.split('.');
+    if (Array.isArray(path) && path.length < 1)
+        return object[path[0]] || defVal;
+    return path.reduce(
+        (xs, x) => (xs && xs[x] != undefined ? xs[x] : defVal),
+        object
+    );
+}
+
+export const GetDateValue = (
+    date: any,
+    format?: string,
+    defaultDate?: Date
+) => {
+    if (!date || isDate(date)) return date;
+    if (format) {
+        return parse(date, format, new Date());
+    }
+
+    if (!isValid(new Date(date))) return defaultDate;
+
+    return new Date(date);
+};
+
+/**
+ * Transform any given object to label & value pair array.
+ *
+ * @param obj Object.
+ * @param label Label Key
+ * @param value Value Key
+ * @returns `Label` `Value` pair array
+ */
+export const TransformObjectToLabelValueObjectArray = (
+    obj: ObjectDto,
+    label: string = 'label',
+    value: string = 'value'
+) => {
+    return Object.keys(obj).map((objKey: string) => ({
+        [label]: objKey,
+        [value]: obj[objKey],
+    }));
+};
+
+/**
+ * Finds the group and item index of a given index in a list of groups.
+ *
+ * @param {ObjectDto[]} groups - List of groups to search within.
+ * @param {number} index - Index to find the group and item index for.
+ * @param {string} [groupItemKey='options'] - Key of the group item array.
+ * @returns {Object} - Object with group and item indices.
+ */
+export const findGroupAndItemIndex = (
+    groups: ObjectDto[],
+    index: number,
+    groupItemKey: string = 'options'
+): { groupIndex: number; itemIndex: number } => {
+    let groupIndex = 0;
+    let itemIndex = index;
+
+    // Iterate over each group in the list.
+    for (const group of groups) {
+        // If the itemIndex is less than the length of the group item array,
+        // then the groupIndex and itemIndex have been found.
+        if (itemIndex < group[groupItemKey].length) {
+            return { groupIndex, itemIndex };
+        }
+
+        itemIndex -= group[groupItemKey].length;
+        groupIndex++;
+    }
+
+    return { groupIndex: -1, itemIndex: -1 };
+};
+
+export const toastBackendError = (
+    response: any,
+    setError?: (data) => void,
+    defaultMessage: string = 'Something Went Wrong'
+) => {
+    if (isValidString(response)) {
+        return Toast.error({ description: response || defaultMessage });
+    }
+    if (response?.columns) {
+        if (setError) return setError(response?.columns);
+        Object.values(response?.columns).forEach((column: any) => {
+            for (let error of column) {
+                Toast.error({
+                    description: error,
+                });
+            }
+        });
     }
 };
