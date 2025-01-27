@@ -15,6 +15,7 @@
         "@slabs/ds-hooks": "*",
         "@slabs/ds-next-router": "*",
         "@slabs/ds-utils": "*",
+        "@slabs/ds-table": "*",
         "@tanstack/react-query": "^5.51.15",
         "@tanstack/react-query-devtools": "^5.51.15",
         "ace-builds": "^1.35.4",
