@@ -297,3 +297,31 @@ export const toastBackendError = (
         });
     }
 };
+
+export const isLetterVariable = (val: string): boolean => {
+    if (!val) return false;
+    return val.startsWith('{{') && val.endsWith('}}');
+};
+
+export const getVariableParamsFromString = (input: string): string[] => {
+    const regex = /{{(.*?)}}/g;
+    const variables: string[] = [];
+    let match;
+
+    while ((match = regex.exec(input)) !== null) {
+        variables.push(match[1].trim());
+    }
+
+    return variables;
+};
+
+export const replaceVariablesInString = (
+    template: string,
+    params: Record<string, string>
+): string => {
+    const regex = /{{(.*?)}}/g;
+    return template.replace(regex, (_, variable) => {
+        const trimmedVariable = variable.trim();
+        return trimmedVariable in params ? params[trimmedVariable] : _;
+    });
+};

@@ -2,6 +2,13 @@
 const { version } = require('./package.json');
 
 const nextConfig = {
+    // experimental: {
+    //     turbo: {
+    //         resolveAlias: {
+    //             canvas: './empty-module.ts',
+    //         },
+    //     },
+    // },
     reactStrictMode: false,
     env: {
         NEXT_PUBLIC_APP_VERSION: version,

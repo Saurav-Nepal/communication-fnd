@@ -21,8 +21,6 @@ const DraftTextEditor: React.FC<DraftTextEditorProps> = ({
     onValueChange,
     defaultValue,
 }) => {
-    console.log({ defaultValue });
-
     const initialEditorState = useMemo(() => {
         if (defaultValue) {
             const contentBlock = htmlToDraft(defaultValue);
@@ -62,7 +60,7 @@ const DraftTextEditor: React.FC<DraftTextEditorProps> = ({
                 editorState={editorState}
                 toolbarClassName='p-4 border-b'
                 wrapperClassName='border'
-                editorClassName='leading-[6px] px-4 min-h-[400px] text-sm text-black'
+                editorClassName=' px-4 min-h-[200px] text-sm text-black'
                 onEditorStateChange={handleEditorStateChange}
             />
         </div>

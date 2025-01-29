@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle } from 'react';
+import { forwardRef, useImperativeHandle, useState } from 'react';
 
 import { Label, SelectBox } from '@slabs/ds-core';
 
@@ -9,6 +9,9 @@ import {
     FormBuilderFormSchema,
     FormBuilderSubmitType,
 } from '../../../../types';
+import YourTemplateEditorButton from './YourTemplateEditor.button.component';
+import YourTemplateEditorDisplaySampleContent from './YourTemplateEditor.display.sample.content';
+import YourTemplateEditorBroadcast from './YourTemplateEditorBroadcastTitle';
 import { YourTemplatesPreview } from './YourTemplatesPriview.component';
 
 const YourTemplateEditor = forwardRef(
@@ -19,18 +22,23 @@ const YourTemplateEditor = forwardRef(
         }: { onSubmit?: FormBuilderSubmitType; defaultValues?: any },
         ref
     ) => {
+        const [title, setTitle] = useState<any>({
+            type: defaultValues?.title?.type || 'text',
+            value: defaultValues?.title?.value || '',
+        });
+        const [sampleContent, setSampleContent] = useState<any>(
+            defaultValues?.sample_contents || {}
+        );
+        const [configuration, setConfiguration] = useState<any>(
+            defaultValues?.button_configurations
+        );
+
         const formSchema: FormBuilderFormSchema = {
             name: {
                 type: 'text',
                 placeholder: 'Template Name',
                 label: 'Template Name',
                 required: true,
-            },
-            title: {
-                type: 'text',
-                placeholder: 'Enter Text',
-                label: 'Title',
-                required: false,
             },
             footer: {
                 type: 'text',
@@ -64,12 +72,22 @@ const YourTemplateEditor = forwardRef(
             hasError,
         } = useFormBuilder({
             initValues: {
-                category_id: WhatsappTemplateCategoryEnum.MARKETING,
                 language_id: 1,
+                category_id: WhatsappTemplateCategoryEnum.MARKETING,
                 ...defaultValues,
             },
             formSchema: formSchema,
-            onSubmit,
+            onSubmit: async (value: any, opt) => {
+                return onSubmit?.(
+                    {
+                        ...value,
+                        title,
+                        button_configurations: configuration,
+                        sample_contents: sampleContent,
+                    },
+                    opt
+                );
+            },
         });
 
         useImperativeHandle(ref, () => ({
@@ -78,8 +96,8 @@ const YourTemplateEditor = forwardRef(
         }));
 
         return (
-            <div className='flex flex-1 gap-7 w-full border-red-500'>
-                <div className='flex flex-col flex-1 gap-4 p-4 w-full h-full bg-white rounded-sm'>
+            <div className='flex overflow-hidden flex-1 gap-7 w-full h-full border-red-500'>
+                <div className='flex overflow-y-auto flex-col flex-1 gap-4 p-4 w-full h-full bg-white rounded-sm'>
                     <div className='grid grid-cols-3 gap-4'>
                         {renderFormFields('name')}
                         <div className='flex flex-col gap-2'>
@@ -88,7 +106,7 @@ const YourTemplateEditor = forwardRef(
                                 isSearchable={false}
                                 value={watch?.('category_id')}
                                 onOptionChange={(opt) => {
-                                    handleFormData('category_id', opt?.data);
+                                    handleFormData('category_id', opt?.value);
                                 }}
                                 options={[
                                     {
@@ -121,11 +139,18 @@ const YourTemplateEditor = forwardRef(
                             />
                         </div>
                     </div>
-                    <div className='grid grid-cols-2 gap-3'>
-                        <div>{renderFormFields('title')}</div>
-                        <div>{renderFormFields('footer')}</div>
+                    <div className='flex flex-col gap-2'>
+                        <hr className='my-4 border-t border-gray-300' />
+                        <YourTemplateEditorBroadcast
+                            defaultValue={title}
+                            getCurrentValue={(data) => {
+                                setTitle(data);
+                            }}
+                        />
                     </div>
+
                     <div>
+                        <hr className='my-4 border-t border-gray-300' />
                         <DraftTextEditor
                             defaultValue={
                                 watch?.('body') || defaultValues?.body
@@ -143,11 +168,34 @@ const YourTemplateEditor = forwardRef(
                             />
                         )}
                     </div>
+                    <div>
+                        <hr className='my-4 border-t border-gray-300' />
+                        {renderFormFields('footer')}
+                    </div>
+
+                    <YourTemplateEditorButton
+                        configuration={configuration}
+                        setConfiguration={setConfiguration}
+                    />
+                    <div className='flex flex-col'></div>
+                    <YourTemplateEditorDisplaySampleContent
+                        defaultVal={sampleContent}
+                        title={title}
+                        body={watch?.('body') || defaultValues?.body}
+                        onBodyChange={(key, value) => {
+                            setSampleContent((prev) => ({
+                                ...prev,
+                                [key]: value,
+                            }));
+                        }}
+                    />
                 </div>
                 <YourTemplatesPreview
+                    sampleContent={sampleContent}
                     footer={watch?.('footer')}
-                    title={watch?.('title')}
+                    title={title}
                     body={watch?.('body')}
+                    configuration={configuration}
                 />
             </div>
         );
@@ -164,5 +212,8 @@ export const ConvertRawApiDataIntoFormSuitable = (apiResponse: any) => {
         body: apiResponse.body?.script,
         footer: apiResponse.footer?.script,
         title: apiResponse?.title,
+        button_configurations: apiResponse?.button_configurations,
+        sample_contents: apiResponse?.sample_contents,
+        id: apiResponse?.id,
     };
 };

@@ -3,7 +3,7 @@ import { messages } from 'react-querybuilder';
 
 import { isUndefinedOrNull } from '@slabs/ds-utils';
 
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { CommunicationTemplateEndPoint } from '../../../../constants/api.constants';
 import { BUSINESS_API_HOST } from '../../../../constants/global.constants';
@@ -16,6 +16,7 @@ import { ConvertRawApiDataIntoFormSuitable } from '../components/YourTemplateEdi
 
 export const useHandleTemplate = (id: number) => {
     const ref = useRef<any>(null);
+    const queryClient = useQueryClient();
 
     const onSubmit: FormBuilderSubmitType = async (
         value: any,
@@ -28,8 +29,10 @@ export const useHandleTemplate = (id: number) => {
                 ...value,
             },
         });
+
         if (!success) return toastBackendError(response, setError);
-        return Navigation.navigate({ url: WHATSAPP_TEMPLATE_LIST_ROUTE });
+        queryClient.invalidateQueries({ queryKey: ['template_detail', id] });
+        Navigation.navigate({ url: WHATSAPP_TEMPLATE_LIST_ROUTE });
     };
 
     const {

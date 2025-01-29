@@ -1,4 +1,4 @@
-import React from 'react';
+import { useMemo } from 'react';
 import {
     ArrowBigLeft,
     CameraIcon,
@@ -8,17 +8,86 @@ import {
     Mic,
 } from 'lucide-react';
 
+import { isArray } from '@slabs/ds-utils';
+
+import PdfViewer from '../../../../components/reactPdf/pdf.viewer';
+import {
+    isLetterVariable,
+    replaceVariablesInString,
+} from '../../../../utils/common.utils';
+import { YOUR_TEMPLATE_SUPPORTED_CONFIG } from './YourTemplateEditor.button.component';
+
 export const YourTemplatesPreview = ({
     body = '',
     title = '',
     footer = '',
+    sampleContent,
+    configuration = {},
 }: {
     body: string;
-    title?: string;
+    title?: any;
     footer?: string;
+    sampleContent: any;
+    configuration: any;
 }) => {
+    const renderTitle = useMemo(() => {
+        const { type, value } = title;
+        if (type === 'image') {
+            const isVariable = isLetterVariable(value);
+            return (
+                <div className='h-[150px] w-full border'>
+                    {isVariable ? (
+                        value
+                    ) : (
+                        <img
+                            alt='image'
+                            src={value}
+                            className='w-full h-full'
+                        />
+                    )}
+                </div>
+            );
+        }
+        if (type === 'document') {
+            return (
+                <div className='overflow-hidden w-60 h-60 border'>
+                    <PdfViewer url={value} />
+                </div>
+            );
+        }
+        if (type === 'text') {
+            return replaceVariablesInString(value, sampleContent);
+        }
+
+        return value;
+    }, [title, sampleContent]);
+
+    const renderButton = useMemo(() => {
+        return Object.entries(configuration).map(([key, val]: any) => {
+            const getValues = YOUR_TEMPLATE_SUPPORTED_CONFIG.find(
+                (val) => val?.type === key
+            );
+
+            if (isArray(val)) {
+                return val?.map((data) => {
+                    return (
+                        <div className='flex gap-2 justify-center items-center w-full text-xs font-medium text-center text-info'>
+                            {getValues?.icon} {data}
+                        </div>
+                    );
+                });
+            }
+
+            return (
+                <div className='flex gap-2 justify-center items-center w-full text-xs font-medium text-center text-info'>
+                    {getValues?.icon} {val?.name}
+                </div>
+            );
+        });
+    }, [configuration]);
+
     return (
-        <div className='w-[350px] h-[612px] bg-green-400 rounded-lg shadow-md flex flex-col'>
+        <div className='w-[350px] h-[612px] max-h-[700px]  bg-green-400 rounded-lg shadow-md flex flex-col'>
             <header className='w-full h-[44px] bg-primary-900 flex items-center px-4 justify-between'>
                 <div className='flex gap-2 items-center'>
                     <i className='material-symbols-outlined text-primary-50'>
@@ -39,7 +108,7 @@ export const YourTemplatesPreview = ({
                     </span>
                 </div>
             </header>
-            <section className='flex flex-col flex-1 gap-4 justify-start items-center p-4 bg-neutral-300'>
+            <section className='flex overflow-y-auto flex-col flex-1 gap-4 justify-start items-center p-4 bg-neutral-300'>
                 <div className='w-[90%] bg-primary text-white p-2 flex rounded-md text-primary-950 text-xs'>
                     <i className='mr-1 text-base align-middle material-symbols-outlined text-primary-500'>
                         <InfoIcon />
@@ -51,10 +120,15 @@ export const YourTemplatesPreview = ({
                 </div>
                 <div className='bg-white rounded-md p-3 shadow-md  w-[90%] self-end flex flex-col gap-1 text-black'>
                     <div className='flex flex-col gap-2'>
-                        <h3 className='font-bold'>{title}</h3>
+                        <h3 className='font-bold'>{renderTitle}</h3>
                         <span
                             className='text-sm text-primary-950'
-                            dangerouslySetInnerHTML={{ __html: body }}
+                            dangerouslySetInnerHTML={{
+                                __html: replaceVariablesInString(
+                                    body,
+                                    sampleContent
+                                ),
+                            }}
                         ></span>
                     </div>
                     <div className='flex items-end text-muted-foreground'>
@@ -64,6 +138,9 @@ export const YourTemplatesPreview = ({
                         <span className='text-xs text-right text-neutral-500'>
                             {`${new Date().getHours()}:${String(new Date().getMinutes()).padStart(2, '0')}`}
                         </span>
+                    </div>
+                    <div className='flex flex-col gap-2 mt-2 w-full'>
+                        {renderButton}
                     </div>
                 </div>
             </section>

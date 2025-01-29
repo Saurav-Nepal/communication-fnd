@@ -13,11 +13,16 @@ const YourTemplatesListModule = () => {
     // Define your columns
     const columns: any = [
         {
-            header: 'Template Name',
-            accessorKey: 'name',
+            header: 'Identifier',
+            accessorKey: 'identifier',
             link: (row: any) =>
                 `${WHATSAPP_TEMPLATE_CREATION_ROUTE}?id=${row.id}`,
         },
+        {
+            header: 'Template Name',
+            accessorKey: 'name',
+        },
+
         {
             header: 'category',
             accessorKey: 'category',

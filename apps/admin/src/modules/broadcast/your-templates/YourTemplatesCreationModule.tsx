@@ -15,7 +15,7 @@ export default function CreateTemplatePage() {
     if (isLoading) return <PageLoader />;
 
     return (
-        <div className='container flex relative flex-col gap-5 p-6 mx-auto h-content-screen'>
+        <div className='container flex overflow-hidden relative flex-col gap-5 p-6 mx-auto h-content-screen'>
             <div className='flex justify-between items-center'>
                 <BreadCrumb title='New Template'>
                     {[<p>Home</p>, <p>New Template</p>]}
