@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
 
+import { IsEmptyObject, IsUndefinedOrNull } from '../Utils/common.utils';
 import { Menu } from '../Utils/menu.utils';
 import { useCurrentBusiness } from './useCurrentBusiness.hook';
 import { useUserHook } from './user.hook';
@@ -14,8 +15,9 @@ export const useMenu = () => {
     const { currentBusiness = {} } = useCurrentBusiness();
 
     const product_id = useMemo(() => {
-        return 1;
-    }, []);
+        if (!IsUndefinedOrNull(user?.email)) return 1;
+        return undefined;
+    }, [user]);
 
     const business_id = useMemo(() => {
         return currentBusiness?.identifier;
