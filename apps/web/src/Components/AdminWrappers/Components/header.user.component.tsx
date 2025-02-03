@@ -77,8 +77,8 @@ const HeaderUser = (props: { customAvatar?: React.ReactNode }) => {
             className='!overflow-visible'
         >
             {props.customAvatar || (
-                <div className='gap-4 row-flex '>
-                    <div className='items-center gap-4 px-2 -mr-2 rounded cursor-pointer select-none row-flex hover:bg-neutral-focus'>
+                <div className='gap-4 row-flex'>
+                    <div className='gap-4 items-center px-2 -mr-2 rounded cursor-pointer select-none row-flex hover:bg-neutral-focus'>
                         <div className='items-end text-sm col-flex'>
                             {currentBusiness?.name}
 
@@ -132,7 +132,7 @@ const HeaderLogoutPopper = ({
     return (
         <div
             className={cn(
-                ' min-w-[220px] p-2 bg-base-100 text-base-primary col-flex menu menu-horizontal rounded',
+                'p-2 rounded min-w-[220px] bg-base-100 text-base-primary col-flex menu menu-horizontal',
                 {
                     'py-1': isArc,
                 }
@@ -217,7 +217,7 @@ const HeaderLogoutPopper = ({
 export const ArcHeaderPopover = ({ children }: any) => {
     const { currentBusiness } = useCurrentBusiness();
     const { basePath } = useApp();
-    const { businesses } = useAppBusinesses();
+    // const { businesses } = useAppBusinesses();
     const { user } = useUserHook();
     const [enabledDebug] = useOpenProperties('enable.debug.mode', {
         convertBoolean: true,
@@ -231,75 +231,75 @@ export const ArcHeaderPopover = ({ children }: any) => {
         Navigation.navigate({ url: `${basePath}/settings/my-profile` });
     };
 
-    const groupedBusinesses = useMemo(() => {
-        return groupBusiness(businesses);
-    }, [businesses]);
+    // const groupedBusinesses = useMemo(() => {
+    //     return groupBusiness(businesses);
+    // }, [businesses]);
 
-    const switchOrgActions = useMemo(() => {
-        return groupedBusinesses?.map((val, index) => {
-            return {
-                name: val?.name,
-                action: () => {
-                    authenticateBusiness(val);
-                },
-            };
-        });
-    }, [groupedBusinesses]);
+    // const switchOrgActions = useMemo(() => {
+    //     return groupedBusinesses?.map((val, index) => {
+    //         return {
+    //             name: val?.name,
+    //             action: () => {
+    //                 authenticateBusiness(val);
+    //             },
+    //         };
+    //     });
+    // }, [groupedBusinesses]);
 
     const actions: DropdownMenuActionProps[] = [
-        {
-            name: 'Switch Organisation',
-            icon: RepeatSvgIcon,
-            isSvg: true,
-            expandableActions: switchOrgActions,
-            className: 'gap-2',
-            iconSize: 16,
-            visible: groupedBusinesses?.length > 1,
-        },
-        {
-            name: 'My Profile',
-            action: navigateToProfile,
-            isSvg: true,
-            icon: UserSvgIcon,
-            iconSize: 16,
-        },
-        {
-            name: 'Rename Organisation',
-            icon: RenameOrgSvgImage,
-            isSvg: true,
-            action: () => {
-                openChangeOrganizationName({
-                    data: {
-                        name: currentBusiness?.name,
-                    },
-                });
-            },
-            visible: isOwner,
-            iconSize: 16,
-        },
-        {
-            name: 'Debug Form',
-            icon: CodeSvgIcon,
-            isSvg: true,
-            action: openDebugForm,
-            visible: !!enabledDebug,
-            iconSize: 16,
-        },
-        {
-            name: 'Enable Developer Mode',
-            icon: LockSvgIcon,
-            isSvg: true,
-            action: enableDeveloperMode,
-            visible: !!enabledDebug,
-            iconSize: 16,
-        },
-        {
-            name: 'Shortcut Keys',
-            icon: ShortcutSvgIcon,
-            isSvg: true,
-            action: openShortCutKeys,
-            iconSize: 16,
-        },
+        // {
+        //     name: 'Switch Organisation',
+        //     icon: RepeatSvgIcon,
+        //     isSvg: true,
+        //     expandableActions: switchOrgActions,
+        //     className: 'gap-2',
+        //     iconSize: 16,
+        //     visible: groupedBusinesses?.length > 1,
+        // },
+        // {
+        //     name: 'My Profile',
+        //     action: navigateToProfile,
+        //     isSvg: true,
+        //     icon: UserSvgIcon,
+        //     iconSize: 16,
+        // },
+        // {
+        //     name: 'Rename Organisation',
+        //     icon: RenameOrgSvgImage,
+        //     isSvg: true,
+        //     action: () => {
+        //         openChangeOrganizationName({
+        //             data: {
+        //                 name: currentBusiness?.name,
+        //             },
+        //         });
+        //     },
+        //     visible: isOwner,
+        //     iconSize: 16,
+        // },
+        // {
+        //     name: 'Debug Form',
+        //     icon: CodeSvgIcon,
+        //     isSvg: true,
+        //     action: openDebugForm,
+        //     visible: !!enabledDebug,
+        //     iconSize: 16,
+        // },
+        // {
+        //     name: 'Enable Developer Mode',
+        //     icon: LockSvgIcon,
+        //     isSvg: true,
+        //     action: enableDeveloperMode,
+        //     visible: !!enabledDebug,
+        //     iconSize: 16,
+        // },
+        // {
+        //     name: 'Shortcut Keys',
+        //     icon: ShortcutSvgIcon,
+        //     isSvg: true,
+        //     action: openShortCutKeys,
+        //     iconSize: 16,
+        // },
         {
             name: 'Logout',
             icon: LogoutSvgIcon,
@@ -333,7 +333,7 @@ const ActionCard = ({
             <div
                 onClick={onClick}
                 className={cn(
-                    'flex items-center gap-3 px-2 py-1 transition-all rounded cursor-pointer hover:bg-primary hover:text-primary-content',
+                    'flex gap-3 items-center px-2 py-1 rounded transition-all cursor-pointer hover:bg-primary hover:text-primary-content',
                     {
                         'bg-primary text-primary-content': showBackground,
                     },
@@ -352,7 +352,7 @@ const ActionCard = ({
         <div
             onClick={onClick}
             className={cn(
-                'flex items-center gap-3 px-3 py-2 transition-all rounded cursor-pointer hover:bg-primary hover:text-primary-content',
+                'flex gap-3 items-center px-3 py-2 rounded transition-all cursor-pointer hover:bg-primary hover:text-primary-content',
                 {
                     'bg-primary text-primary-content': showBackground,
                 },

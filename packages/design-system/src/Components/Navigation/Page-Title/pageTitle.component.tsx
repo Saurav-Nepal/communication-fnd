@@ -16,7 +16,7 @@ import { PageTitleProps } from './pageTitle.types';
 export const PageTitle = ({
     loading,
     title,
-    prefix = 'Finnoto',
+    prefix = 'Communication',
 }: PageTitleProps) => {
     return (
         <Head>

@@ -932,3 +932,13 @@ html {
     border-image-slice: 1;
     border-style: dashed;
 }
+
+.bg-login-background {
+    @apply relative flex items-center justify-center h-screen;
+
+    &::before {
+        content: '';
+        z-index: -1;
+        @apply absolute inset-0 right-2/4 top-0 bottom-0 bg-primary;
+    }
+}

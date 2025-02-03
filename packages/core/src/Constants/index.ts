@@ -5,6 +5,7 @@ export * from './text.constant';
 export * from './event.constant';
 export * from './routeName.constants';
 export * from './dashboardRouteName.constant';
+export * from './communication.route.name.constant';
 export * from './expenseRouteName.constant';
 export * from './arcRouteName.constant';
 export * from './preference.constants';

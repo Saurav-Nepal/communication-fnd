@@ -24,8 +24,10 @@ export const DateTimePicker = forwardRef(
             [rest?.value]
         );
 
+        console.log({ value });
+
         return (
-            <div ref={ref} className='items-center gap-4 row-flex'>
+            <div ref={ref} className='gap-4 items-center row-flex'>
                 <MaskedDatePickerInput
                     {...rest}
                     value={value}

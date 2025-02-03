@@ -5,14 +5,11 @@ import {
     CLIENT_INVITATION_DATA,
     LAST_LOGIN_INFORMATION,
     LOGIN_ROUTE,
-    OWNER_TRANSFER,
-    OWNER_TRANSFER_REFERER,
     PRODUCT_IDENTIFIER,
     PRODUCT_PATH_STATE,
     REFERRER_STORE,
     VENDOR_CLIENT_ROUTE,
     VENDOR_REGISTER_ROUTE,
-    VERIFY_EMAIL_ROUTE,
 } from '../Constants';
 import { FetchData } from '../Hooks/useFetchData.hook';
 import { UserBusiness } from '../Models/Business/user.business';
@@ -28,12 +25,10 @@ import {
     toastBackendError,
 } from './common.utils';
 import { ExpenseRouteUtils } from './expenseRoute.utils';
-import { GetOpenPropertyValue } from './function.utils';
 import { GetItem, SetItem } from './localStorage.utils';
 import { Navigation, SerializeObj } from './navigation.utils';
 import { GetSessionItem } from './sessionStorage.utils';
 import { StoreEvent } from './stateManager.utils';
-import { Toast } from './toast.utils';
 import { Functions } from './ui.utils';
 
 export const handleLoginNextScreen = async (data: ObjectDto) => {
@@ -61,44 +56,57 @@ export const handleLoginNextScreen = async (data: ObjectDto) => {
         return;
     }
 
-    if (IsEmptyArray(businesses)) {
-        if (!userObj.email_verified_at) {
-            return Navigation.navigate({
-                url: VERIFY_EMAIL_ROUTE,
-                queryParam: { email: userObj.email },
-                method: 'replace',
-            });
-        }
-    }
+    StoreUserToken({ access_token: userObj?.access_token });
+
+    storeProductPathState(1, '');
+
+    UserBusiness.setBusinessAPIURLToLocalStorage(
+        'https://sndebug.finnoto.cloud/'
+    );
+
+    const pathState = getProductPathState(1);
+    window.location.replace('/');
+
+    return businesses?.[0];
+
+    // if (IsEmptyArray(businesses)) {
+    //     if (!userObj.email_verified_at) {
+    //         return Navigation.navigate({
+    //             url: VERIFY_EMAIL_ROUTE,
+    //             queryParam: { email: userObj.email },
+    //             method: 'replace',
+    //         });
+    //     }
+    // }
 
     if (!IsEmptyArray(invitations)) {
         Functions.openBusinessInvitation(invitations, authenticateBusiness);
         return;
     }
 
-    if (IsEmptyArray(businesses)) {
-        const isOnboardingEnabled = await GetOpenPropertyValue(
-            'self-business-onboarding',
-            { convertBoolean: true }
-        );
+    // if (IsEmptyArray(businesses)) {
+    //     const isOnboardingEnabled = await GetOpenPropertyValue(
+    //         'self-business-onboarding',
+    //         { convertBoolean: true }
+    //     );
 
-        if (isOnboardingEnabled)
-            return Functions.openOnboarding(authenticateBusiness);
+    //     if (isOnboardingEnabled)
+    //         return Functions.openOnboarding(authenticateBusiness);
 
-        Navigation.navigate({
-            url: LOGIN_ROUTE,
-            queryParam: { no_business: true },
-            method: 'replace',
-        });
+    //     Navigation.navigate({
+    //         url: LOGIN_ROUTE,
+    //         queryParam: { no_business: true },
+    //         method: 'replace',
+    //     });
 
-        return;
-    }
+    //     return;
+    // }
 
-    const groupedBusiness = groupBusiness(businesses);
-    if (groupedBusiness.length === 1)
-        return authenticateBusiness(groupedBusiness[0]);
+    // const groupedBusiness = groupBusiness(businesses);
+    // if (groupedBusiness.length === 1)
+    // return authenticateBusiness(businesses[0]);
 
-    Functions.openBusinessSelector(businesses, authenticateBusiness);
+    // Functions.openBusinessSelector(businesses, authenticateBusiness);
 };
 
 export const authenticateBusiness = async (
@@ -166,77 +174,78 @@ export const authenticateBusiness = async (
         description: 'Please wait. Processing Business authorization...',
     });
 
-    const { success, response } = await FetchData({
-        className: AuthUser,
-        method: 'authBusinessToken',
-        methodParams: business.meta_server_id || business.id,
-        classParams: { product_id: selectedProduct?.id },
-    });
+    // const { success, response } = await FetchData({
+    //     className: AuthUser,
+    //     method: 'authBusinessToken',
+    //     methodParams: business.meta_server_id || business.id,
+    //     classParams: { product_id: selectedProduct?.id },
+    // });
 
     let result: ObjectDto | false = false;
+    result = business;
 
-    if (success) {
-        const { token, api_url } = response;
+    // if (success) {
+    //     const { token, api_url } = response;
 
-        //for ownership transfer
-        const ownerShipReferralLocalStore = GetItem(OWNER_TRANSFER_REFERER);
+    //     //for ownership transfer
+    //     const ownerShipReferralLocalStore = GetItem(OWNER_TRANSFER_REFERER);
 
-        let ownership_referrer = '';
-        if ([OWNER_TRANSFER].includes(ownerShipReferralLocalStore?.url)) {
-            const searchParams = new URLSearchParams(
-                ownerShipReferralLocalStore?.params || {}
-            );
-            ownership_referrer = `${
-                ownerShipReferralLocalStore?.url
-            }?${searchParams.toString()}`;
-        }
+    //     let ownership_referrer = '';
+    //     if ([OWNER_TRANSFER].includes(ownerShipReferralLocalStore?.url)) {
+    //         const searchParams = new URLSearchParams(
+    //             ownerShipReferralLocalStore?.params || {}
+    //         );
+    //         ownership_referrer = `${
+    //             ownerShipReferralLocalStore?.url
+    //         }?${searchParams.toString()}`;
+    //     }
 
-        let frontendPath = '';
+    //     let frontendPath = '';
 
-        const pathState = getProductPathState(selectedProduct?.id);
+    //     const pathState = getProductPathState(selectedProduct?.id);
 
-        if (pathState) {
-            frontendPath = pathState;
-        } else {
-            frontendPath = ExpenseRouteUtils.GetFrontendPath(
-                selectedProduct?.id
-            );
-        }
+    //     if (pathState) {
+    //         frontendPath = pathState;
+    //     } else {
+    //         frontendPath = ExpenseRouteUtils.GetFrontendPath(
+    //             selectedProduct?.id
+    //         );
+    //     }
 
-        if (referrer) {
-            referrer = handleProductPathMismatch(referrer, frontendPath);
-        }
+    //     if (referrer) {
+    //         referrer = handleProductPathMismatch(referrer, frontendPath);
+    //     }
 
-        const validateResult = await validateBusinessToken({
-            token,
-            backend: api_url,
-            referrer: (options?.referrer ||
-                ownership_referrer ||
-                referrer) as string,
-            frontend: frontendPath,
-            noNavigate,
-        });
+    //     const validateResult = await validateBusinessToken({
+    //         token,
+    //         backend: api_url,
+    //         referrer: (options?.referrer ||
+    //             ownership_referrer ||
+    //             referrer) as string,
+    //         frontend: frontendPath,
+    //         noNavigate,
+    //     });
 
-        if (validateResult) {
-            result = business;
-        }
-    } else {
-        const { message } = response;
-        Toast.error({ description: message });
-        StoreEvent({
-            eventName: 'login_loading',
-            data: false,
-            isTemp: true,
-            isMemoryStore: false,
-        });
-        if (!noNavigate) {
-            Navigation.navigate({
-                url: LOGIN_ROUTE,
-                queryParam: { referrer: options?.referrer || referrer },
-                method: 'replace',
-            });
-        }
-    }
+    //     if (validateResult) {
+    //         result = business;
+    //     }
+    // } else {
+    //     const { message } = response;
+    //     Toast.error({ description: message });
+    //     StoreEvent({
+    //         eventName: 'login_loading',
+    //         data: false,
+    //         isTemp: true,
+    //         isMemoryStore: false,
+    //     });
+    //     if (!noNavigate) {
+    //         Navigation.navigate({
+    //             url: LOGIN_ROUTE,
+    //             queryParam: { referrer: options?.referrer || referrer },
+    //             method: 'replace',
+    //         });
+    //     }
+    // }
 
     handleStopLoading?.();
     hideLoading();

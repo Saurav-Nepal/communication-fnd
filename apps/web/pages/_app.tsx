@@ -109,7 +109,7 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
         <div className={cn('root h-full', rubik.variable, jost.variable)}>
             <Head>
-                <title>Finnoto</title>
+                <title>Communication</title>
             </Head>
             <RootApp component={Component} pageProp={pageProps} />
         </div>

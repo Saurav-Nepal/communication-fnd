@@ -80,6 +80,12 @@ export const SelectBox = forwardRef(
             containerClassName
         );
 
+        const getDisplayMessageValue = useMemo(() => {
+            return rest?.options?.find(
+                (val: any) => val?.data?.id === rest?.value
+            );
+        }, [rest?.options, rest?.value]);
+
         if (label) {
             return (
                 <FormControl
@@ -104,6 +110,7 @@ export const SelectBox = forwardRef(
                         warning={warning}
                         ref={ref}
                     />
+                    {(rest as any)?.displayMessage?.(getDisplayMessageValue)}
                     <InputErrorMessage {...{ error, warning }} />
                     <InputMessage {...{ message, messageComponent, error }} />
                 </FormControl>
@@ -124,12 +131,12 @@ export const SelectBox = forwardRef(
                     ref={ref}
                 />
                 {error && (
-                    <div className={`text-error text-sm font-normal pt-1 `}>
+                    <div className={`pt-1 text-sm font-normal text-error`}>
                         {error}
                     </div>
                 )}
                 {warning && (
-                    <div className={`text-warning text-sm font-normal pt-1 `}>
+                    <div className={`pt-1 text-sm font-normal text-warning`}>
                         {warning}
                     </div>
                 )}
@@ -449,78 +456,83 @@ const SelectInput = forwardRef(
         }
 
         return (
-            <Select
-                ref={ref}
-                value={value}
-                defaultValue={defaultValue || undefined}
-                options={sanitizedOptions}
-                className={cn(
-                    'selectbox-container',
-                    {
-                        'text-sm ': !isArc,
-                        'text-polaris-size-325': isArc,
-                    },
-                    className
-                )}
-                aria-label={rest.name}
-                styles={styles}
-                onChange={(option, isMeta) => {
-                    if (IsFunction(onChange)) {
-                        if (option?.value === 'all') onChange(null, isMeta);
-                        else onChange(option, isMeta);
+            <>
+                <Select
+                    ref={ref}
+                    value={value}
+                    defaultValue={defaultValue || undefined}
+                    options={sanitizedOptions}
+                    className={cn(
+                        'selectbox-container',
+                        {
+                            'text-sm': !isArc,
+                            'text-polaris-size-325': isArc,
+                        },
+                        className
+                    )}
+                    aria-label={rest.name}
+                    styles={styles}
+                    onChange={(option, isMeta) => {
+                        if (IsFunction(onChange)) {
+                            if (option?.value === 'all') onChange(null, isMeta);
+                            else onChange(option, isMeta);
+                        }
+                        if (IsFunction(onOptionChangeOnly)) {
+                            if (option?.value === 'all')
+                                onOptionChangeOnly(null);
+                            else onOptionChangeOnly(option);
+                        }
+                    }}
+                    theme={theme}
+                    menuPlacement={menuPlacement}
+                    menuPosition={menuPosition}
+                    // menuIsOpen // this is for debug. Donot remove this.
+                    openMenuOnFocus
+                    components={
+                        {
+                            Option,
+                            Control,
+                            Menu,
+                            MenuList,
+                            MenuPortal: ({ children, ...props }: any) => (
+                                <components.MenuPortal
+                                    {...props}
+                                    className={'selectbox-menuportal'}
+                                >
+                                    {children}
+                                </components.MenuPortal>
+                            ),
+                            MenuListFooter: (props) =>
+                                footer ? (
+                                    <MenuListFooter
+                                        text={footer}
+                                        onClick={() => {
+                                            props?.onMenuClose?.();
+                                            footerClick();
+                                        }}
+                                    />
+                                ) : null,
+                        } as any
                     }
-                    if (IsFunction(onOptionChangeOnly)) {
-                        if (option?.value === 'all') onOptionChangeOnly(null);
-                        else onOptionChangeOnly(option);
-                    }
-                }}
-                theme={theme}
-                menuPlacement={menuPlacement}
-                menuPosition={menuPosition}
-                // menuIsOpen // this is for debug. Donot remove this.
-                openMenuOnFocus
-                components={
-                    {
-                        Option,
-                        Control,
-                        Menu,
-                        MenuList,
-                        MenuPortal: ({ children, ...props }: any) => (
-                            <components.MenuPortal
-                                {...props}
-                                className={'selectbox-menuportal'}
-                            >
-                                {children}
-                            </components.MenuPortal>
-                        ),
-                        MenuListFooter: (props) =>
-                            footer ? (
-                                <MenuListFooter
-                                    text={footer}
-                                    onClick={() => {
-                                        props?.onMenuClose?.();
-                                        footerClick();
-                                    }}
-                                />
-                            ) : null,
-                    } as any
-                }
-                filterOption={(option, inputValue) => {
-                    if (!inputValue) return true;
+                    filterOption={(option, inputValue) => {
+                        if (!inputValue) return true;
 
-                    return (
-                        option.label
-                            .toLowerCase()
-                            .includes(inputValue.toLowerCase()) ||
-                        option.data?.subLabel
-                            ?.toLowerCase()
-                            .includes(inputValue.toLowerCase())
-                    );
-                }}
-                isSearchable={isSearchable}
-                formatGroupLabel={formatGroupLabel}
-                {...rest}
-            />
+                        return (
+                            option.label
+                                .toLowerCase()
+                                .includes(inputValue.toLowerCase()) ||
+                            option.data?.subLabel
+                                ?.toLowerCase()
+                                .includes(inputValue.toLowerCase())
+                        );
+                    }}
+                    isSearchable={isSearchable}
+                    formatGroupLabel={formatGroupLabel}
+                    {...rest}
+                />
+
+                {(rest as any).displayMessage?.({})}
+            </>
         );
     }
 );
@@ -644,7 +656,7 @@ const Option = ({ children, ...props }: OptionProps<SelectBoxOption>) => {
 };
 
 const MenuListFooter = ({ text, onClick = () => {} }: any) => (
-    <div className='items-center w-full p-1 border-t menu-footer bg-base-100 col-flex'>
+    <div className='items-center p-1 w-full border-t menu-footer bg-base-100 col-flex'>
         <Button
             className='no-underline link link-hover hover:bg-transparent'
             appearance='plain'

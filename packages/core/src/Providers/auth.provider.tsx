@@ -112,6 +112,8 @@ export const AuthProvider = ({ children }: any) => {
     const getMenuId = useCallback(() => {
         let path: any = {};
 
+        console.log({ modules });
+
         modules.forEach((module: ObjectDto) => {
             if (path?.id) return;
             path = module.menus?.find(
@@ -234,6 +236,9 @@ export const AuthProvider = ({ children }: any) => {
             setIsLoadingMenuDetail(true);
 
             const menu_id = getMenuId();
+
+            console.log({ menu_id });
+
             if (menu_id) {
                 loadMenuDetails(menu_id);
             } else {

@@ -354,7 +354,7 @@ const GenericDocumentListing = ({
                 {hasDashboard ? (
                     dashboardComponent()
                 ) : (
-                    <div className={cn('flex-1 h-full pb-28 col-flex')}>
+                    <div className={cn('flex-1 pb-28 h-full col-flex')}>
                         <GenericCardListing
                             data={records || []}
                             list={list}
@@ -367,7 +367,7 @@ const GenericDocumentListing = ({
                             noDataProps={noDataProps}
                         />
                         <div
-                            className={cn('justify-center pt-4 hidden', {
+                            className={cn('hidden justify-center pt-4', {
                                 'row-flex': hasNextPage,
                             })}
                             ref={sentryRef}
@@ -379,7 +379,7 @@ const GenericDocumentListing = ({
                                 End of page
                             </div>
                         )}
-                        <div className='fixed z-10 gap-4 -translate-x-1/2 row-flex actions left-1/2 bottom-8'>
+                        <div className='fixed bottom-8 left-1/2 z-10 gap-4 -translate-x-1/2 row-flex actions'>
                             {searchFilter !== false && records?.length > 0 && (
                                 <ListActionButton
                                     icon={'search'}
@@ -427,7 +427,7 @@ export const ListActionButton = ({
         <div
             data-title={name}
             className={cn(
-                'row-flex items-center   justify-center gap-2 shadow-modal bg-base-100 rounded-full h-12 min-w-[48px] select-none cursor-pointer active:bg-base-200',
+                'gap-2 justify-center items-center h-12 rounded-full cursor-pointer select-none row-flex shadow-modal bg-base-100 min-w-[48px] active:bg-base-200',
                 { 'px-4': title }
             )}
             onClick={onClick}

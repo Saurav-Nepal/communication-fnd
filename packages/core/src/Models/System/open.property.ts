@@ -6,7 +6,7 @@ import { SetItem } from '../../Utils/localStorage.utils';
 import { BaseModel } from '../base.models';
 
 export class OpenProperty extends BaseModel {
-    protected api = 'open-property';
+    protected api = 'api/open-property';
     protected method = this.get;
     protected isMeta = true;
     protected showToast = false;

@@ -1500,3 +1500,36 @@ export function shallowMerge<TTarget extends object>(
 export const getMinValue = (number1, number2) => {
     return number1 < number2 ? number1 : number2;
 };
+
+export const isLetterVariable = (val: string): boolean => {
+    if (!val) return false;
+    return val.startsWith('{{') && val.endsWith('}}');
+};
+
+export const getVariableParamsFromString = (input: string): string[] => {
+    const regex = /{{(.*?)}}/g;
+    const variables: string[] = [];
+    let match;
+
+    while ((match = regex.exec(input)) !== null) {
+        variables.push(match[1].trim());
+    }
+
+    return variables;
+};
+
+export const replaceVariablesInString = (
+    template: string,
+    params: Record<string, string>
+): string => {
+    const regex = /{{(.*?)}}/g;
+    return template.replace(regex, (_, variable) => {
+        const trimmedVariable = variable.trim();
+        return trimmedVariable in params ? params[trimmedVariable] : _;
+    });
+};
+
+export function ChangeRecordToData(route: string) {
+    if (!IsValidString(route)) return null;
+    return route.replace('record', 'data');
+}

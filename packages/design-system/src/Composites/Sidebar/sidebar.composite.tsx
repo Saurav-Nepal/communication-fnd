@@ -75,13 +75,13 @@ export const Sidebar = ({
                 {isArc && !isSidebarExpand && (
                     <Button
                         appearance='polaris-transparent'
-                        className='w-full mt-3 text-polaris-text-inverse hover:text-polaris-text-inverse hover:bg-polaris-bg-surface-inverse'
+                        className='mt-3 w-full text-polaris-text-inverse hover:text-polaris-text-inverse hover:bg-polaris-bg-surface-inverse'
                         onClick={toggleSidebarExpand}
                     >
                         <Icon
                             source={Icons.CircleChevronLeftSvgIcon}
                             size={20}
-                            className={cn('rotate-180 ', {
+                            className={cn('rotate-180', {
                                 'rotate-0': isSidebarExpand,
                             })}
                             isSvg
@@ -98,7 +98,7 @@ export const SidebarBanner = (props: { className?: string }) => {
 
     return (
         <Link
-            href={isExpense || isArc ? basePath : HOME_ROUTE}
+            href={HOME_ROUTE}
             className='flex items-center text-xl normal-case'
         >
             <div className={cn(' w-[180px]', props.className)}>
@@ -146,13 +146,7 @@ const RenderMenus = ({
         (route: string) => {
             if (route === pathname) return true;
 
-            return (
-                pathname.startsWith(route) &&
-                route !== '/' + DASHBOARD_ROUTE &&
-                route !== VENDOR_EXPENSE_DASHBOARD_ROUTE &&
-                route !== EMPLOYEE_EXPENSE_DASHBOARD_ROUTE &&
-                route !== FINOPS_EXPENSE_DASHBOARD_ROUTE
-            );
+            return pathname.startsWith(route) && route !== '/';
         },
         [pathname]
     );
@@ -351,7 +345,7 @@ const RenderMenuItem = ({
                                         >
                                             {name}
                                         </Typography>
-                                        <div className='relative overflow-hidden transition-all'>
+                                        <div className='overflow-hidden relative transition-all'>
                                             <RenderMenus
                                                 menus={dropdownMenus}
                                                 showIcon={false}
@@ -388,7 +382,7 @@ const RenderMenuItem = ({
                                                 }}
                                                 noStyle
                                                 className={cn(
-                                                    'sidebar-drop-text hover:bg-base-200 cursor-pointer transition-all rounded',
+                                                    'rounded transition-all cursor-pointer sidebar-drop-text hover:bg-base-200',
                                                     {
                                                         'sidebar-drop-text-active':
                                                             isActiveRoute(path),
@@ -680,7 +674,7 @@ const Profilecomponent = ({ isSidebarExpand }: any) => {
                     {user?.image_url ? (
                         <div
                             className={cn(
-                                'w-8 h-8 p-1 overflow-hidden rounded bg-base-200 centralize',
+                                'overflow-hidden p-1 w-8 h-8 rounded bg-base-200 centralize',
                                 arcAvatarWidthClassName
                             )}
                         >
@@ -689,7 +683,7 @@ const Profilecomponent = ({ isSidebarExpand }: any) => {
                                 src={user?.image_url}
                                 alt='profile'
                                 className={cn(
-                                    'object-cover w-8 h-8 ',
+                                    'object-cover w-8 h-8',
                                     arcAvatarWidthClassName
                                 )}
                             />
@@ -718,7 +712,7 @@ const Profilecomponent = ({ isSidebarExpand }: any) => {
                             {user?.image_url ? (
                                 <div
                                     className={cn(
-                                        'w-8 h-8 p-1 overflow-hidden rounded bg-base-200 centralize',
+                                        'overflow-hidden p-1 w-8 h-8 rounded bg-base-200 centralize',
                                         arcAvatarWidthClassName
                                     )}
                                 >
@@ -727,7 +721,7 @@ const Profilecomponent = ({ isSidebarExpand }: any) => {
                                         src={user?.image_url}
                                         alt='profile'
                                         className={cn(
-                                            'object-cover w-14 h-14 ',
+                                            'object-cover w-14 h-14',
                                             arcAvatarWidthClassName
                                         )}
                                     />
@@ -756,7 +750,7 @@ const Profilecomponent = ({ isSidebarExpand }: any) => {
                         {user?.image_url ? (
                             <div
                                 className={cn(
-                                    'w-8 h-8 p-1 overflow-hidden rounded bg-base-200 centralize',
+                                    'overflow-hidden p-1 w-8 h-8 rounded bg-base-200 centralize',
                                     arcAvatarWidthClassName
                                 )}
                             >
@@ -765,7 +759,7 @@ const Profilecomponent = ({ isSidebarExpand }: any) => {
                                     src={user?.image_url}
                                     alt='profile'
                                     className={cn(
-                                        'object-cover w-8 h-8 ',
+                                        'object-cover w-8 h-8',
                                         arcAvatarWidthClassName
                                     )}
                                 />
@@ -773,7 +767,7 @@ const Profilecomponent = ({ isSidebarExpand }: any) => {
                         ) : (
                             <div
                                 className={cn(
-                                    'w-8 h-8 p-1 overflow-hidden rounded-full centralize',
+                                    'overflow-hidden p-1 w-8 h-8 rounded-full centralize',
                                     arcAvatarWidthClassName
                                 )}
                             >
@@ -812,7 +806,7 @@ const Profilecomponent = ({ isSidebarExpand }: any) => {
                     <Icon
                         source={Icons.CircleChevronLeftSvgIcon}
                         size={20}
-                        className={cn('rotate-180 ', {
+                        className={cn('rotate-180', {
                             'rotate-0': isSidebarExpand,
                         })}
                         isSvg

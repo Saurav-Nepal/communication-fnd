@@ -1,5 +1,5 @@
 'use client';
 
 export default function Page() {
-    return <div></div>;
+    return <div>Dashboard</div>;
 }

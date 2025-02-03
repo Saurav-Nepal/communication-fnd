@@ -22,14 +22,13 @@ const ArcAdminWrapper = ({ children }: any) => {
                     showArcHamburger
                 />
                 <article
-                    className={cn('dashboard-content relative', {
+                    className={cn('relative dashboard-content', {
                         expanded: isSidebarExpand,
                     })}
                 >
                     {children}
                 </article>
             </div>
-
             <SpotlightSearch
                 menus={[...modules, ...bottomModules]}
                 queries={['gstin']}

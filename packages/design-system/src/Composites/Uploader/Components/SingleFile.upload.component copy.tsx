@@ -64,7 +64,7 @@ export const SingleFileUploader = ({
     };
 
     return (
-        <div className={cn('flex-1 col-flex ', className)}>
+        <div className={cn('flex-1 col-flex', className)}>
             <div className='text-sm col-flex'>
                 {title && <Label label={title} required={required} />}
                 {!files.length && (
@@ -78,7 +78,7 @@ export const SingleFileUploader = ({
                             return (
                                 <div
                                     className={cn(
-                                        'items-center cursor-pointer justify-center transition-all h-full gap-2 p-4 py-6 border upload-document-raise hover:border-primary border-dashed hover:bg-base-200 border-base-300 bg-base-100 col-flex rounded',
+                                        'gap-2 justify-center items-center p-4 py-6 h-full rounded border border-dashed transition-all cursor-pointer upload-document-raise hover:border-primary hover:bg-base-200 border-base-300 bg-base-100 col-flex',
                                         {
                                             'cursor-none bg-base-200':
                                                 uploading,

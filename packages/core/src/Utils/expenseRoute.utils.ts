@@ -46,24 +46,25 @@ export class ExpenseRouteUtils {
     }
 
     public static GetPortalType(pathname: string = '') {
-        if (this.CheckVendorExpenseRoute(pathname)) {
-            return 'vendor';
-        }
-        if (this.CheckEmployeeExpenseRoute(pathname)) {
-            return 'employee';
-        }
-        if (this.CheckFinopsExpenseRoute(pathname)) {
-            return 'finops';
-        }
-        if (this.CheckARCRoute(pathname)) {
-            return 'arc';
-        }
-        if (this.CheckPaymentRoute(pathname)) {
-            return 'payment';
-        }
-        if (this.CheckARRoute(pathname)) {
-            return 'reco';
-        }
+        return '/';
+        // if (this.CheckVendorExpenseRoute(pathname)) {
+        //     return 'vendor';
+        // }
+        // if (this.CheckEmployeeExpenseRoute(pathname)) {
+        //     return 'employee';
+        // }
+        // if (this.CheckFinopsExpenseRoute(pathname)) {
+        //     return 'finops';
+        // }
+        // if (this.CheckARCRoute(pathname)) {
+        //     return 'arc';
+        // }
+        // if (this.CheckPaymentRoute(pathname)) {
+        //     return 'payment';
+        // }
+        // if (this.CheckARRoute(pathname)) {
+        //     return 'reco';
+        // }
         return null;
     }
 
@@ -76,6 +77,7 @@ export class ExpenseRouteUtils {
     }
 
     public static GetFrontendPath = (product_id: number) => {
+        return '/';
         if (product_id === PRODUCT_IDENTIFIER.VENDOR) {
             return VENDOR_EXPENSE_DASHBOARD_ROUTE;
         }

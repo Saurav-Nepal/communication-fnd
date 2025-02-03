@@ -13,7 +13,6 @@ const AdminWrapper = ({ children }: any) => {
     return (
         <main className='dashboard full-width-topnav arc-portal'>
             <ArcHeader />
-
             <div className='relative flex-1 row-flex'>
                 <Sidebar
                     menus={modules}
@@ -22,14 +21,13 @@ const AdminWrapper = ({ children }: any) => {
                     showArcHamburger
                 />
                 <article
-                    className={cn('dashboard-content relative', {
+                    className={cn('relative dashboard-content', {
                         expanded: isSidebarExpand,
                     })}
                 >
                     {children}
                 </article>
             </div>
-
             {/* <GlobalActivityLog /> */}
             <SpotlightSearch menus={[...modules, ...bottomModules]} />
         </main>

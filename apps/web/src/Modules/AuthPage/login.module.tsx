@@ -55,8 +55,9 @@ const LoginModule = () => {
 
     return (
         <LoginPageFrame className='min-w-[470px]'>
-            {!token && <LoginScreen />}
-            {!!token && <TwoFALogin />}
+            <LoginScreen />
+            {/* {!token && <LoginScreen />} */}
+            {/* {!!token && <TwoFALogin />} */}
         </LoginPageFrame>
     );
 };
@@ -79,7 +80,7 @@ const LoginScreen = () => {
 
     return (
         <AuthenticationUIWrapper
-            title='Sign In'
+            title='SLAB Communication'
             subTitle='Enter your credentials to access your account'
             containerClassName='gap-4'
         >
@@ -110,12 +111,12 @@ const LoginScreen = () => {
                     <EmailLoginSection email={email} resetLogin={resetLogin} />
                 )}
             </div>
-            <SocialLoginSection />
-            <AuthenticationUIFooter
+            {/* <SocialLoginSection /> */}
+            {/* <AuthenticationUIFooter
                 link={'Sign Up'}
                 text="Don't  have an Account?"
                 route={SIGNUP_ROUTE}
-            />
+            /> */}
         </AuthenticationUIWrapper>
     );
 };
@@ -203,7 +204,7 @@ const LoginMainSection = ({ data, onMobile, onEmail }: any) => {
         <form
             onSubmit={handleSubmit}
             noValidate
-            className='justify-between flex-1 gap-6 col-flex'
+            className='flex-1 gap-6 justify-between col-flex'
         >
             <InputField
                 label='Email/Mobile number'
@@ -216,9 +217,9 @@ const LoginMainSection = ({ data, onMobile, onEmail }: any) => {
                 onChange={setUsername}
                 autoComplete
             />
-            <div className='items-center gap-2 col-flex'>
+            <div className='gap-2 items-center col-flex'>
                 <Button
-                    className='normal-case h-11'
+                    className='h-11 normal-case'
                     loading={loading}
                     block
                     appearance='primary'
@@ -257,7 +258,7 @@ const OtpLoginSection = ({
     }, [enableOrDisableOtpBtn, mobile, verifyOtp]);
 
     return (
-        <div className='justify-between flex-1 gap-6 col-flex'>
+        <div className='flex-1 gap-6 justify-between col-flex'>
             <div className='gap-6 col-flex'>
                 <InputField
                     label='Mobile Number'
@@ -303,14 +304,14 @@ const OtpLoginSection = ({
                                               })
                                             : null
                                     }
-                                    className={'link link-hover text-sm'}
+                                    className={'text-sm link link-hover'}
                                 >
                                     Resend OTP
                                 </div>
                             )}
                         </div>
                         {!resendbtn ? (
-                            <span className='flex items-center gap-1 font-normal text-base-primary'>
+                            <span className='flex gap-1 items-center font-normal text-base-primary'>
                                 <CountdownTimer
                                     duration={10}
                                     callback={() => setResendbtn(true)}
@@ -362,30 +363,30 @@ const EmailLoginSection = ({ email, resetLogin = () => {} }: any) => {
             minLength: 6,
             required: true,
             autoFocus: true,
-            messageComponent: () => (
-                <div className='mt-2 mb-1'>
-                    <Link
-                        href={`${FORGOT_PASSWORD_ROUTE}?email=${email}`}
-                        className='text-sm link link-hover'
-                    >
-                        Forgot Password?
-                    </Link>
-                </div>
-            ),
+            // messageComponent: () => (
+            //     <div className='mt-2 mb-1'>
+            //         <Link
+            //             href={`${FORGOT_PASSWORD_ROUTE}?email=${email}`}
+            //             className='text-sm link link-hover'
+            //         >
+            //             Forgot Password?
+            //         </Link>
+            //     </div>
+            // ),
         },
     };
 
     return (
         <FormBuilder
-            className='justify-between flex-1 h-full'
+            className='flex-1 justify-between h-full'
             formSchema={schema}
             onSubmit={handleLogin}
             initValues={{ username: email }}
         >
             {({ isSubmitting, disableSubmit, handleSubmit }) => (
-                <div className='pt-6 border-t-2 bg-base-100 border-base-300'>
+                <div className='pt-6 bg-base-100 border-base-300'>
                     <Button
-                        className='normal-case h-11'
+                        className='h-11 normal-case'
                         loading={isSubmitting}
                         disabled={disableSubmit}
                         block
@@ -401,97 +402,97 @@ const EmailLoginSection = ({ email, resetLogin = () => {} }: any) => {
     );
 };
 
-const TwoFALogin = () => {
-    const { handleResetOtp, handleLogin2FA } = useLogin();
+// const TwoFALogin = () => {
+//     const { handleResetOtp, handleLogin2FA } = useLogin();
 
-    const [loading, setLoading] = useState(false);
-    const [totp, setTotp] = useState('');
+//     const [loading, setLoading] = useState(false);
+//     const [totp, setTotp] = useState('');
 
-    const disableOtpBtn = useMemo(() => {
-        return !(totp.length == OTP_LENGTH);
-    }, [totp]);
+//     const disableOtpBtn = useMemo(() => {
+//         return !(totp.length == OTP_LENGTH);
+//     }, [totp]);
 
-    const handleOtp = () => {
-        if (disableOtpBtn) return;
+//     const handleOtp = () => {
+//         if (disableOtpBtn) return;
 
-        setLoading(true);
-        handleLogin2FA(next, totp);
-    };
+//         setLoading(true);
+//         handleLogin2FA(next, totp);
+//     };
 
-    const next = () => {
-        setLoading(false);
-    };
+//     const next = () => {
+//         setLoading(false);
+//     };
 
-    return (
-        <AuthenticationUIWrapper
-            title='2FA Confirmation'
-            subTitle='Enter the code from your application, In order to continue the login process'
-        >
-            <div className='flex-1 gap-6 col-flex'>
-                <div className='gap-4 col-flex'>
-                    <span className='font-semibold'>
-                        To confirm the secret, enter the 6-digit code from the
-                        app
-                    </span>
-                    <div className='centralize'>
-                        <OTPInput
-                            length={OTP_LENGTH}
-                            autoFocus
-                            isNumberInput
-                            inputClassName='otpInput !w-12'
-                            className='gap-3 row-flex'
-                            onEnterKeyPress={handleOtp}
-                            onChangeOTP={setTotp}
-                            disabled={loading}
-                        />
-                    </div>
+//     return (
+//         <AuthenticationUIWrapper
+//             title='2FA Confirmation'
+//             subTitle='Enter the code from your application, In order to continue the login process'
+//         >
+//             <div className='flex-1 gap-6 col-flex'>
+//                 <div className='gap-4 col-flex'>
+//                     <span className='font-semibold'>
+//                         To confirm the secret, enter the 6-digit code from the
+//                         app
+//                     </span>
+//                     <div className='centralize'>
+//                         <OTPInput
+//                             length={OTP_LENGTH}
+//                             autoFocus
+//                             isNumberInput
+//                             inputClassName='otpInput !w-12'
+//                             className='gap-3 row-flex'
+//                             onEnterKeyPress={handleOtp}
+//                             onChangeOTP={setTotp}
+//                             disabled={loading}
+//                         />
+//                     </div>
 
-                    <div className='flex justify-center gap-1'>
-                        <Typography
-                            onClick={handleResetOtp as any}
-                            className='cursor-pointer text-info'
-                        >
-                            Reset
-                        </Typography>
-                        <Typography>Two-Factor Authentication</Typography>
-                    </div>
-                </div>
-                <div className='gap-6 mt-auto col-flex'>
-                    <div className='border'></div>
-                    <div className='grid items-center grid-cols-2 gap-6'>
-                        <Button
-                            size='lg'
-                            appearance='primary'
-                            onClick={() => {
-                                Navigation.back();
-                            }}
-                            outline
-                        >
-                            Back
-                        </Button>
-                        <Button
-                            size='lg'
-                            appearance='primary'
-                            block
-                            loading={loading}
-                            disabled={disableOtpBtn}
-                            onClick={handleOtp}
-                        >
-                            Next &rarr;
-                        </Button>
-                    </div>
-                    <div>
-                        <AuthenticationUIFooter
-                            link='Sign In'
-                            route={LOGIN_ROUTE}
-                            text='Already Have an Account?'
-                        />
-                    </div>
-                </div>
-            </div>
-        </AuthenticationUIWrapper>
-    );
-};
+//                     <div className='flex gap-1 justify-center'>
+//                         <Typography
+//                             onClick={handleResetOtp as any}
+//                             className='cursor-pointer text-info'
+//                         >
+//                             Reset
+//                         </Typography>
+//                         <Typography>Two-Factor Authentication</Typography>
+//                     </div>
+//                 </div>
+//                 <div className='gap-6 mt-auto col-flex'>
+//                     <div className='border'></div>
+//                     <div className='grid grid-cols-2 gap-6 items-center'>
+//                         <Button
+//                             size='lg'
+//                             appearance='primary'
+//                             onClick={() => {
+//                                 Navigation.back();
+//                             }}
+//                             outline
+//                         >
+//                             Back
+//                         </Button>
+//                         <Button
+//                             size='lg'
+//                             appearance='primary'
+//                             block
+//                             loading={loading}
+//                             disabled={disableOtpBtn}
+//                             onClick={handleOtp}
+//                         >
+//                             Next &rarr;
+//                         </Button>
+//                     </div>
+//                     <div>
+//                         <AuthenticationUIFooter
+//                             link='Sign In'
+//                             route={LOGIN_ROUTE}
+//                             text='Already Have an Account?'
+//                         />
+//                     </div>
+//                 </div>
+//             </div>
+//         </AuthenticationUIWrapper>
+//     );
+// };
 
 const SocialLoginSection = () => {
     return (

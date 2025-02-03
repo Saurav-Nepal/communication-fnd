@@ -26,6 +26,7 @@ export class Menu {
 
     public init(product_id: number) {
         this.product_id = product_id;
+
         return this._fetchPages();
     }
 
@@ -173,18 +174,18 @@ export class Menu {
 
     private _getBasePath = () => {
         switch (this.product_id) {
-            case PRODUCT_IDENTIFIER.VENDOR:
-                return VENDOR_EXPENSE_DASHBOARD_ROUTE;
-            case PRODUCT_IDENTIFIER.EMPLOYEE:
-                return EMPLOYEE_EXPENSE_DASHBOARD_ROUTE;
-            case PRODUCT_IDENTIFIER.FINOPS:
-                return FINOPS_EXPENSE_DASHBOARD_ROUTE;
-            case PRODUCT_IDENTIFIER.ARC:
-                return ARC_HOME_ROUTE;
-            case PRODUCT_IDENTIFIER.PAYMENT:
-                return PAYMENT_HOME_ROUTE;
+            // case PRODUCT_IDENTIFIER.VENDOR:
+            //     return VENDOR_EXPENSE_DASHBOARD_ROUTE;
+            // case PRODUCT_IDENTIFIER.EMPLOYEE:
+            //     return EMPLOYEE_EXPENSE_DASHBOARD_ROUTE;
+            // case PRODUCT_IDENTIFIER.FINOPS:
+            //     return FINOPS_EXPENSE_DASHBOARD_ROUTE;
+            // case PRODUCT_IDENTIFIER.ARC:
+            //     return ARC_HOME_ROUTE;
+            // case PRODUCT_IDENTIFIER.PAYMENT:
+            //     return PAYMENT_HOME_ROUTE;
             default:
-                return '/' + DASHBOARD_ROUTE;
+                return '/';
         }
     };
 }

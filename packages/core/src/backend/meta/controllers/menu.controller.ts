@@ -1,11 +1,11 @@
-import { user } from '../../../Models/User';
 import { BaseModel } from '../../../Models/base.models';
+import { user } from '../../../Models/User';
 
 export class MenuController extends BaseModel {
     private endPoint = 'api/product';
 
     async list() {
-        const product_id = user.getProductId();
+        const product_id = 1;
 
         this.api = `${this.endPoint}/${product_id}/menu`;
 
@@ -13,7 +13,7 @@ export class MenuController extends BaseModel {
     }
 
     async show(id: number) {
-        const product_id = user.getProductId();
+        const product_id = 1;
 
         this.api = `${this.endPoint}/${product_id}/menu/${id}`;
 

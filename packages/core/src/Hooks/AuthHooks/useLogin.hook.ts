@@ -58,7 +58,7 @@ export const useLogin = () => {
         }
 
         await handleLoginNextScreen(response);
-        setLoading(true);
+        // setLoading(true);
     };
 
     const handleLogin2FA = async (next = () => {}, totp: string) => {

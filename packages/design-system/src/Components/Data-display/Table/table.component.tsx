@@ -267,7 +267,7 @@ export const Table = ({
                     )}
                 >
                     <TableCell className='!py-2.5 !px-2'>
-                        <span className='flex items-center gap-4 font-bold w-fit'>
+                        <span className='flex gap-4 items-center font-bold w-fit'>
                             {footer?.leftComponent}
                         </span>
                     </TableCell>
@@ -305,7 +305,7 @@ export const Table = ({
             );
         if (IsEmptyArray(sanitizedTableData))
             return (
-                <td colSpan={totalColumn} className='w-full h-full '>
+                <td colSpan={totalColumn} className='w-full h-full'>
                     {noDataFound?.customNoData || (
                         <NoDataFound
                             size='lg'
@@ -459,7 +459,7 @@ export const Table = ({
                         >
                             <div
                                 className={cn(
-                                    'flex items-center gap-4 justify-center'
+                                    'flex gap-4 justify-center items-center'
                                 )}
                             >
                                 {/* Render outerMenuActions */}
@@ -612,7 +612,7 @@ export const Table = ({
                 }
             )}
         >
-            <div className='flex-1 overflow-x-auto bg-base-100 finnoto__table__wrapper'>
+            <div className='overflow-x-auto flex-1 bg-base-100 finnoto__table__wrapper'>
                 <TableWrapper
                     className={cn(
                         'finnoto__table__container',
@@ -675,9 +675,9 @@ export const Table = ({
                                 {isRowActionVisible && (
                                     <TableCell
                                         className={cn(
-                                            'text-center border border-x-0',
+                                            'text-center !text-white border border-x-0',
                                             {
-                                                'finnoto__table--stickyaction sticky right-0':
+                                                'sticky right-0 finnoto__table--stickyaction':
                                                     stickyRowAction,
                                             }
                                         )}

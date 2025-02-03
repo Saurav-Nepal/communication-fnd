@@ -1,10 +1,7 @@
-import Image from 'next/image';
 import { ReactNode } from 'react';
 
 import { useTheme } from '@finnoto/core';
-import { cn, Icon, PageTitle, Typography } from '@finnoto/design-system';
-
-import { DarkLogoSvgIcon, SmallLogoSvgIcon } from 'assets';
+import { cn, PageTitle, Typography } from '@finnoto/design-system';
 
 const LoginPageFrame = ({
     children,
@@ -18,13 +15,13 @@ const LoginPageFrame = ({
     return (
         <div
             className={cn(
-                'h-full min-h-screen py-10 2xl:h-screen centralize bg-base-200',
+                'py-10 h-full min-h-screen 2xl:h-screen centralize bg-base-200 bg-login-background',
                 frameClassName
             )}
         >
             <div
                 className={cn(
-                    'min-h-[680px] shadow-lg bg-base-100 col-flex overflow-hidden rounded min-w-[470px] dark:shadow-none dark:border',
+                    'overflow-hidden rounded shadow-lg bg-base-100 col-flex min-w-[470px] dark:shadow-none dark:border',
                     className
                 )}
             >
@@ -53,10 +50,10 @@ export const AuthenticationUIWrapper = ({
     const { isDarkMode } = useTheme();
 
     return (
-        <div className='flex-1 h-full px-8 py-6 col-flex'>
+        <div className='flex-1 px-8 py-6 h-full col-flex'>
             <PageTitle title={pageTitleText} />
             <div className='mb-6 centralize'>
-                {process.env['SMALL_LOGO'] ? (
+                {/* {process.env['SMALL_LOGO'] ? (
                     <Image
                         src={process.env['SMALL_LOGO']}
                         alt='Brand Logo'
@@ -77,7 +74,7 @@ export const AuthenticationUIWrapper = ({
                         isSvg
                         size={48}
                     />
-                )}
+                )} */}
             </div>
             <div
                 className={cn(
@@ -92,7 +89,7 @@ export const AuthenticationUIWrapper = ({
             </div>
             <div
                 className={cn(
-                    'flex-1 h-full mt-6 overflow-hidden col-flex',
+                    'overflow-hidden flex-1 mt-6 h-full col-flex',
                     containerClassName
                 )}
             >
@@ -112,7 +109,7 @@ export const AuthenticationUIFooter = ({
     link?: string;
 }) => {
     return (
-        <div className='items-center justify-center gap-2 text-center row-flex'>
+        <div className='gap-2 justify-center items-center text-center row-flex'>
             <Typography variant='span'>{text}</Typography>{' '}
             <Typography link={route}>{link}</Typography>
         </div>

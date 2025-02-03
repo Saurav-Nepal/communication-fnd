@@ -9,8 +9,8 @@ const IsProductionDb = () => {
     return true;
 };
 const END_POINT: any = {
-    prod: 'https://meta.finnoto.one/',
-    uat: 'https://meta.finnoto.dev/',
+    prod: 'https://sndebug.finnoto.cloud/',
+    uat: 'https://sndebug.finnoto.cloud/',
     // uat: 'http://10.190.208.37:4000/',
     // uat: 'https://debug.bizryt.dev/',
 };
@@ -22,10 +22,9 @@ export function ReturnEnvironmentVariables(env = currentEnvironment) {
         SOCKET_URL: `${END_POINT[env]}`,
         VERSION_ID: '1.0.0',
         PLATFORM_ID: PlatformTypeEnum.DESKTOP,
-        SITE_NAME: 'Finnoto',
-        SITE_HOST: 'https://finnoto.com',
-        SITE_DESCRIPTION:
-            'Finnoto is one-stop platform to manage business digitally. It covers the entire business cycle from adding and maintaining customer data to managing sales, purchases, expenses, inventory and payments along with a unified dashboard.',
+        SITE_NAME: 'Slab Communication',
+        SITE_HOST: 'https://dartinbox.com',
+        SITE_DESCRIPTION: 'Some Description',
         GOOGLE_API:
             '186930609499-3r6m6qe2b42q3mssebll9gesg6hbl4ki.apps.googleusercontent.com',
     };
