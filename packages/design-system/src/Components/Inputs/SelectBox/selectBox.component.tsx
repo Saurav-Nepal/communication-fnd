@@ -81,7 +81,7 @@ export const SelectBox = forwardRef(
         );
 
         const getDisplayMessageValue = useMemo(() => {
-            return rest?.options?.find(
+            return (rest?.options as any)?.find(
                 (val: any) => val?.data?.id === rest?.value
             );
         }, [rest?.options, rest?.value]);
